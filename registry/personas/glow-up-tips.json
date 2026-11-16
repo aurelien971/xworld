@@ -4,7 +4,30 @@
   "product": "opaque",
   "stance": "tips",
   "can": [
-    "before-after"
+    "before-after",
+    "tips"
   ],
-  "voice": "Faceless tips page. One fix per post: lighting, colour, skin. Says what to do, then shows it."
+  "voice": "Faceless tips page. One fix per post: lighting, colour, skin. Says what to do, then shows it.",
+  "kit": {
+    "idea": "A faceless tips account. Saves and shares are the metric: useful posts get kept.",
+    "handles": [
+      "glowup.fixes",
+      "onephotofix",
+      "betterpics.daily"
+    ],
+    "bio": "one fix a day for photos of you.",
+    "picture": "A clean type mark.",
+    "pillars": [
+      "lighting",
+      "skin",
+      "colour",
+      "posing",
+      "posting"
+    ],
+    "first": [
+      "Tip card on lighting",
+      "Tip card on skin",
+      "A before/after carousel of the fix"
+    ]
+  }
 }

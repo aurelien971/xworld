@@ -1,0 +1,31 @@
+{
+  "id": "three-photos-reel",
+  "name": "Three photos reel",
+  "kind": "video",
+  "platforms": [
+    "instagram",
+    "tiktok",
+    "youtube"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1920
+  },
+  "needs": {
+    "count": 3,
+    "mode": "same-filter"
+  },
+  "video": {
+    "renderer": "sequence",
+    "plan": "photos",
+    "options": {
+      "hold": 0.5,
+      "wipe": 0.8,
+      "rest": 0.8,
+      "cta": 1.6
+    }
+  }
+}

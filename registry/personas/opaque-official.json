@@ -4,7 +4,29 @@
   "product": "opaque",
   "stance": "official",
   "can": [
-    "before-after"
+    "before-after",
+    "brand"
   ],
-  "voice": "Lowercase, short, dry. Speaks to her, about her photos. Never explains the app."
+  "voice": "Lowercase, short, dry. Speaks to her, about her photos. Never explains the app.",
+  "kit": {
+    "idea": "The brand's own account. The place every other account points to.",
+    "handles": [
+      "getopaque",
+      "opaque.app",
+      "useopaque"
+    ],
+    "bio": "your camera roll, but the version you post.\nfilters that still look like you.",
+    "picture": "The app icon on black.",
+    "pillars": [
+      "one-liners about your camera roll",
+      "one filter, shown properly",
+      "what people made with it",
+      "seasonal looks"
+    ],
+    "first": [
+      "Pin a slider reel of the strongest filter",
+      "A 'good, better, best' carousel",
+      "A pick-one post that asks for a number"
+    ]
+  }
 }

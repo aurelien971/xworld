@@ -1,0 +1,33 @@
+{
+  "id": "ai-muse",
+  "name": "Nova",
+  "product": "opaque",
+  "stance": "ai-influencer",
+  "can": [
+    "before-after",
+    "face",
+    "ai"
+  ],
+  "voice": "Openly AI. Editorial, slightly eerie, funny about not being real.",
+  "kit": {
+    "idea": "An AI influencer, declared as one. A Mitsushiro model with her own feed; the angle is 'even the fake girl edits her photos'.",
+    "handles": [
+      "nova.isnt.real",
+      "novanotreal",
+      "made.of.pixels"
+    ],
+    "bio": "not a real person. still edits her photos.\nmade with AI, labelled as such.",
+    "picture": "A Mitsushiro portrait of the model, studio light.",
+    "pillars": [
+      "looks",
+      "AI vs real",
+      "even i need editing",
+      "fashion moods"
+    ],
+    "first": [
+      "'i'm not real and i still edit' slider reel",
+      "Filter-run reel across three moods",
+      "A pick-one of four looks"
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "it-girl-tiktok",
+  "persona": "it-girl",
+  "platform": "tiktok",
+  "handle": "",
+  "perDay": 3,
+  "times": [
+    "08:00",
+    "12:30",
+    "21:00"
+  ],
+  "status": "placeholder"
+}

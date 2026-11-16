@@ -8,6 +8,10 @@ import type { BriefDetail, BriefView, DayView, WallView } from "@/factory/view";
 import { Detail } from "./Detail";
 import { Button, cx, IconButton, money, StateMark } from "./primitives";
 import { Accounts } from "./Accounts";
+import { Campaign } from "./Campaign";
+import { Filters } from "./Filters";
+import { Ideas } from "./Ideas";
+import { Library } from "./Library";
 import { Wall } from "./Wall";
 
 /**
@@ -18,8 +22,10 @@ import { Wall } from "./Wall";
 
 const shift = (day: string, by: number) => new Date(Date.parse(`${day}T12:00:00Z`) + by * 86_400_000).toISOString().slice(0, 10);
 const longDate = (day: string) => new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }).format(new Date(`${day}T12:00:00Z`));
-type Mode = "day" | "wall" | "accounts";
-const MODES: Mode[] = ["day", "wall", "accounts"];
+type Mode = "campaign" | "day" | "wall" | "ideas" | "filters" | "library" | "accounts";
+const MODES: Mode[] = ["campaign", "day", "wall", "ideas", "filters", "library", "accounts"];
+/** The views that show briefs, and so have a brief open beside them and its keys. */
+const BRIEFS: Mode[] = ["day", "wall"];
 const working = (b: BriefView) => b.state === "generating" || (b.state === "reviewing" && !b.needsPerson);
 const firstOfInterest = (v: DayView) => (v.briefs.find((b) => b.needsPerson || b.state === "failed") ?? v.briefs[0])?.id ?? null;
 
@@ -30,7 +36,7 @@ async function call<T>(url: string, body?: unknown): Promise<T> {
   return data as T;
 }
 
-export function Floor({ initial, view: initialMode = "day" }: { initial: DayView; view?: Mode }) {
+export function Floor({ initial, view: initialMode = "campaign" }: { initial: DayView; view?: Mode }) {
   const [view, setView] = useState(initial);
   const [selected, setSelected] = useState<string | null>(() => firstOfInterest(initial));
   const [detail, setDetail] = useState<BriefDetail | null>(null);
@@ -170,7 +176,8 @@ export function Floor({ initial, view: initialMode = "day" }: { initial: DayView
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.metaKey || e.ctrlKey || e.altKey || (e.target as HTMLElement).closest("input, textarea, [contenteditable]")) return;
+      if (e.metaKey || e.ctrlKey || e.altKey || (e.target as HTMLElement).closest("input, textarea, select, [contenteditable]")) return;
+      if (!BRIEFS.includes(mode)) return;
       const i = source.findIndex((b) => b.id === selected);
       const move = (by: number) => {
         const next = source[Math.max(0, Math.min(source.length - 1, i + by))];
@@ -223,7 +230,7 @@ export function Floor({ initial, view: initialMode = "day" }: { initial: DayView
           <span className="font-medium">{view.product.name}</span>
         </nav>
         <span className="h-3.5 w-px bg-line-2" aria-hidden />
-        <div className="flex gap-0.5" role="tablist" aria-label="View">
+        <div className="scroll-quiet flex gap-0.5 overflow-x-auto" role="tablist" aria-label="View">
           {MODES.map((m) => (
             <button
               key={m}
@@ -276,9 +283,17 @@ export function Floor({ initial, view: initialMode = "day" }: { initial: DayView
         </p>
       )}
 
-      <div className={cx("grid min-h-0 flex-1", mode !== "accounts" && "min-[1100px]:grid-cols-[minmax(0,1fr)_560px]")}>
+      <div className={cx("grid min-h-0 flex-1", BRIEFS.includes(mode) && "min-[1100px]:grid-cols-[minmax(0,1fr)_560px]")}>
         <main className={cx("scroll-quiet min-h-0 overflow-y-auto transition-opacity duration-150 ease-out", busy === "day" && "opacity-50")}>
-          {mode === "accounts" ? (
+          {mode === "campaign" ? (
+            <Campaign product={product} onOpen={(v) => show(v as Mode)} />
+          ) : mode === "ideas" ? (
+            <Ideas product={product} />
+          ) : mode === "filters" ? (
+            <Filters product={product} />
+          ) : mode === "library" ? (
+            <Library product={product} />
+          ) : mode === "accounts" ? (
             <Accounts product={product} />
           ) : mode === "wall" ? (
             <Wall wall={wall} selected={selected} onSelect={(id) => select(id, true)} />
@@ -293,7 +308,7 @@ export function Floor({ initial, view: initialMode = "day" }: { initial: DayView
           )}
         </main>
 
-        {current && mode !== "accounts" && (
+        {current && BRIEFS.includes(mode) && (
           <Detail
             brief={current}
             detail={detail?.id === current.id ? detail : null}

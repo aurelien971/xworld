@@ -44,6 +44,26 @@ npm run import:opaqueads
 Reads `~/OpaqueAds` and the Mac app's filter catalog. Stop the dev server first: the
 embedded database is one process at a time.
 
+## The campaign
+
+Each product is a campaign. Its views:
+
+- **Campaign**: progress against the targets in `product.json`, and what to do next.
+- **Day** and **Wall**: the posts, by day or all at once.
+- **Ideas**: every content idea (`registry/ideas/<product>/`). Nothing is used until approved.
+- **Filters**: every prompt in full, what was seen of each filter's results, rewrites and
+  new filters (`filter-lab.json`). A filter is planned only once switched on.
+- **Library**: source photos (used once approved) and the ads brought in from Opaque Ads.
+- **Accounts**: each persona, how to set its account up, and its connections.
+
+```bash
+npm run import:library   # Opaque Ads settings and ads, portraits from other apps
+npm run remake           # every unposted post made again after a scene changes
+npm run smoke -- 2026-11-20 run
+```
+
+Stop the dev server before any of them.
+
 ## Accounts and publishing
 
 Mitsushiro holds every account's sign-in and does the posting. Each persona here is one

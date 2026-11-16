@@ -1,0 +1,31 @@
+{
+  "id": "filter-run-reel",
+  "name": "Filter run reel",
+  "kind": "video",
+  "platforms": [
+    "instagram",
+    "tiktok",
+    "youtube"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1920
+  },
+  "needs": {
+    "count": 3,
+    "mode": "same-asset"
+  },
+  "video": {
+    "renderer": "sequence",
+    "plan": "run",
+    "options": {
+      "hold": 0.8,
+      "wipe": 0.8,
+      "rest": 0.9,
+      "cta": 1.6
+    }
+  }
+}

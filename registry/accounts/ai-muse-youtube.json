@@ -1,0 +1,12 @@
+{
+  "id": "ai-muse-youtube",
+  "persona": "ai-muse",
+  "platform": "youtube",
+  "handle": "",
+  "perDay": 2,
+  "times": [
+    "11:00",
+    "18:00"
+  ],
+  "status": "placeholder"
+}

@@ -1,0 +1,717 @@
+[
+  {
+    "id" : "designed-starter",
+    "kind" : "video",
+    "name" : "Starter · hook + reveal + brand",
+    "segments" : [
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.2,
+        "endingStyle" : "brand_o",
+        "id" : "A480CA75-1A18-434B-8609-0A1EF370E756",
+        "kind" : "hook",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "texts" : [
+          {
+            "chip" : true,
+            "colorHex" : "#FFFFFF",
+            "design" : "default",
+            "id" : "1FF85901-56AF-4B86-B60E-8A87EF7792E1",
+            "size" : 0.055,
+            "variants" : [
+              "your camera roll is about to change",
+              "wait for the glow up",
+              "this filter is unreal"
+            ],
+            "weight" : "bold",
+            "x" : 0.5,
+            "y" : 0.42
+          }
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "4F3D7F5C-DA7F-450A-B216-E0FA828ECE38",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 3,
+        "endingStyle" : "cta_overlay",
+        "id" : "D095237F-F7AA-4A36-BBD7-AE8AF57803BC",
+        "kind" : "ending",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      }
+    ],
+    "status" : "validated",
+    "version" : 2,
+    "watermarkOn" : true
+  },
+  {
+    "id" : "f-classic",
+    "kind" : "video",
+    "name" : "Video · classic swipe + brand O",
+    "pairing" : "sameImage",
+    "segments" : [
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1,
+        "endingStyle" : "brand_o",
+        "id" : "1CA4C82D-1E04-458C-82FF-C3F08037A07F",
+        "kind" : "hook",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+          {
+            "chip" : true,
+            "colorHex" : "#FFFFFF",
+            "design" : "default",
+            "id" : "F54301B9-29BC-440A-9135-8B628FBACB2F",
+            "size" : 0.055,
+            "variants" : [
+              "your camera roll is about to change",
+              "wait for the glow up",
+              "POV: you found the filter app",
+              "this took one tap"
+            ],
+            "weight" : "bold",
+            "x" : 0.5,
+            "y" : 0.42
+          }
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "4759CC4D-DFAC-411B-92A8-5B2DDE555F1F",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 3,
+        "endingStyle" : "brand_o",
+        "id" : "27A46CC2-DB2C-4B33-8F0D-2443D4D87F6B",
+        "kind" : "ending",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      }
+    ],
+    "status" : "draft",
+    "version" : 1,
+    "watermarkOn" : true
+  },
+  {
+    "id" : "f-loop",
+    "kind" : "video",
+    "name" : "Video · instant loop (no ending)",
+    "pairing" : "sameImage",
+    "segments" : [
+      {
+        "afterHold" : 1.2,
+        "beforeHold" : 0.2,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "DFCE1416-4C5F-46EB-A678-B49BB9F9A7CF",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1
+      }
+    ],
+    "status" : "draft",
+    "version" : 1,
+    "watermarkOn" : true
+  },
+  {
+    "id" : "f-3fx",
+    "kind" : "video",
+    "name" : "Video · 3 effects on one photo",
+    "pairing" : "sameImage",
+    "segments" : [
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 0.8,
+        "endingStyle" : "brand_o",
+        "id" : "E25F8162-9918-4146-8134-0A9DC7CFB67B",
+        "kind" : "hook",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+          {
+            "chip" : true,
+            "colorHex" : "#FFFFFF",
+            "design" : "default",
+            "id" : "F9FC1C64-B04C-4B3D-A790-6D3AB9869F62",
+            "size" : 0.055,
+            "variants" : [
+              "1 photo · 3 filters",
+              "which one wins?"
+            ],
+            "weight" : "bold",
+            "x" : 0.5,
+            "y" : 0.42
+          }
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "B79DA380-7D44-40CF-99CC-340B8D1BF547",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "068455B4-F987-47C4-9D6C-8989D7EEEBAC",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "FAD5A225-6DCB-4FEB-A5D4-139A22227638",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 3,
+        "endingStyle" : "appstore_promo",
+        "id" : "A4D06BCE-0BE7-4875-9166-A3EBEF4C0672",
+        "kind" : "ending",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      }
+    ],
+    "status" : "draft",
+    "version" : 1,
+    "watermarkOn" : true
+  },
+  {
+    "id" : "f-3pics",
+    "kind" : "video",
+    "name" : "Video · one effect across 3 photos",
+    "pairing" : "sameFilter",
+    "segments" : [
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "104157B2-F355-44D9-86FF-87CBBA761318",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "02EFCEE3-1149-4C29-9A03-D76E5CAE35B9",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 2,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "B431253A-AF3D-4256-8EE5-A4CDC617538E",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      }
+    ],
+    "status" : "draft",
+    "version" : 1,
+    "watermarkOn" : true
+  },
+  {
+    "id" : "f-question",
+    "kind" : "video",
+    "name" : "Video · question hook + App Store promo",
+    "pairing" : "sameImage",
+    "segments" : [
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.3,
+        "endingStyle" : "brand_o",
+        "id" : "CE164539-021B-488A-9701-DEE629EE6B56",
+        "kind" : "hook",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+          {
+            "chip" : true,
+            "colorHex" : "#FFFFFF",
+            "design" : "default",
+            "id" : "4D20805D-42E2-4440-BF98-2C6FF63FD77B",
+            "size" : 0.06,
+            "variants" : [
+              "would you post this?",
+              "is this even the same photo?",
+              "how is this free"
+            ],
+            "weight" : "bold",
+            "x" : 0.5,
+            "y" : 0.45
+          }
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "22008C47-039E-496A-99CF-BD3FE5889481",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 3.5,
+        "endingStyle" : "appstore_promo",
+        "id" : "3E1B3212-E015-4A5F-8AD3-64B0555EF7C3",
+        "kind" : "ending",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      }
+    ],
+    "status" : "draft",
+    "version" : 1,
+    "watermarkOn" : true
+  },
+  {
+    "id" : "f-freeze",
+    "kind" : "video",
+    "name" : "Video · freeze flash + CTA",
+    "pairing" : "sameImage",
+    "segments" : [
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 0.5,
+        "endingStyle" : "brand_o",
+        "id" : "7CE35221-8D21-4C65-9E06-1361E8CDC024",
+        "kind" : "still",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "F37441B7-955A-4050-B556-A9AE9B9297A5",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 2.5,
+        "endingStyle" : "cta_overlay",
+        "id" : "40CCCCC6-C3C8-4533-B4BE-1322564A2BBE",
+        "kind" : "ending",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      }
+    ],
+    "status" : "draft",
+    "version" : 1,
+    "watermarkOn" : true
+  },
+  {
+    "id" : "f-slides-solo",
+    "kind" : "carousel",
+    "name" : "Slideshow · single filter",
+    "pairing" : "sameImage",
+    "segments" : [
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1,
+        "endingStyle" : "brand_o",
+        "id" : "943D73D9-8100-4E28-8256-79AC1F77611E",
+        "kind" : "hook",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+          {
+            "chip" : true,
+            "colorHex" : "#FFFFFF",
+            "design" : "default",
+            "id" : "84E7EF8E-FA69-4690-81CB-09B85C4EB829",
+            "size" : 0.045,
+            "variants" : [
+              "swipe →",
+              "wait for slide 2 →"
+            ],
+            "weight" : "bold",
+            "x" : 0.5,
+            "y" : 0.16
+          }
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "B5C616CA-8BA4-4E1D-BC23-2D6405BDC95E",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1,
+        "endingStyle" : "brand_o",
+        "id" : "B0814BDD-93B5-421A-9C48-BC9D5955F77A",
+        "kind" : "ending",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      }
+    ],
+    "status" : "draft",
+    "version" : 1,
+    "watermarkOn" : true
+  },
+  {
+    "id" : "f-slides-trio",
+    "kind" : "carousel",
+    "name" : "Slideshow · one effect, 3 photos",
+    "pairing" : "sameFilter",
+    "segments" : [
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "846825B0-0F31-4323-B77B-DC3411B7D56E",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "D08E166F-C35F-4CB6-83FF-51C30469BF7F",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "458D0F0A-838C-4AB4-BC4B-515FADB3138A",
+        "kind" : "reveal",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "duration" : 1,
+        "endingStyle" : "brand_o",
+        "id" : "5D035D3A-F616-4FAC-81B8-522A524B5B36",
+        "kind" : "ending",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      }
+    ],
+    "status" : "draft",
+    "version" : 1,
+    "watermarkOn" : true
+  },
+  {
+    "id" : "f-progressive",
+    "kind" : "video",
+    "name" : "Video · progressive 3-filter reveal",
+    "pairing" : "sameImage",
+    "segments" : [
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.7,
+        "chained" : false,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "C0C4DF79-1351-4427-B619-EBF2F874B2A8",
+        "kind" : "reveal",
+        "pillCorner" : 1,
+        "pillOpacity" : 1,
+        "pillPadX" : 1,
+        "pillPadY" : 1,
+        "pillScale" : 1,
+        "pillWeight" : "bold",
+        "showFilterChip" : true,
+        "showLabels" : false,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.3,
+        "chained" : true,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "A099D51E-1839-40EE-84F6-CDD5E63C9244",
+        "kind" : "reveal",
+        "pillCorner" : 1,
+        "pillOpacity" : 1,
+        "pillPadX" : 1,
+        "pillPadY" : 1,
+        "pillScale" : 1,
+        "pillWeight" : "bold",
+        "showFilterChip" : true,
+        "showLabels" : false,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.8,
+        "beforeHold" : 0.3,
+        "chained" : true,
+        "duration" : 1.5,
+        "endingStyle" : "brand_o",
+        "id" : "6E4D2AE8-7B0E-4A0F-AABA-DA5D0DC1D97F",
+        "kind" : "reveal",
+        "pillCorner" : 1,
+        "pillOpacity" : 1,
+        "pillPadX" : 1,
+        "pillPadY" : 1,
+        "pillScale" : 1,
+        "pillWeight" : "bold",
+        "showFilterChip" : true,
+        "showLabels" : false,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      },
+      {
+        "afterHold" : 1.5,
+        "beforeHold" : 0.8,
+        "chained" : false,
+        "duration" : 2.5,
+        "endingStyle" : "brand_o",
+        "id" : "685DB2CD-8226-4594-A2EE-D00CF6D4FCDA",
+        "kind" : "ending",
+        "pillCorner" : 1,
+        "pillOpacity" : 1,
+        "pillPadX" : 1,
+        "pillPadY" : 1,
+        "pillScale" : 1,
+        "pillWeight" : "bold",
+        "showFilterChip" : true,
+        "showLabels" : true,
+        "speed" : 1,
+        "texts" : [
+
+        ],
+        "trimStart" : 0,
+        "wipeDuration" : 1.2
+      }
+    ],
+    "status" : "draft",
+    "version" : 1,
+    "watermarkOn" : true
+  }
+]

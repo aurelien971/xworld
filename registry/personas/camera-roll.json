@@ -2,9 +2,31 @@
   "id": "camera-roll",
   "name": "Camera roll",
   "product": "opaque",
-  "stance": "creator",
+  "stance": "aesthetic",
   "can": [
-    "before-after"
+    "before-after",
+    "dump"
   ],
-  "voice": "Aesthetic camera-roll page. Almost no words. Lets the before and after do the talking."
+  "voice": "Aesthetic camera-roll page. Almost no words. Lets the photos do the talking.",
+  "kit": {
+    "idea": "A photo-dump account. No selling at all on most posts; the filter name in the caption is the only tie-in.",
+    "handles": [
+      "thisweeksroll",
+      "soft.camera.roll",
+      "dump.archive"
+    ],
+    "bio": "dumps.",
+    "picture": "A blurry flash photo.",
+    "pillars": [
+      "dumps by mood",
+      "seasons",
+      "film looks",
+      "soft life"
+    ],
+    "first": [
+      "The november dump",
+      "A disposable-camera dump",
+      "A loop reel"
+    ]
+  }
 }

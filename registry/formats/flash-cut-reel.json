@@ -1,0 +1,27 @@
+{
+  "id": "flash-cut-reel",
+  "name": "Flash cut reel",
+  "kind": "video",
+  "platforms": [
+    "instagram",
+    "tiktok",
+    "youtube"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1920
+  },
+  "video": {
+    "renderer": "sequence",
+    "plan": "flash",
+    "options": {
+      "hold": 1.4,
+      "wipe": 0.0,
+      "rest": 1.8,
+      "cta": 1.5
+    }
+  }
+}

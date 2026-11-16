@@ -1,0 +1,13 @@
+{
+  "id": "the-photographer-instagram",
+  "persona": "the-photographer",
+  "platform": "instagram",
+  "handle": "",
+  "perDay": 3,
+  "times": [
+    "09:00",
+    "13:30",
+    "19:30"
+  ],
+  "status": "placeholder"
+}

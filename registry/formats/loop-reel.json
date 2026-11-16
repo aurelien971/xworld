@@ -1,0 +1,27 @@
+{
+  "id": "loop-reel",
+  "name": "Loop reel",
+  "kind": "video",
+  "platforms": [
+    "instagram",
+    "tiktok",
+    "youtube"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1920
+  },
+  "video": {
+    "renderer": "sequence",
+    "plan": "single",
+    "options": {
+      "hold": 0.5,
+      "wipe": 0.7,
+      "rest": 1.0,
+      "cta": 0.0
+    }
+  }
+}

@@ -2,10 +2,31 @@
   "id": "edit-receipts",
   "name": "Edit receipts",
   "product": "opaque",
-  "stance": "creator",
+  "stance": "meme",
   "can": [
     "before-after",
     "callout"
   ],
-  "voice": "Calls out edited photos, then admits the original was worse. Dry, teasing, never cruel."
+  "voice": "Calls out edited photos, then admits the original was worse. Dry, teasing, never cruel.",
+  "kit": {
+    "idea": "A meme account built on one joke with endless versions: the accusation, then the receipt.",
+    "handles": [
+      "editreceipts",
+      "caughtediting",
+      "showtheoriginal"
+    ],
+    "bio": "she edits her photos. the original was worse.",
+    "picture": "A receipt.",
+    "pillars": [
+      "caught editing",
+      "the receipts",
+      "it was the camera",
+      "confession"
+    ],
+    "first": [
+      "The verdict",
+      "A DM reveal",
+      "Flash-cut reel"
+    ]
+  }
 }

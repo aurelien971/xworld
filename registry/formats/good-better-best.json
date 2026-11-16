@@ -1,0 +1,55 @@
+{
+  "id": "good-better-best",
+  "name": "Good, better, best",
+  "kind": "carousel",
+  "platforms": [
+    "instagram",
+    "tiktok"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1350
+  },
+  "needs": {
+    "count": 2,
+    "mode": "same-asset"
+  },
+  "scenes": [
+    {
+      "scene": "title",
+      "options": {}
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "before",
+        "tag": "good"
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "pair": 0,
+        "tag": "better",
+        "label": "filter"
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "pair": 1,
+        "tag": "best",
+        "label": "filter"
+      }
+    },
+    {
+      "scene": "cta",
+      "options": {}
+    }
+  ]
+}

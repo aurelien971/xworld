@@ -1,0 +1,33 @@
+{
+  "id": "the-photographer",
+  "name": "The photographer",
+  "product": "opaque",
+  "stance": "expert",
+  "can": [
+    "before-after",
+    "tips",
+    "expert"
+  ],
+  "voice": "A working portrait photographer. Explains one thing about light, then shows the filter that fakes it.",
+  "kit": {
+    "idea": "An expert account. Borrowed authority: a pro tells you why your photo looks flat, and the fix happens to be one tap.",
+    "handles": [
+      "shotbysomeone",
+      "light.explained",
+      "whyyourphotos"
+    ],
+    "bio": "portrait photographer.\nwhy your photos look flat, and the fix.",
+    "picture": "A camera held up to the face, or a clean logo mark.",
+    "pillars": [
+      "why your photo looks flat",
+      "light",
+      "colour",
+      "what pros do"
+    ],
+    "first": [
+      "Tip card: window light",
+      "A ranked carousel 'by how expensive you look'",
+      "Slow slider reel: studio light"
+    ]
+  }
+}

@@ -1,37 +1,23 @@
 import { liveAccount } from "./accounts";
-import { aligned, type Alignment } from "./align";
+import { aligned, alignedSet, type Alignment } from "./align";
 import { brief as load, briefsOn, claim, update } from "./briefs";
 import { sql } from "./db";
 import * as registry from "./registry";
+import type { ScenePair } from "./scenes";
 import { compose } from "./stages/compose";
 import { judge, judgeAvailable } from "./stages/judge";
 import { publishBlocker, send, standing } from "./stages/publish";
 import { generationKey, transform } from "./stages/transform";
 import { get } from "./storage";
-import type { Brief } from "./types";
+import type { Brief, PairRef } from "./types";
 
 /**
- * One brief through its states: planned → generating (the pair, then the
- * slides) → reviewing (the judge, or a person when there is no judge or the
- * judge is unsure) → ready → published. Anything that breaks lands on failed
- * with the reason in plain words, and can be run again from there.
+ * One brief through its states: planned → generating (its pairs, then the
+ * slides or the video) → reviewing (the judge, or a person when there is no
+ * judge or the judge is unsure) → ready → published. Anything that breaks
+ * lands on failed with the reason in plain words, and can be run again.
  */
 const message = (e: unknown) => (e instanceof Error ? e.message : String(e)).slice(0, 400);
-
-function captionFor(b: Brief) {
-  const angles = registry.angles(b.product);
-  const filter = registry.filter(b.product, b.inputs.filter);
-  const hook = angles.hooks.find((h) => h.id === b.inputs.captionHook)?.text ?? "";
-  return angles.captionLine.replace("{hook}", hook).replace("{filter}", filter.name).trim();
-}
-
-/** The pair, registered: the after laid over the before and both cut to what they share. Worked out once per pair and kept. */
-async function registered(key: string, before: Buffer, after: Buffer) {
-  const out = await aligned(before, after);
-  await sql("insert into alignments (key, result) values ($1,$2) on conflict (key) do update set result = excluded.result", [key, JSON.stringify(out.alignment)]);
-  return out as { before: Buffer; after: Buffer; alignment: Alignment };
-}
-
 const waiting = (note: string) => ({ by: "none" as const, outcome: "hold" as const, note, at: new Date().toISOString() });
 
 /** "Film · '70s Vintage", but only the filter's name when the variation's label just repeats it. */
@@ -40,35 +26,94 @@ const filterLabel = (name: string, label: string) => {
   return label.toLowerCase().split(/\s+/).some((w) => words.has(w)) ? name : `${name} · ${label}`;
 };
 
+/** A brief's pairs: its main one, then any more a multi-pair format asked for. */
+export const pairsOf = (b: Brief): PairRef[] => [{ asset: b.inputs.asset, filter: b.inputs.filter, variation: b.inputs.variation }, ...(b.inputs.more ?? [])];
+
+/** The words on the post: the idea's own when the brief came from one, else a validated hook. */
+function wordsOf(b: Brief) {
+  const angles = registry.angles(b.product);
+  const filter = registry.filter(b.product, b.inputs.filter);
+  const hook = b.inputs.hookText ?? angles.hooks.find((h) => h.id === b.inputs.hook)?.text ?? "";
+  const caption = b.inputs.captionText ?? angles.captionLine.replace("{hook}", angles.hooks.find((h) => h.id === b.inputs.captionHook)?.text ?? "").replace("{filter}", filter.name).trim();
+  return { hook, caption, text: b.inputs.text ?? "" };
+}
+
+type Built = { pairs: ScenePair[]; alignment: Alignment; cost: number; fresh: number; judgeable: { key: string; before: Buffer; after: Buffer; filterName: string; benefit: string } };
+
+/**
+ * A brief's pairs, generated (or taken from what is kept) and registered.
+ * Several filters on one photo are registered together, so every frame of
+ * that photo lies over every other; different photos are registered each on
+ * their own.
+ */
+async function build(b: Brief, generate: boolean): Promise<Built> {
+  const refs = pairsOf(b);
+  let cost = 0, fresh = 0;
+  const loaded: { ref: PairRef; key: string; filter: ReturnType<typeof registry.filter>; label: string; before: Buffer; after: Buffer }[] = [];
+  for (const ref of refs) {
+    const filter = registry.filter(b.product, ref.filter);
+    const variation = filter.variations.find((v) => v.id === ref.variation);
+    if (!variation) throw new Error(`The filter "${filter.name}" has no variation "${ref.variation}".`);
+    const [asset] = await sql<{ media_key: string }>("select media_key from assets where id = $1", [ref.asset]);
+    if (!asset) throw new Error("A source photo is no longer in the library.");
+    const key = generationKey(ref.asset, filter.id, variation.id, variation.prompt);
+    let mediaKey: string;
+    if (generate) {
+      const g = await transform({ asset: ref.asset, assetKey: asset.media_key, filter: filter.id, variation: variation.id, prompt: variation.prompt, quality: filter.quality });
+      if (!g.cached) {
+        cost += g.costUsd ?? 0;
+        fresh++;
+      }
+      mediaKey = g.mediaKey;
+    } else {
+      const [gen] = await sql<{ media_key: string }>("select media_key from generations where key = $1", [key]);
+      if (!gen) throw new Error("A pair of this brief was never generated.");
+      mediaKey = gen.media_key;
+    }
+    loaded.push({ ref, key, filter, label: filterLabel(filter.name, variation.label), before: await get(asset.media_key), after: await get(mediaKey) });
+  }
+
+  const sameAsset = loaded.length > 1 && loaded.every((l) => l.ref.asset === loaded[0].ref.asset);
+  const pairs: ScenePair[] = [];
+  let alignment: Alignment;
+  if (sameAsset) {
+    const set = await alignedSet(loaded[0].before, loaded.map((l) => l.after));
+    for (const [i, l] of loaded.entries()) pairs.push({ before: set.before, after: set.afters[i], filterLabel: l.label });
+    alignment = set.alignments[0];
+  } else {
+    const each: Alignment[] = [];
+    for (const l of loaded) {
+      const one = await aligned(l.before, l.after);
+      pairs.push({ before: one.before, after: one.after, filterLabel: l.label });
+      each.push(one.alignment);
+    }
+    alignment = each[0];
+  }
+  await sql("insert into alignments (key, result) values ($1,$2) on conflict (key) do update set result = excluded.result", [loaded[0].key, JSON.stringify(alignment)]);
+  return { pairs, alignment, cost, fresh, judgeable: { key: loaded[0].key, before: pairs[0].before, after: pairs[0].after, filterName: loaded[0].filter.name, benefit: loaded[0].filter.benefit } };
+}
+
 export async function runBrief(id: string) {
   if (!(await claim(id, ["planned", "failed"], "generating", "Started"))) return;
   let cost = 0;
   try {
     const b = (await load(id))!;
-    const filter = registry.filter(b.product, b.inputs.filter);
-    const variation = filter.variations.find((v) => v.id === b.inputs.variation);
-    if (!variation) throw new Error(`The filter "${filter.name}" has no variation "${b.inputs.variation}".`);
-    const [asset] = await sql<{ media_key: string }>("select media_key from assets where id = $1", [b.inputs.asset]);
-    if (!asset) throw new Error("The source photo is no longer in the library.");
+    const built = await build(b, true);
+    cost = built.cost;
+    const n = built.pairs.length;
+    await update(id, null, built.fresh ? `Generated ${built.fresh} of ${n} for $${built.cost.toFixed(3)}` : n > 1 ? `Used ${n} kept generations` : "Used the kept generation", { costUsd: cost });
+    if (built.alignment.applied) await update(id, null, `After laid over the before: ${Math.round(Math.abs(built.alignment.scale - 1) * 100)}% zoom corrected`);
 
-    const generation = await transform({ asset: b.inputs.asset, assetKey: asset.media_key, filter: filter.id, variation: variation.id, prompt: variation.prompt, quality: filter.quality });
-    if (!generation.cached) cost += generation.costUsd ?? 0;
-    await update(id, null, generation.cached ? "Used the kept generation" : `Generated${generation.costUsd ? ` for $${generation.costUsd.toFixed(3)}` : ""}`, { costUsd: cost });
-
-    const pair = await registered(generation.key, await get(asset.media_key), await get(generation.mediaKey));
-    const { before, after } = pair;
-    if (pair.alignment.applied) await update(id, null, `After laid over the before: ${Math.round(Math.abs(pair.alignment.scale - 1) * 100)}% zoom corrected`);
-    const hook = registry.angles(b.product).hooks.find((h) => h.id === b.inputs.hook)?.text ?? "";
-    const format = registry.format(b.format);
-    const { slides, video } = await compose({ briefId: id, format, product: registry.product(b.product), before, after, hook, filterLabel: filterLabel(filter.name, variation.label) });
-    await update(id, "reviewing", video ? `Video made, ${video.seconds}s` : `${slides.length} slides made`, { slides, video, align: pair.alignment, caption: captionFor(b) });
+    const words = wordsOf(b);
+    const { slides, video } = await compose({ briefId: id, format: registry.format(b.format), product: registry.product(b.product), pairs: built.pairs, hook: words.hook, text: words.text });
+    await update(id, "reviewing", video ? `Video made, ${video.seconds}s` : `${slides.length} ${slides.length === 1 ? "picture" : "slides"} made`, { slides, video, align: built.alignment, caption: words.caption });
 
     if (!judgeAvailable()) {
       await update(id, null, "Waiting for a person: no review model is set", { review: waiting("No review model is set.") });
       return;
     }
     // A review model that cannot answer is not a reason to throw the slides away: the brief waits for a person instead.
-    const verdict = await judge({ key: generationKey(b.inputs.asset, filter.id, variation.id, variation.prompt), before, after, filterName: filter.name, benefit: filter.benefit }).catch(async (e) => {
+    const verdict = await judge(built.judgeable).catch(async (e) => {
       await update(id, null, "Waiting for a person: the review model did not answer", { review: waiting(`The review model did not answer: ${message(e)}`) });
       return null;
     });
@@ -89,19 +134,14 @@ export async function runBrief(id: string) {
   }
 }
 
-/** Make a brief's slides again from the same pair and words, at no cost: for when a scene or a format changes. Its state stays as it is. */
+/** Make a brief's slides or video again from the same pairs and words, at no cost: for when a scene or a format changes. Its state stays as it is. */
 export async function remake(id: string) {
   const b = await load(id);
   if (!b || !b.slides.length) return false;
-  const filter = registry.filter(b.product, b.inputs.filter);
-  const variation = filter.variations.find((v) => v.id === b.inputs.variation);
-  const [asset] = await sql<{ media_key: string }>("select media_key from assets where id = $1", [b.inputs.asset]);
-  const [gen] = variation ? await sql<{ media_key: string }>("select media_key from generations where key = $1", [generationKey(b.inputs.asset, filter.id, variation.id, variation.prompt)]) : [];
-  if (!variation || !asset || !gen) return false;
-  const pair = await registered(generationKey(b.inputs.asset, filter.id, variation.id, variation.prompt), await get(asset.media_key), await get(gen.media_key));
-  const hook = registry.angles(b.product).hooks.find((h) => h.id === b.inputs.hook)?.text ?? "";
-  const { slides, video } = await compose({ briefId: id, format: registry.format(b.format), product: registry.product(b.product), before: pair.before, after: pair.after, hook, filterLabel: filterLabel(filter.name, variation.label) });
-  await update(id, null, "Made again", { slides, video, align: pair.alignment });
+  const built = await build(b, false);
+  const words = wordsOf(b);
+  const { slides, video } = await compose({ briefId: id, format: registry.format(b.format), product: registry.product(b.product), pairs: built.pairs, hook: words.hook, text: words.text });
+  await update(id, null, "Made again", { slides, video, align: built.alignment });
   return true;
 }
 

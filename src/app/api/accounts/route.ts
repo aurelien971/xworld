@@ -12,6 +12,7 @@ export type AccountsView = {
   creators: { id: string; name: string }[];
   personas: {
     id: string; name: string; stance: string; voice: string; model: string | null; creatorName: string | null;
+    kit: { idea: string; handles: string[]; bio: string; picture: string; pillars: string[]; first: string[] } | null;
     slots: { id: string; platform: string; handle: string; status: string; perDay: number; connected: boolean; needsReconnect: boolean }[];
     formats: string[];
   }[];
@@ -29,7 +30,7 @@ async function view(product: string): Promise<AccountsView> {
       const slots = accounts.filter((a) => a.persona === p.id);
       const model = slots[0]?.model ?? null;
       return {
-        id: p.id, name: p.name, stance: p.stance, voice: p.voice, model, creatorName: creators.find((c) => c.id === model)?.name ?? null,
+        id: p.id, name: p.name, stance: p.stance, voice: p.voice, kit: p.kit ?? null, model, creatorName: creators.find((c) => c.id === model)?.name ?? null,
         slots: slots.map((a) => ({ id: a.id, platform: a.platform, handle: a.handle, status: a.status, perDay: a.perDay, connected: a.connected, needsReconnect: a.needsReconnect })),
         formats: registry.formatsFor(p).map((f) => f.name),
       };

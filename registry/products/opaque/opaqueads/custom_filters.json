@@ -1,0 +1,24 @@
+[
+  {
+    "domain" : "human",
+    "preset" : {
+      "basePrompt" : "Apply a moderate warm color temperature shift, balancing reds and oranges with cooler tones for a harmonious look. Enhance contrast to deepen blacks and brighten highlights, achieving a dynamic range. Adjust sharpening to create a crisper texture, while maintaining subtlety. Introduce a gentle vignette to subtly draw focus towards the center. Soften the halation effect to ensure a delicate glow around bright areas, enhancing the dramatic lighting and emphasizing the subject.",
+      "benefit" : "Enhance vibrancy and focus.",
+      "category" : "style",
+      "enabled" : true,
+      "examples" : [
+
+      ],
+      "id" : "clone_20260710-193619",
+      "intensities" : [
+
+      ],
+      "name" : "Warm Glow",
+      "order" : 500,
+      "quality" : "high",
+      "variationExamples" : {
+
+      }
+    }
+  }
+]

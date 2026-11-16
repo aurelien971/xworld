@@ -31,14 +31,14 @@ function studioFilters(): Filter[] {
   return heads.map((m, i) => {
     const body = src.slice(m.index! + m[0].length, heads[i + 1]?.index ?? src.length);
     const variations = [...body.matchAll(variation)].map((v) => ({ id: unswift(v[1]), label: unswift(v[2]), prompt: unswift(v[3]) }));
-    return { id: unswift(m[1]), category: unswift(m[2]), name: unswift(m[3]), benefit: unswift(m[4]), quality: unswift(m[5]), approved: false, variations };
+    return { id: unswift(m[1]), category: unswift(m[2]), name: unswift(m[3]), benefit: unswift(m[4]), quality: unswift(m[5]), approved: false, origin: "opaque" as const, variations };
   }).filter((f) => f.variations.length);
 }
 
 type Preset = { id: string; category: string; name: string; benefit?: string; quality?: string; basePrompt?: string; intensities?: { id: string; label: string; prompt: string }[] };
 const fromPreset = (p: Preset): Filter | null => {
   const variations = p.intensities?.length ? p.intensities : p.basePrompt ? [{ id: "default", label: p.name, prompt: p.basePrompt }] : [];
-  return variations.length ? { id: p.id, category: p.category, name: p.name, benefit: p.benefit ?? "", quality: p.quality ?? "medium", approved: false, variations } : null;
+  return variations.length ? { id: p.id, category: p.category, name: p.name, benefit: p.benefit ?? "", quality: p.quality ?? "medium", approved: false, origin: "opaque" as const, variations } : null;
 };
 
 async function main() {

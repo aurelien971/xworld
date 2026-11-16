@@ -15,11 +15,12 @@
     "height": 1920
   },
   "video": {
-    "renderer": "slider",
+    "renderer": "sequence",
+    "plan": "single",
     "options": {
-      "beforeHold": 0.3,
+      "hold": 0.3,
       "wipe": 0.8,
-      "afterHold": 1.4,
+      "rest": 1.4,
       "cta": 1.5
     }
   }

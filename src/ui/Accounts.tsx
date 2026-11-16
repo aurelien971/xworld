@@ -59,6 +59,9 @@ export function Accounts({ product }: { product: string }) {
       </dl>
 
       {view && !view.configured && <p className="mt-6 text-ink-2">Mitsushiro is not linked yet, so nothing can be connected. Set its address and the shared secret, then come back.</p>}
+      {view?.configured && !view.error && view.creators.length === 0 && (
+        <p className="mt-6 text-ink-2">Mitsushiro is linked, but the login it was told to act for has no creators. Set INGEST_OWNER on Mitsushiro to the email you sign in to the studio with, then reload.</p>
+      )}
       {(error || view?.error) && (
         <p role="alert" className="mt-6 text-accent">
           {error || view?.error}
@@ -70,9 +73,22 @@ export function Accounts({ product }: { product: string }) {
           <li key={p.id} className="grid gap-x-8 gap-y-3 border-b border-line py-4 lg:grid-cols-[minmax(0,260px)_minmax(0,220px)_minmax(0,1fr)]">
             <div className="min-w-0">
               <p className="text-base">
-                {p.name} <span className="ml-1 text-xs text-ink-3 capitalize">{p.stance}</span>
+                {p.name} <span className="ml-1 text-xs text-ink-3 capitalize">{p.stance.replace("-", " ")}</span>
               </p>
-              <p className="mt-0.5 line-clamp-2 text-ink-2">{p.voice}</p>
+              <p className="mt-0.5 text-ink-2">{p.kit?.idea ?? p.voice}</p>
+              {p.kit && (
+                <details className="mt-2">
+                  <summary className="cursor-pointer text-xs text-ink-3 underline decoration-line-2 underline-offset-2 hover:text-ink">How to set it up</summary>
+                  <dl className="mt-2 grid gap-y-2 text-xs">
+                    {([["Handles to try", p.kit.handles.map((h) => `@${h}`).join("  ")], ["Bio", p.kit.bio], ["Picture", p.kit.picture], ["Posts about", p.kit.pillars.join(", ")], ["First posts", p.kit.first.join(". ") + "."], ["Voice", p.voice]] as const).map(([k, v]) => (
+                      <div key={k}>
+                        <dt className="text-ink-3">{k}</dt>
+                        <dd className="whitespace-pre-line text-ink-2">{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </details>
+              )}
               <p className="mt-1.5 truncate font-mono text-2xs text-ink-3">{p.formats.length} formats</p>
             </div>
 

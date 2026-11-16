@@ -127,18 +127,66 @@ export async function aligned(before: Buffer, after: Buffer): Promise<{ before: 
 }
 
 /**
+ * One before and several afters of it (several filters on one photo), all
+ * cut to the area every one of them shares, so any two can be laid over
+ * each other. An after whose edges cannot be trusted is taken as it is.
+ */
+export async function alignedSet(before: Buffer, afters: Buffer[]): Promise<{ before: Buffer; afters: Buffer[]; alignments: Alignment[] }> {
+  if (afters.length === 1) {
+    const one = await aligned(before, afters[0]);
+    return { before: one.before, afters: [one.after], alignments: [one.alignment] };
+  }
+  const base = await sharp(before).rotate().toBuffer({ resolveWithObject: true });
+  const W = base.info.width, H = base.info.height;
+  const placed = [];
+  let x0 = 0, y0 = 0, x1 = W, y1 = H;
+  for (const after of afters) {
+    const r = await register(before, after);
+    const sw = Math.round(W * r.scale), sh = Math.round(H * r.scale);
+    const ox = Math.round((W - sw) / 2 + r.dx * W), oy = Math.round((H - sh) / 2 + r.dy * H);
+    const kept = (Math.min(W, ox + sw) - Math.max(0, ox)) * (Math.min(H, oy + sh) - Math.max(0, oy)) / (W * H);
+    const trust = r.score >= 0.2 && kept >= 0.6;
+    placed.push({ after, r, sw: trust ? sw : W, sh: trust ? sh : H, ox: trust ? ox : 0, oy: trust ? oy : 0, kept, trust });
+    if (trust) {
+      x0 = Math.max(x0, ox);
+      y0 = Math.max(y0, oy);
+      x1 = Math.min(x1, ox + sw);
+      y1 = Math.min(y1, oy + sh);
+    }
+  }
+  const w = x1 - x0, h = y1 - y0;
+  const out = await Promise.all(placed.map((p) => sharp(p.after).rotate().resize(p.sw, p.sh, { fit: "fill" }).extract({ left: x0 - p.ox, top: y0 - p.oy, width: w, height: h }).toBuffer()));
+  return {
+    before: await sharp(base.data).extract({ left: x0, top: y0, width: w, height: h }).toBuffer(),
+    afters: out,
+    alignments: placed.map((p) => ({ ...p.r, kept: +p.kept.toFixed(3), applied: p.trust && (Math.abs(p.r.scale - 1) >= 0.004 || Math.abs(p.r.dx) >= 0.003 || Math.abs(p.r.dy) >= 0.003) })),
+  };
+}
+
+/** The window the eye is drawn to in a picture (faces and skin), as an offset into the picture scaled to cover width by height. */
+async function window(image: Buffer, width: number, height: number) {
+  const meta = await sharp(image).metadata();
+  const W = meta.width!, H = meta.height!;
+  const scale = Math.max(width / W, height / H);
+  const rw = Math.max(width, Math.round(W * scale)), rh = Math.max(height, Math.round(H * scale));
+  const picked = await sharp(image).resize(width, height, { fit: "cover", position: sharp.strategy.attention }).toBuffer({ resolveWithObject: true });
+  const info = picked.info as typeof picked.info & { cropOffsetLeft?: number; cropOffsetTop?: number };
+  const left = Math.min(rw - width, Math.max(0, Math.abs(info.cropOffsetLeft ?? Math.round((rw - width) / 2))));
+  const top = Math.min(rh - height, Math.max(0, Math.abs(info.cropOffsetTop ?? Math.round((rh - height) / 2))));
+  return { rw, rh, left, top };
+}
+
+/** The same window cut from every picture of a set that is already registered, chosen once on the first. */
+export async function coverSet(images: Buffer[], width: number, height: number): Promise<Buffer[]> {
+  const { rw, rh, left, top } = await window(images[0], width, height);
+  return Promise.all(images.map((img) => sharp(img).resize(rw, rh, { fit: "fill" }).extract({ left, top, width, height }).toBuffer()));
+}
+
+/**
  * The same window cut from both pictures, chosen once on the before (where
  * the eye is drawn: faces and skin) so the two crops can never drift apart.
  */
 export async function coverPair(before: Buffer, after: Buffer, width: number, height: number): Promise<[Buffer, Buffer]> {
-  const meta = await sharp(before).metadata();
-  const W = meta.width!, H = meta.height!;
-  const scale = Math.max(width / W, height / H);
-  const rw = Math.max(width, Math.round(W * scale)), rh = Math.max(height, Math.round(H * scale));
-  const picked = await sharp(before).resize(width, height, { fit: "cover", position: sharp.strategy.attention }).toBuffer({ resolveWithObject: true });
-  const info = picked.info as typeof picked.info & { cropOffsetLeft?: number; cropOffsetTop?: number };
-  const left = Math.min(rw - width, Math.max(0, Math.abs(info.cropOffsetLeft ?? Math.round((rw - width) / 2))));
-  const top = Math.min(rh - height, Math.max(0, Math.abs(info.cropOffsetTop ?? Math.round((rh - height) / 2))));
-  const cut = (img: Buffer) => sharp(img).resize(rw, rh, { fit: "fill" }).extract({ left, top, width, height }).toBuffer();
-  return Promise.all([cut(before), cut(after)]);
+  const [b, a] = await coverSet([before, after], width, height);
+  return [b, a];
 }

@@ -1,0 +1,12 @@
+{
+  "id": "the-photographer-x",
+  "persona": "the-photographer",
+  "platform": "x",
+  "handle": "",
+  "perDay": 2,
+  "times": [
+    "10:00",
+    "17:00"
+  ],
+  "status": "placeholder"
+}

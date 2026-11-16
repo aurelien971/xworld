@@ -1,0 +1,40 @@
+{
+  "id": "dm-reveal",
+  "name": "DM reveal",
+  "kind": "carousel",
+  "platforms": [
+    "instagram",
+    "tiktok"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1350
+  },
+  "scenes": [
+    {
+      "scene": "dm",
+      "options": {}
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "label": "filter"
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "before",
+        "label": "before"
+      }
+    },
+    {
+      "scene": "cta",
+      "options": {}
+    }
+  ]
+}

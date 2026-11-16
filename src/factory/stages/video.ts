@@ -3,9 +3,8 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
-import { coverPair } from "../align";
 import { ctaLayers, type SceneContext } from "../scenes";
-import { canvas, overlay, pill, thumb, type Layer } from "../scenes/draw";
+import { canvas, overlay, pill, sharp, thumb, type Layer } from "../scenes/draw";
 import { put } from "../storage";
 import type { Slide, Video } from "../types";
 
@@ -21,70 +20,123 @@ async function ffmpeg() {
   return "ffmpeg";
 }
 
-/**
- * The slider: the before held, a line drawn across it that leaves the after
- * behind, the after held, then the closing card. Nothing moves but the line:
- * the two pictures are the same window of a registered pair, so the face
- * stays exactly where it is while the look changes. Timings (seconds) come
- * from the format: beforeHold, wipe, afterHold, cta.
- */
-export async function sliderVideo(o: {
-  briefId: string; width: number; height: number; before: Buffer; after: Buffer; hook: string; filterLabel: string;
-  product: SceneContext["product"]; timings: Record<string, number>;
-}): Promise<{ video: Video; slides: Slide[] }> {
-  const W = o.width, H = o.height;
-  const t = { beforeHold: 0.9, wipe: 1.2, afterHold: 1.3, cta: 1.6, ...o.timings };
-  const wipeAt = t.beforeHold, afterAt = wipeAt + t.wipe, ctaAt = afterAt + t.afterHold, total = ctaAt + t.cta;
-  const [before, after] = await coverPair(o.before, o.after, W, H);
+/** How one frame gives way to the next: a line drawn across, a white flash, or a plain cut. */
+export type Transition = "wipe" | "flash" | "cut";
+export type Sequence = {
+  /** Finished frames at the video's size, in order. */
+  frames: Buffer[];
+  /** How each frame after the first arrives. One fewer than frames. */
+  transitions: Transition[];
+  /** A name shown over a frame while it is held (a filter's name), by frame. */
+  labels: (string | null)[];
+  hook: string;
+  /** Seconds: a frame arrived at by a cut is held for `hold`, a wipe lasts `wipe`, a revealed frame rests for `rest`, the closing card for `cta` (0: none, the video loops). */
+  timings: { hold: number; wipe: number; rest: number; cta: number };
+};
 
-  // The layers: the hook over the before, the line with its handle, the filter's name over the after, the closing card.
-  const hook: Layer[] = o.hook ? await pill(o.hook, { cx: W / 2, cy: Math.round(H * 0.24), size: Math.round(W * 0.05), maxWidth: Math.round(W * 0.82) }) : [];
-  const chip: Layer[] = o.filterLabel ? await pill(o.filterLabel, { cx: W / 2, cy: Math.round(H * 0.74), size: Math.round(W * 0.04), maxWidth: Math.round(W * 0.8), weight: "SemiBold" }) : [];
-  const card = await ctaLayers({ width: W, height: H, product: o.product, filterLabel: o.filterLabel });
+/**
+ * A sequence of frames into a video. Nothing moves but the line: every
+ * frame of one photo is the same window of a registered set, so the face
+ * stays exactly where it is while the look changes around it. One renderer
+ * for every video format: a single slider, a flash cut, three filters in a
+ * row, one filter across three photos.
+ */
+export async function sequenceVideo(o: { briefId: string; width: number; height: number; sequence: Sequence; product: SceneContext["product"]; ctaLabel: string }): Promise<{ video: Video; slides: Slide[] }> {
+  const W = o.width, H = o.height;
+  const { frames, transitions, labels, hook, timings: t } = o.sequence;
+  const n = frames.length;
+  const FLASH = 0.3;
+
+  // When each frame arrives and how long it is held.
+  const arrive: number[] = [0], done: number[] = [];
+  let clock = 0;
+  for (let k = 0; k < n; k++) {
+    const dwell = k === 0 || transitions[k - 1] === "cut" ? t.hold : t.rest;
+    clock += dwell;
+    done[k] = clock;
+    if (k < n - 1) {
+      clock += transitions[k] === "wipe" ? t.wipe : 0;
+      arrive[k + 1] = clock;
+    }
+  }
+  const ctaAt = clock, total = +(clock + t.cta).toFixed(3);
+
+  const hookLayers: Layer[] = hook ? await pill(hook, { cx: W / 2, cy: Math.round(H * 0.24), size: Math.round(W * 0.05), maxWidth: Math.round(W * 0.82) }) : [];
+  const card = t.cta > 0 ? await ctaLayers({ width: W, height: H, product: o.product, filterLabel: o.ctaLabel }) : [];
   const knob = 84, lineW = 6;
-  const handle = Buffer.from(
+  const handle = await sharp(Buffer.from(
     `<svg xmlns="http://www.w3.org/2000/svg" width="${knob}" height="${H}"><rect x="${(knob - lineW) / 2}" width="${lineW}" height="${H}" fill="#fff"/><circle cx="${knob / 2}" cy="${H / 2}" r="${knob / 2 - 2}" fill="#fff"/><path d="M${knob / 2 - 9} ${H / 2 - 12} l-12 12 l12 12 M${knob / 2 + 9} ${H / 2 - 12} l12 12 l-12 12" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
-  );
+  )).png().toBuffer();
 
   const dir = await fs.mkdtemp(path.join(os.tmpdir(), "factory-"));
   try {
     const file = (name: string) => path.join(dir, name);
-    const { sharp } = await import("../scenes/draw");
-    await Promise.all([
-      fs.writeFile(file("before.jpg"), before),
-      fs.writeFile(file("after.jpg"), after),
-      overlay(W, H, hook).then((b) => fs.writeFile(file("hook.png"), b)),
-      overlay(W, H, chip).then((b) => fs.writeFile(file("chip.png"), b)),
-      overlay(W, H, card).then((b) => fs.writeFile(file("card.png"), b)),
-      sharp(handle).png().toBuffer().then((b) => fs.writeFile(file("handle.png"), b)),
-    ]);
+    const inputs: string[] = [];
+    let count = 0;
+    const add = async (name: string, data: Buffer) => {
+      await fs.writeFile(file(name), data);
+      inputs.push("-loop", "1", "-framerate", "30", "-t", String(total), "-i", file(name));
+      return count++;
+    };
+    const frameIn: number[] = [];
+    for (const [k, f] of frames.entries()) frameIn.push(await add(`f${k}.jpg`, f));
+    const hookIn = hookLayers.length ? await add("hook.png", await overlay(W, H, hookLayers)) : -1;
+    const cardIn = card.length ? await add("card.png", await overlay(W, H, card)) : -1;
+    const labelIn: number[] = [];
+    for (const [k, text] of labels.entries()) {
+      labelIn[k] = text ? await add(`l${k}.png`, await overlay(W, H, await pill(text, { cx: W / 2, cy: Math.round(H * 0.74), size: Math.round(W * 0.04), maxWidth: Math.round(W * 0.8), weight: "SemiBold" }))) : -1;
+    }
 
-    // Progress of the line, eased so it starts and lands softly: 0 before the wipe, 1 after it.
-    const p = `st(0,clip((t-${wipeAt})/${t.wipe},0,1));ld(0)*ld(0)*(3-2*ld(0))`;
-    const still = (name: string) => ["-loop", "1", "-framerate", "30", "-t", String(total), "-i", file(name)];
-    const fade = (at: number, out?: number) => `format=rgba,fade=t=in:st=${at}:d=0.25:alpha=1${out != null ? `,fade=t=out:st=${out}:d=0.2:alpha=1` : ""}`;
-    const graph = [
-      // A mask that is white to the right of the line: the before shows there, the after to its left.
-      `color=black:s=${W}x${H}:r=30:d=${total}[mb]`,
-      `color=white:s=${W}x${H}:r=30:d=${total}[mw]`,
-      `[mb][mw]overlay=x='(${p})*${W}':y=0:eval=frame,format=gray[mask]`,
-      `[0:v]format=rgba[b]`,
-      `[b][mask]alphamerge[bm]`,
-      `[1:v][bm]overlay=0:0[base]`,
-      `[5:v]format=rgba[h]`,
-      `[base][h]overlay=x='(${p})*${W}-${knob / 2}':y=0:eval=frame:enable='between(t,${wipeAt},${afterAt})'[v1]`,
-      `[2:v]format=rgba,fade=t=out:st=${(wipeAt + t.wipe * 0.35).toFixed(2)}:d=0.25:alpha=1[hk]`,
-      `[v1][hk]overlay=0:0[v2]`,
-      `[3:v]${fade(afterAt, ctaAt - 0.1)}[ch]`,
-      `[v2][ch]overlay=0:0[v3]`,
-      `[4:v]${fade(ctaAt)}[cd]`,
-      `[v3][cd]overlay=0:0,format=yuv420p[out]`,
-    ].join(";");
+    const graph: string[] = [];
+    let cur = `[${frameIn[0]}:v]`;
+    for (let k = 1; k < n; k++) {
+      const kind = transitions[k - 1];
+      const at = done[k - 1];
+      // Progress of this frame's arrival: an eased line for a wipe, a step for a cut or a flash.
+      const p = kind === "wipe" ? `st(0,clip((t-${at})/${t.wipe},0,1));ld(0)*ld(0)*(3-2*ld(0))` : `gte(t,${at})`;
+      graph.push(
+        // A mask that is white to the left of the line: this frame shows there, what came before to its right.
+        `color=white:s=${W}x${H}:r=30:d=${total}[mw${k}]`,
+        `color=black:s=${W}x${H}:r=30:d=${total}[mb${k}]`,
+        `[mw${k}][mb${k}]overlay=x='(${p})*${W}':y=0:eval=frame,format=gray[m${k}]`,
+        `[${frameIn[k]}:v]format=rgba[fr${k}]`,
+        `[fr${k}][m${k}]alphamerge[fm${k}]`,
+        `${cur}[fm${k}]overlay=0:0[s${k}]`,
+      );
+      cur = `[s${k}]`;
+      if (kind === "wipe") {
+        // Each wipe draws its own copy of the handle.
+        const handleIn = await add(`h${k}.png`, handle);
+        graph.push(`[${handleIn}:v]format=rgba[h${k}]`, `${cur}[h${k}]overlay=x='(${p})*${W}-${knob / 2}':y=0:eval=frame:enable='between(t,${at},${at + t.wipe})'[sh${k}]`);
+        cur = `[sh${k}]`;
+      }
+      if (kind === "flash") {
+        graph.push(`color=white:s=${W}x${H}:r=30:d=${total},format=rgba,fade=t=in:st=${(at - 0.07).toFixed(2)}:d=0.07:alpha=1,fade=t=out:st=${at.toFixed(2)}:d=${FLASH}:alpha=1[fl${k}]`, `${cur}[fl${k}]overlay=0:0[sf${k}]`);
+        cur = `[sf${k}]`;
+      }
+    }
+    // The hook stays over the first frame and leaves as the first change begins.
+    if (hookIn >= 0) {
+      graph.push(`[${hookIn}:v]format=rgba,fade=t=out:st=${Math.max(0, done[0] + (transitions[0] === "wipe" ? t.wipe * 0.35 : -0.05)).toFixed(2)}:d=0.25:alpha=1[hk]`, `${cur}[hk]overlay=0:0[shk]`);
+      cur = "[shk]";
+    }
+    // Each name fades in once its frame has arrived and out before the next change (or the closing card).
+    for (let k = 0; k < n; k++) {
+      if (labelIn[k] < 0) continue;
+      const out = (k < n - 1 ? done[k] : t.cta > 0 ? ctaAt : total + 1) - 0.1;
+      graph.push(`[${labelIn[k]}:v]format=rgba,fade=t=in:st=${(arrive[k] + 0.05).toFixed(2)}:d=0.25:alpha=1,fade=t=out:st=${out.toFixed(2)}:d=0.2:alpha=1[lb${k}]`, `${cur}[lb${k}]overlay=0:0[sl${k}]`);
+      cur = `[sl${k}]`;
+    }
+    if (cardIn >= 0) {
+      graph.push(`[${cardIn}:v]format=rgba,fade=t=in:st=${ctaAt.toFixed(2)}:d=0.25:alpha=1[cd]`, `${cur}[cd]overlay=0:0[scd]`);
+      cur = "[scd]";
+    }
+    graph.push(`${cur}format=yuv420p[out]`);
+
     const args = [
-      "-y", "-hide_banner", "-loglevel", "error",
-      ...still("before.jpg"), ...still("after.jpg"), ...still("hook.png"), ...still("chip.png"), ...still("card.png"), ...still("handle.png"),
+      "-y", "-hide_banner", "-loglevel", "error", ...inputs,
       "-f", "lavfi", "-t", String(total), "-i", "anullsrc=channel_layout=stereo:sample_rate=44100",
-      "-filter_complex", graph, "-map", "[out]", "-map", "6:a",
+      "-filter_complex", graph.join(";"), "-map", "[out]", "-map", `${count}:a`,
       "-c:v", "libx264", "-preset", "medium", "-crf", "21", "-maxrate", "4M", "-bufsize", "8M", "-r", "30", "-c:a", "aac", "-b:a", "64k",
       "-movflags", "+faststart", "-t", String(total), file("out.mp4"),
     ];
@@ -96,13 +148,14 @@ export async function sliderVideo(o: {
     const key = `${base}/video.mp4`;
     await put(key, await fs.readFile(file("out.mp4")));
 
-    // Three stills of it for the queue: the opening, the line half way, the closing card.
+    // Three stills of it for the queue: the opening, a change half way, the end.
     const half = Math.round(W / 2);
-    const leftAfter = await sharp(after).extract({ left: 0, top: 0, width: half, height: H }).toBuffer();
+    const mid = Math.min(n - 1, Math.max(1, Math.round((n - 1) / 2)));
+    const leftOfMid = await sharp(frames[mid]).extract({ left: 0, top: 0, width: half, height: H }).toBuffer();
     const stills: [string, Buffer][] = [
-      ["opening", await canvas(W, H, [{ input: before, left: 0, top: 0 }, ...hook])],
-      ["wipe", await canvas(W, H, [{ input: before, left: 0, top: 0 }, { input: leftAfter, left: 0, top: 0 }, { input: await sharp(handle).png().toBuffer(), left: half - knob / 2, top: 0 }])],
-      ["closing", await canvas(W, H, [{ input: after, left: 0, top: 0 }, ...card])],
+      ["opening", await canvas(W, H, [{ input: frames[0], left: 0, top: 0 }, ...hookLayers])],
+      ["change", await canvas(W, H, [{ input: frames[mid - 1], left: 0, top: 0 }, { input: leftOfMid, left: 0, top: 0 }, { input: handle, left: half - knob / 2, top: 0 }])],
+      ["closing", await canvas(W, H, [{ input: frames[n - 1], left: 0, top: 0 }, ...card])],
     ];
     const slides: Slide[] = [];
     for (const [i, [name, jpeg]] of stills.entries()) {

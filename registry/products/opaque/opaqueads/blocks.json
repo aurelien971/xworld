@@ -1,0 +1,1424 @@
+{
+  "approved" : [
+    "black",
+    "clarity",
+    "postcard",
+    "spotlight",
+    "color_pop",
+    "cartoon2d",
+    "headshot",
+    "touch_up",
+    "longer_legs",
+    "polaroid",
+    "corporate",
+    "natural_glow",
+    "y2k_camcorder",
+    "polaroid_flash",
+    "film_authentic",
+    "polaroid_retro",
+    "pixar3d",
+    "studio_background",
+    "flash",
+    "hdr",
+    "glam",
+    "cinematic"
+  ],
+  "approvedAssets" : [
+    "9A00D6BB-F893-4632-B9C1-7E02332518B9",
+    "D5B84D21-9E22-491F-8C53-C2FF2DD1F12F",
+    "FD68CED3-CCCF-4D39-AC9D-204989B8483E",
+    "23700FA2-E9FC-4B78-A175-D955F09EAD70",
+    "F45A44F4-D019-4319-B7D2-8AE341224A23",
+    "170A1C71-C915-437F-8D50-485F7F22399D",
+    "CE0BC765-D3E5-4D91-940F-7C563CBC55B5",
+    "EFA2ADA2-13B6-4D22-817D-02D1034EBA86",
+    "BB922BB9-08C0-416E-A505-3FA43D419037",
+    "8226AB35-2BE1-4403-9D2D-7673CAAC2335",
+    "7B5DEE2E-64CF-4434-B46B-D49373737025",
+    "96FAB727-E257-40B2-86E3-3973A36A00DC",
+    "54DC2BBE-B2CE-4C56-9718-6C5E4FA9A765",
+    "B6AACFBD-5BA4-4EE6-8BD3-3896328CA840",
+    "B71D69E8-5C97-4C4F-999C-BA57ACF0170E"
+  ],
+  "blocked" : [
+
+  ],
+  "blockedAssets" : [
+    "41536046-0484-4D1D-8428-F98B05AB1AE5",
+    "E2E5E0C0-55F3-4361-A6B1-6BB84524F5CF",
+    "10EDB726-A778-4BA7-BB84-132D8D61725C",
+    "6E37F018-8D3B-40F1-861D-82B78739DD40",
+    "B90E5378-64FA-4316-BEC1-BE4C503689EB",
+    "29DD5A40-169D-4E91-9696-3CFD22B92F12"
+  ],
+  "captions" : [
+    {
+      "hashtags" : "#photoediting #filters #glowup #AIphotoeditor #Opaque",
+      "id" : "FF5B326F-F473-4234-BF48-1E5680C086D9",
+      "templateName" : "The Verdict · 2 slides",
+      "text" : "Edited in Opaque AI App ✨\nBad lighting doesn't mean a bad photo.",
+      "uses" : 0,
+      "validated" : true
+    }
+  ],
+  "endings" : [
+    {
+      "duration" : 3,
+      "id" : "880C779D-49C7-4F0C-8D28-21C165AE8C56",
+      "name" : "Brand O",
+      "pillCorner" : 1,
+      "pillOpacity" : 1,
+      "pillPadX" : 1,
+      "pillPadY" : 1,
+      "pillScale" : 1,
+      "pillWeight" : "bold",
+      "style" : "brand_o",
+      "validated" : true
+    },
+    {
+      "duration" : 3.5,
+      "id" : "3E1238C7-C392-44A3-9518-A12C7AEB99A9",
+      "name" : "App Store promo",
+      "pillCorner" : 1,
+      "pillOpacity" : 1,
+      "pillPadX" : 1,
+      "pillPadY" : 1,
+      "pillScale" : 1,
+      "pillWeight" : "bold",
+      "style" : "appstore_promo",
+      "validated" : true
+    },
+    {
+      "duration" : 2.2,
+      "id" : "4285EACE-64EB-4E72-8253-6A83C1866991",
+      "name" : "CTA overlay",
+      "pillCorner" : 1,
+      "pillOpacity" : 1,
+      "pillPadX" : 1,
+      "pillPadY" : 1,
+      "pillScale" : 1,
+      "pillWeight" : "bold",
+      "style" : "cta_overlay",
+      "validated" : true
+    },
+    {
+      "duration" : 0,
+      "id" : "AC72B449-0FF3-4ED2-A921-E799FB5C4EFD",
+      "name" : "Loop cut (none)",
+      "pillCorner" : 1,
+      "pillOpacity" : 1,
+      "pillPadX" : 1,
+      "pillPadY" : 1,
+      "pillScale" : 1,
+      "pillWeight" : "bold",
+      "style" : "none",
+      "validated" : false
+    }
+  ],
+  "hookDurMax" : 1.6,
+  "hookDurMin" : 0.8,
+  "hooks" : [
+    {
+      "duration" : 1.2,
+      "id" : "417D0204-2C1B-405A-AF8D-048C3EB74DF9",
+      "text" : "make your camera roll dangerous",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "7A2C0BDE-E437-469A-B4A0-DB7947BF2C80",
+      "text" : "you’re about to become annoyingly photogenic",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "647FAAC8-E8F3-46C7-BEE4-81DC0DCD758F",
+      "text" : "this app understands your face better than your camera",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "24E16AA8-7A30-486E-B41A-CB324A6846EE",
+      "text" : "one tap = main character",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "072DA293-FE07-4FE9-A672-0421263C9C03",
+      "text" : "the before is disrespectful.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "F5923DEF-9C48-4E00-95E8-18E2299D4C20",
+      "text" : "this filter is actually unfair.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "1B13E67D-4BFD-4054-B931-DC7CB879BA43",
+      "text" : "you were never the problem.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "E8F61A6A-BB6C-447C-A017-E3A77486FE11",
+      "text" : "your camera roll needs therapy.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "282BF297-2C17-4B32-BBFA-AF7B8361A832",
+      "text" : "delete less. post more.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "E0E3BF8A-2238-490A-8B57-5799D72EBFC2",
+      "text" : "face card: restored.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "4B88B7FA-5193-42EC-A324-56F083F8FB45",
+      "text" : "pretty privilege, one tap away.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "CD2FA2C3-E764-4359-B298-59A17420710A",
+      "text" : "your ex is going to see this.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "A5E69C0C-B78D-4E8E-BCB2-940CFB3723EC",
+      "text" : "the glow up your camera forgot.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "7C7A779D-94B9-47AB-9BF6-B4015B5994F2",
+      "text" : "turn ‘maybe’ into profile picture.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "108941A2-B3BA-4338-B1E5-5FBD9D0236AE",
+      "text" : "your camera is doing you dirty.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "588DB1D9-DE7E-426D-83DC-2CDEA6D9094B",
+      "text" : "you’d post more if you looked like this.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "3B60B403-3369-462A-B240-2483D84C9EFF",
+      "text" : "stop deleting photos of yourself.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "DAD5BCED-AE47-4E0B-8CBC-32C0C2155C2F",
+      "text" : "this is why her pictures always eat.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "527EC877-EF7A-426F-88AD-98256794FE39",
+      "text" : "make them regret unfollowing you.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "CAE0C434-A760-4664-90C8-14069E5404B8",
+      "text" : "the photo wasn’t ugly. the edit was.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "6810608D-6F0A-475D-BDB3-EC7E5F30D18A",
+      "text" : "hot girls don’t post the first version.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "A619FF96-5B54-4CAB-ADF3-F885240A8F54",
+      "text" : "your face card deserves better lighting.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "194F2104-10F3-402F-A50C-764DC2703700",
+      "text" : "she’s not prettier. she edits better.",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "74E9BF8B-3373-45CA-AA0A-2A7C8A5F80DE",
+      "text" : "\"How do you get this many likes on your pictures?\"",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "F42DC936-E6EC-43CA-A13B-9E61662C3974",
+      "text" : "F*ck gatekeeping, here's the filter",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "207FF96A-01FE-4798-A56B-1254E7DD6241",
+      "text" : "\"How do you edit your photos?\"",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "F64E115D-B782-4F25-865C-18F48B09B46A",
+      "text" : "your camera roll is about to change",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "9811FC22-9427-4D2D-88AC-568CE6C0E5EF",
+      "text" : "wait for the glow up",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "C0C1C72F-D83B-4386-A518-350CF81646B0",
+      "text" : "POV: you found the filter app",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "DD16FA5A-477A-49A5-8BA4-F11C20C1D819",
+      "text" : "this took one tap",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "CBD1EF4D-7959-4673-A0EF-4D4114542EE0",
+      "text" : "how is this free",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "9A91B773-A837-49E9-BAF4-C10FD7C6F115",
+      "text" : "would you post this?",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "BCE6944C-5BBF-4F4F-9BFE-2168E2C505CD",
+      "text" : "the before hurts to look at",
+      "validated" : true
+    },
+    {
+      "duration" : 1.2,
+      "id" : "A04A80F9-C53D-4BD0-8F63-BA58DA135F81",
+      "text" : "your photos deserve this",
+      "validated" : true
+    }
+  ],
+  "overlays" : {
+    "filterChip" : {
+      "chip" : true,
+      "corner" : 0.28184933438628157,
+      "design" : "default",
+      "fontFamily" : "Avenir Next",
+      "opacity" : 1,
+      "pillColorHex" : "#000000",
+      "size" : 0.05737713645081227,
+      "stroke" : true,
+      "validated" : true,
+      "weight" : "bold",
+      "x" : 0.5,
+      "y" : 0.84
+    },
+    "hookText" : {
+      "chip" : true,
+      "corner" : 0.3,
+      "design" : "default",
+      "fontFamily" : "Futura",
+      "opacity" : 0.9,
+      "padX" : 1.2,
+      "padY" : 1.1,
+      "pillColorHex" : "#000000",
+      "pillOpacity" : 1,
+      "size" : 0.1,
+      "stroke" : true,
+      "textColorHex" : "#FFFFFF",
+      "validated" : true,
+      "weight" : "semibold",
+      "x" : 0.5,
+      "y" : 0.6
+    },
+    "watermark" : {
+      "chip" : false,
+      "design" : "default",
+      "opacity" : 1,
+      "size" : 0.07092969102549637,
+      "validated" : true,
+      "weight" : "bold",
+      "x" : 0.5,
+      "y" : 0.8993316135084428
+    }
+  },
+  "packs" : [
+    {
+      "filterIds" : [
+        "cinematic"
+      ],
+      "id" : "4670D0B8-B191-41C0-B66E-486168A934AE",
+      "name" : "Pack 1",
+      "validated" : false
+    }
+  ],
+  "reveals" : [
+    {
+      "afterHold" : 1.6,
+      "beforeHold" : 0.9,
+      "easing" : "smooth",
+      "flash" : false,
+      "flashDuration" : 0.4,
+      "id" : "1129600E-4678-4BB0-879D-3EE97B6F2CA6",
+      "name" : "Classic",
+      "showFilterChip" : true,
+      "speed" : 1,
+      "transition" : "swipe",
+      "validated" : true,
+      "wipeDuration" : 1.2
+    },
+    {
+      "afterHold" : 1.3,
+      "beforeHold" : 0.2,
+      "easing" : "smooth",
+      "flash" : false,
+      "flashDuration" : 0.4,
+      "id" : "D5028C1B-45FB-46BC-B91A-D9D47561C0D7",
+      "name" : "Instant",
+      "showFilterChip" : true,
+      "speed" : 1,
+      "transition" : "swipe",
+      "validated" : true,
+      "wipeDuration" : 0.9
+    },
+    {
+      "afterHold" : 2,
+      "beforeHold" : 1.2,
+      "easing" : "easeOut",
+      "flash" : false,
+      "flashDuration" : 0.4,
+      "id" : "E0181A65-7BC3-4E32-9C0A-39F5B7AD8F75",
+      "name" : "Slow luxe",
+      "showFilterChip" : true,
+      "speed" : 1,
+      "transition" : "swipe",
+      "validated" : true,
+      "wipeDuration" : 2
+    },
+    {
+      "afterHold" : 1.2,
+      "beforeHold" : 0.5,
+      "easing" : "easeIn",
+      "flash" : false,
+      "flashDuration" : 0.4,
+      "id" : "299048A5-6BE2-4327-B552-D3751C085BD5",
+      "name" : "Snap",
+      "showFilterChip" : true,
+      "speed" : 1,
+      "transition" : "swipe",
+      "validated" : true,
+      "wipeDuration" : 0.5
+    },
+    {
+      "afterHold" : 1.5,
+      "beforeHold" : 0.6,
+      "easing" : "smooth",
+      "flash" : true,
+      "flashDuration" : 0.4,
+      "id" : "2945632F-D18C-4A30-8780-F74DB3168797",
+      "name" : "Freeze flash",
+      "showFilterChip" : true,
+      "speed" : 1,
+      "transition" : "swipe",
+      "validated" : true,
+      "wipeDuration" : 1.1
+    },
+    {
+      "afterHold" : 1.4,
+      "beforeHold" : 0.8,
+      "easing" : "smooth",
+      "flash" : false,
+      "flashDuration" : 0.4,
+      "id" : "F927AADF-A973-475C-B532-C1C64D603B84",
+      "name" : "Double time",
+      "showFilterChip" : true,
+      "speed" : 1.6,
+      "transition" : "swipe",
+      "validated" : true,
+      "wipeDuration" : 1.2
+    },
+    {
+      "afterHold" : 0.55,
+      "beforeHold" : 0.5,
+      "easing" : "smooth",
+      "flash" : false,
+      "flashDuration" : 0.4,
+      "id" : "022A9271-582F-478E-ACCD-BD3BC18881BB",
+      "name" : "Snap cuts",
+      "showFilterChip" : true,
+      "speed" : 1,
+      "transition" : "cut",
+      "validated" : true,
+      "wipeDuration" : 0
+    }
+  ],
+  "sequences" : [
+    {
+      "beats" : [
+        {
+          "duration" : 1.7954324499844911,
+          "id" : "88A16C90-156E-4069-A57C-EF8D88491386",
+          "kind" : "original"
+        },
+        {
+          "duration" : 1.3150829081632651,
+          "id" : "2341B6C4-64D4-4B2D-B15A-17D20C2D13D0",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1.3150829081632651,
+          "id" : "45834C8A-D714-43D5-9121-343567FE886F",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1.3150829081632651,
+          "id" : "A926919F-5D3D-4552-B2C4-91DED7BEA29C",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1.3150829081632651,
+          "id" : "BD145FD8-B20D-4B3D-B376-DDF0D2BEC423",
+          "kind" : "cta"
+        }
+      ],
+      "chipPersistent" : false,
+      "ctaStyle" : "appstore_promo",
+      "grain" : 0.05,
+      "hookLineExtra" : 0.309141621129326,
+      "hookMode" : "first",
+      "hookOn" : true,
+      "id" : "2CF0F7E9-B0B0-470A-853F-82717C964576",
+      "name" : "Bang bang ×3",
+      "output" : "video",
+      "overlays" : {
+        "ctaLogo" : {
+          "chip" : true,
+          "corner" : 0.4304613095238095,
+          "design" : "default",
+          "opacity" : 1,
+          "pillOpacity" : 0.8701428571428572,
+          "size" : 0.03178273809523809,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.43516845703124996
+        },
+        "ctaPill" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "size" : 0.038983925143953935,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.6853306754221389
+        },
+        "ctaTitle" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 1,
+          "size" : 0.04295765355086372,
+          "stroke" : true,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.6298370075046904
+        },
+        "filterChip" : {
+          "chip" : true,
+          "corner" : 0.736024472168906,
+          "design" : "default",
+          "fontFamily" : "Avenir Next",
+          "opacity" : 1,
+          "pillColorHex" : "#0C0E10",
+          "size" : 0.047292323179271706,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "medium",
+          "x" : 0.5,
+          "y" : 0.7418650328330206
+        },
+        "hookText" : {
+          "chip" : true,
+          "corner" : 1,
+          "design" : "default",
+          "fontFamily" : "Futura",
+          "maxLines" : 2,
+          "opacity" : 0.9,
+          "padX" : 1.2,
+          "padY" : 1.1,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 1,
+          "size" : 0.04506346288515406,
+          "stroke" : true,
+          "textColorHex" : "#FFFFFF",
+          "validated" : true,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.5350243316135085
+        },
+        "watermark" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "padY" : 0.6158706202651515,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.9952237215909091,
+          "size" : 0.03900647095959596,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.11651596350755777
+        }
+      },
+      "pairing" : "sameImage",
+      "showFilterChip" : true,
+      "stillTopText" : "Phone camera",
+      "transition" : "cut",
+      "validated" : true,
+      "vignette" : 0.3,
+      "watermarkOn" : true,
+      "wipeDuration" : 0.35
+    },
+    {
+      "beats" : [
+        {
+          "duration" : 1.6014751687806872,
+          "id" : "7D9BC0DA-20DB-47D4-B6A3-2FA4E40055AF",
+          "kind" : "original"
+        },
+        {
+          "anim" : "none",
+          "duration" : 0.6912624028232406,
+          "id" : "725EF3F4-092E-493D-8090-DA59F36A682D",
+          "kind" : "filter"
+        },
+        {
+          "anim" : "none",
+          "duration" : 0.6912624028232406,
+          "id" : "C383BE63-3282-479F-B72C-22F7ED0DB35C",
+          "kind" : "filter"
+        },
+        {
+          "anim" : "none",
+          "duration" : 0.6912624028232406,
+          "id" : "96535B48-AF94-4701-956A-9E9C3B6971D7",
+          "kind" : "filter"
+        },
+        {
+          "anim" : "none",
+          "duration" : 0.6912624028232406,
+          "id" : "F49999DA-A7EE-43A1-95B1-F2BB78543A85",
+          "kind" : "filter"
+        },
+        {
+          "anim" : "none",
+          "duration" : 0.6912624028232406,
+          "id" : "B860658D-7D18-4012-B3A7-FE8D6EC4D5D0",
+          "kind" : "filter"
+        },
+        {
+          "anim" : "none",
+          "duration" : 0.6912624028232406,
+          "id" : "D9930C37-A71F-43D1-A84F-2647194CD73C",
+          "kind" : "filter"
+        },
+        {
+          "anim" : "none",
+          "duration" : 0.6912624028232406,
+          "id" : "9F205AFE-3C8A-4975-BB31-E4C759583E04",
+          "kind" : "filter"
+        },
+        {
+          "anim" : "none",
+          "duration" : 0.6912624028232406,
+          "id" : "FE8E2EFC-502F-4602-ABA4-58558FD7C77B",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 2.736715034816576,
+          "id" : "BC5B20A6-4EFF-4EB1-9C01-152F7D54473C",
+          "kind" : "cta"
+        }
+      ],
+      "chipPersistent" : false,
+      "ctaStyle" : "cta_overlay",
+      "grain" : 0.05,
+      "hookLineExtra" : 0.309141621129326,
+      "hookMode" : "first",
+      "hookOn" : true,
+      "id" : "FB46A823-C5D2-443D-A2CE-F30BA3C37248",
+      "name" : "Machine gun ×8",
+      "output" : "video",
+      "overlays" : {
+        "ctaLogo" : {
+          "chip" : true,
+          "corner" : 0.4304613095238095,
+          "design" : "default",
+          "opacity" : 1,
+          "pillOpacity" : 0.8701428571428572,
+          "size" : 0.03178273809523809,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.5506493316135085
+        },
+        "ctaPill" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "size" : 0.038983925143953935,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.7327773217636022
+        },
+        "ctaTitle" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 1,
+          "size" : 0.04295765355086372,
+          "stroke" : true,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.6555244488742964
+        },
+        "filterChip" : {
+          "chip" : true,
+          "corner" : 0.8850921727129337,
+          "design" : "default",
+          "fontFamily" : "Avenir Next",
+          "opacity" : 1,
+          "pillColorHex" : "#0C0E10",
+          "pillOpacity" : 0.8434715102523659,
+          "size" : 0.04754919663915094,
+          "stroke" : false,
+          "validated" : true,
+          "weight" : "medium",
+          "x" : 0.5,
+          "y" : 0.7276544520242973
+        },
+        "hookText" : {
+          "chip" : true,
+          "corner" : 1,
+          "design" : "default",
+          "fontFamily" : "Futura",
+          "maxLines" : 2,
+          "opacity" : 0.9,
+          "padX" : 1.2,
+          "padY" : 1.1,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 1,
+          "size" : 0.041168917586750786,
+          "stroke" : true,
+          "textColorHex" : "#FFFFFF",
+          "validated" : true,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.5350243316135085
+        },
+        "watermark" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 0.2,
+          "padY" : 0.6158706202651515,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.9952237215909091,
+          "size" : 0.02,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.97,
+          "y" : 0.97
+        }
+      },
+      "pairing" : "sameImage",
+      "showFilterChip" : true,
+      "stillTopText" : "Phone camera",
+      "transition" : "cut",
+      "validated" : true,
+      "vignette" : 0.3,
+      "watermarkOn" : true,
+      "wipeDuration" : 0.35
+    },
+    {
+      "beats" : [
+        {
+          "duration" : 1.5741695804195803,
+          "id" : "078D539A-8364-49C7-A079-58A10BE7564F",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 0.80781005859375,
+          "id" : "F9737287-5E18-4324-97E1-B7CDD1817564",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 0.80781005859375,
+          "id" : "A17C8E25-F133-4B79-B9F0-C637BB6E81AF",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 0.80781005859375,
+          "id" : "F89F422D-B8B4-4966-979B-6EC9BE07EA82",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 0.80781005859375,
+          "id" : "B1B433D6-3C4B-446E-A1E0-02BC556DF6C5",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 0.80781005859375,
+          "id" : "88FF2A22-9C19-4CF4-B063-396C89F400F7",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1.3673806720890411,
+          "id" : "1F88AE81-896F-4E76-B28F-3002DAF8C113",
+          "kind" : "cta"
+        }
+      ],
+      "chipPersistent" : true,
+      "ctaStyle" : "cta_overlay",
+      "grain" : 0.05,
+      "hookLineExtra" : 0.35,
+      "hookMode" : "first",
+      "hookOn" : true,
+      "id" : "C722233C-11D3-4B06-9217-3C02852B05C4",
+      "name" : "One look · many models",
+      "output" : "video",
+      "overlays" : {
+        "ctaLogo" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "padX" : 1.2182737585616439,
+          "padY" : 1.2044520547945206,
+          "size" : 0.028851669520547945,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.6030649038461539
+        },
+        "filterChip" : {
+          "chip" : true,
+          "corner" : 1,
+          "design" : "default",
+          "fontFamily" : "Avenir Next",
+          "opacity" : 1,
+          "padX" : 1.5652672697368422,
+          "padY" : 0.7524958881578948,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.8630358987603306,
+          "size" : 0.04725054824561403,
+          "stroke" : false,
+          "validated" : true,
+          "weight" : "medium",
+          "x" : 0.5,
+          "y" : 0.7242574896694215
+        },
+        "hookText" : {
+          "chip" : true,
+          "corner" : 0.3,
+          "design" : "default",
+          "fontFamily" : "Futura",
+          "opacity" : 0.9,
+          "padX" : 1.2,
+          "padY" : 1.1,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 1,
+          "size" : 0.04632919520547945,
+          "stroke" : true,
+          "textColorHex" : "#FFFFFF",
+          "validated" : true,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.5647572701688556
+        },
+        "watermark" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "padY" : 0.6158706202651515,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.9952237215909091,
+          "size" : 0.03900647095959596,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.12310175619834711
+        }
+      },
+      "pairing" : "sameFilter",
+      "showFilterChip" : true,
+      "stillTopText" : "Phone camera",
+      "transition" : "cut",
+      "validated" : true,
+      "vignette" : 0.3,
+      "watermarkOn" : true,
+      "wipeDuration" : 0.35
+    },
+    {
+      "beats" : [
+        {
+          "duration" : 1,
+          "id" : "F2EF348F-C732-43EA-A306-7B49406FF078",
+          "kind" : "original"
+        },
+        {
+          "duration" : 2.8,
+          "id" : "BC6B34C0-7F2A-4AF3-9D82-BC7A33824F46",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 2.5,
+          "id" : "C8446F7F-569B-47DF-8451-B3CE178F1EDD",
+          "kind" : "cta"
+        }
+      ],
+      "chipPersistent" : false,
+      "ctaStyle" : "cta_overlay",
+      "grain" : 0.05,
+      "hookLineExtra" : 0.35,
+      "hookMode" : "first",
+      "hookOn" : true,
+      "id" : "2DA3A9FA-8309-40CD-85C4-7E8717BC4BC7",
+      "name" : "Classic reveal",
+      "output" : "video",
+      "overlays" : {
+        "ctaLogo" : {
+          "chip" : true,
+          "corner" : 0.41338455578512395,
+          "design" : "default",
+          "opacity" : 1,
+          "padX" : 1.2182737585616439,
+          "padY" : 1.2044520547945206,
+          "size" : 0.028851669520547945,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.54499882739212
+        },
+        "ctaPill" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "size" : 0.036,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.6853306754221389
+        },
+        "ctaTitle" : {
+          "chip" : false,
+          "design" : "default",
+          "opacity" : 1,
+          "size" : 0.05,
+          "validated" : false,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.630562558630394
+        },
+        "filterChip" : {
+          "chip" : true,
+          "corner" : 1,
+          "design" : "default",
+          "fontFamily" : "Avenir Next",
+          "opacity" : 1,
+          "padX" : 1.5652672697368422,
+          "padY" : 0.7524958881578948,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.9337773101719198,
+          "size" : 0.047416386880165286,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "medium",
+          "x" : 0.5,
+          "y" : 0.7456906660412758
+        },
+        "hookText" : {
+          "chip" : true,
+          "corner" : 0.3,
+          "design" : "default",
+          "fontFamily" : "Futura",
+          "opacity" : 0.9,
+          "padX" : 1.2,
+          "padY" : 1.1,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 1,
+          "size" : 0.04632919520547945,
+          "stroke" : true,
+          "textColorHex" : "#FFFFFF",
+          "validated" : true,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.5647572701688556
+        },
+        "watermark" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "padY" : 0.6158706202651515,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.9952237215909091,
+          "size" : 0.03900647095959596,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.118125
+        }
+      },
+      "pairing" : "sameImage",
+      "showFilterChip" : true,
+      "stillTopText" : "Phone camera",
+      "transition" : "swipe",
+      "validated" : true,
+      "vignette" : 0.3,
+      "watermarkOn" : true,
+      "wipeDuration" : 1.1
+    },
+    {
+      "beats" : [
+        {
+          "duration" : 1,
+          "id" : "B89EE5D4-B123-433F-A6A8-0796E65F6070",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "DD79E81F-7BD8-4B63-AFE5-F6BE08AA462F",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "5B83EB52-D9E4-4A54-BB61-0AF8F085F85A",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "A1967E3B-08A3-4A89-B217-C7AD27311794",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "195E5B12-669F-4E40-ABFF-47FAA60C35EE",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "738269D4-732C-4823-A9C8-1A59FE7FE8C8",
+          "kind" : "cta"
+        }
+      ],
+      "chipPersistent" : false,
+      "ctaStyle" : "cta_overlay",
+      "grain" : 0.05,
+      "hookLineExtra" : 0.35,
+      "hookMode" : "first",
+      "hookOn" : true,
+      "id" : "E37F3373-4B6C-4FD4-8E74-5A8FED577BA0",
+      "name" : "Still · stacked",
+      "output" : "still-stack",
+      "overlays" : {
+        "ctaLogo" : {
+          "chip" : true,
+          "corner" : 0.4818019093078759,
+          "design" : "default",
+          "opacity" : 1,
+          "padX" : 1.2029944809069213,
+          "padY" : 1.1998340542959427,
+          "pillOpacity" : 0.9261299224343675,
+          "size" : 0.05173478520286397,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.56
+        },
+        "filterChip" : {
+          "chip" : true,
+          "corner" : 0.5431947314049587,
+          "design" : "default",
+          "fontFamily" : "Avenir Next",
+          "opacity" : 1,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.8295793517561983,
+          "size" : 0.036780733471074384,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.5190269886363635
+        },
+        "hookText" : {
+          "chip" : true,
+          "corner" : 0.3,
+          "design" : "default",
+          "fontFamily" : "Futura",
+          "opacity" : 0.9,
+          "padX" : 1.2,
+          "padY" : 1.1,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 1,
+          "size" : 0.04661048832923833,
+          "stroke" : true,
+          "textColorHex" : "#FFFFFF",
+          "validated" : true,
+          "weight" : "semibold",
+          "x" : 0.48268229166666665,
+          "y" : 0.5189083020637899
+        },
+        "watermark" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 0.2,
+          "padY" : 0.6158706202651515,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.1,
+          "size" : 0.02,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.8998307291666666,
+          "y" : 0.04013250469043152
+        }
+      },
+      "pairing" : "sameImage",
+      "showFilterChip" : true,
+      "stillTopText" : "Phone camera",
+      "transition" : "cut",
+      "validated" : true,
+      "vignette" : 0.3,
+      "watermarkOn" : true,
+      "wipeDuration" : 0.35
+    },
+    {
+      "beats" : [
+        {
+          "duration" : 1,
+          "id" : "AEFFDCBE-139E-4316-9AD3-602E1C99968F",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "D044FABF-5185-4F5D-BD8C-81E7AAFA1AC9",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "3CF60E52-0DAF-45F1-AEC5-363816C8B59A",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "FB0B9371-48AA-4AC0-963E-61A809DC46BF",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "BBC2CB35-886F-4562-BD57-F753C30804C6",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "BD93BE6D-7319-47B3-89E4-D8523149AF68",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "71448E39-EBA7-43D2-926F-01138A90B85D",
+          "kind" : "cta"
+        }
+      ],
+      "chipPersistent" : false,
+      "ctaStyle" : "appstore_promo",
+      "grain" : 0.05,
+      "hookLineExtra" : 0.35,
+      "hookMode" : "first",
+      "hookOn" : true,
+      "id" : "51F23AF5-CEA2-43E6-B833-2B903E3676DB",
+      "name" : "Still · split",
+      "output" : "still-split",
+      "overlays" : {
+        "ctaPill" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "size" : 0.036,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.6553415547520661
+        },
+        "ctaTitle" : {
+          "chip" : false,
+          "design" : "default",
+          "opacity" : 1,
+          "size" : 0.05,
+          "validated" : false,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.5980026472107438
+        },
+        "filterChip" : {
+          "chip" : true,
+          "corner" : 0.28184933438628157,
+          "design" : "default",
+          "fontFamily" : "Avenir Next",
+          "opacity" : 1,
+          "pillColorHex" : "#000000",
+          "size" : 0.04241726812039312,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.5281459839876033
+        },
+        "hookText" : {
+          "chip" : true,
+          "corner" : 0.3,
+          "design" : "default",
+          "fontFamily" : "Futura",
+          "opacity" : 0.9,
+          "padX" : 1.2,
+          "padY" : 1.1,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 1,
+          "size" : 0.04661048832923833,
+          "stroke" : true,
+          "textColorHex" : "#FFFFFF",
+          "validated" : true,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.5232602660123966
+        },
+        "watermark" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "padY" : 0.6158706202651515,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.9952237215909091,
+          "size" : 0.03900647095959596,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.11727530991735537
+        }
+      },
+      "pairing" : "sameImage",
+      "showFilterChip" : true,
+      "stillTopText" : "Phone camera",
+      "transition" : "cut",
+      "validated" : true,
+      "vignette" : 0.3,
+      "watermarkOn" : true,
+      "wipeDuration" : 0.35
+    },
+    {
+      "beats" : [
+        {
+          "duration" : 1,
+          "id" : "DD7174B4-F3F2-4DF9-9478-5FD37EFF157E",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "53FA2BBD-B766-4841-844D-6A375485081F",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "D2E63B1A-F96C-4F16-8ACA-BB608B1B3954",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "19064183-2476-4D10-AF16-7C5477D7BB90",
+          "kind" : "filter"
+        },
+        {
+          "duration" : 1,
+          "id" : "25BCB900-A584-469A-A05C-CA55D5CD0DB1",
+          "kind" : "cta"
+        }
+      ],
+      "chipPersistent" : false,
+      "ctaStyle" : "cta_overlay",
+      "grain" : 0.05,
+      "hookLineExtra" : 0.35,
+      "hookMode" : "first",
+      "hookOn" : true,
+      "id" : "F607F063-67C9-4D06-A1B7-47B078F36DF9",
+      "name" : "Slideshow ×4",
+      "output" : "slides",
+      "overlays" : {
+        "ctaLogo" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "size" : 0.04056009311868687,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5294140625,
+          "y" : 0.4988713649155722
+        },
+        "ctaPill" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "size" : 0.036,
+          "validated" : false,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.71275390625
+        },
+        "ctaTitle" : {
+          "chip" : false,
+          "design" : "default",
+          "opacity" : 1,
+          "size" : 0.05,
+          "validated" : false,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.64791015625
+        },
+        "filterChip" : {
+          "chip" : true,
+          "corner" : 0.9080438075267774,
+          "design" : "default",
+          "fontFamily" : "Avenir Next",
+          "opacity" : 1,
+          "padX" : 1.206482438016529,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.9222000903925619,
+          "size" : 0.039562007874015745,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.7300070356472795
+        },
+        "hookText" : {
+          "chip" : true,
+          "corner" : 0.3,
+          "design" : "default",
+          "fontFamily" : "Futura",
+          "opacity" : 0.9,
+          "padX" : 1.2,
+          "padY" : 1.1,
+          "pillColorHex" : "#AA7941",
+          "pillOpacity" : 1,
+          "size" : 0.1,
+          "stroke" : true,
+          "textColorHex" : "#FFFFFF",
+          "validated" : true,
+          "weight" : "semibold",
+          "x" : 0.5,
+          "y" : 0.49675297004132224
+        },
+        "watermark" : {
+          "chip" : true,
+          "design" : "default",
+          "opacity" : 1,
+          "padY" : 0.6158706202651515,
+          "pillColorHex" : "#000000",
+          "pillOpacity" : 0.9952237215909091,
+          "size" : 0.03900647095959596,
+          "stroke" : true,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.11352756973140495
+        }
+      },
+      "pairing" : "sameImage",
+      "showFilterChip" : true,
+      "stillTopText" : "Phone camera",
+      "transition" : "cut",
+      "validated" : true,
+      "vignette" : 0.3,
+      "watermarkOn" : true,
+      "wipeDuration" : 0.35
+    },
+    {
+      "beats" : [
+        {
+          "caption" : "\"She edits her photos too much\"",
+          "duration" : 1,
+          "id" : "197ED83D-31C0-4D8B-894F-B008A6C4D41B",
+          "kind" : "filter"
+        },
+        {
+          "caption" : "Damn you're right 🥹",
+          "duration" : 1,
+          "id" : "CEF7452E-DC73-4F30-AED1-B6062A9AB00A",
+          "kind" : "original"
+        }
+      ],
+      "chipPersistent" : false,
+      "ctaStyle" : "cta_overlay",
+      "grain" : 0.02,
+      "hookLineExtra" : 0.35,
+      "hookMode" : "none",
+      "hookOn" : false,
+      "id" : "BDE0C0F0-7903-44ED-883B-202B846B3058",
+      "name" : "The Verdict · 2 slides",
+      "output" : "slides",
+      "overlays" : {
+        "hookText" : {
+          "chip" : false,
+          "design" : "default",
+          "opacity" : 1,
+          "size" : 0.046555765086206895,
+          "validated" : true,
+          "weight" : "bold",
+          "x" : 0.5,
+          "y" : 0.637202450750469
+        }
+      },
+      "pairing" : "sameImage",
+      "showFilterChip" : false,
+      "stillTopText" : "Phone camera",
+      "transition" : "cut",
+      "validated" : true,
+      "vignette" : 0.14,
+      "watermarkOn" : false,
+      "wipeDuration" : 0.35
+    }
+  ]
+}

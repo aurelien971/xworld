@@ -11,5 +11,12 @@
     "Opaque"
   ],
   "cta": "Get Opaque on the App Store",
-  "icon": "icon.jpg"
+  "icon": "icon.jpg",
+  "campaign": {
+    "posts": 1000,
+    "ideas": 300,
+    "photos": 100,
+    "filters": 30,
+    "accounts": 36
+  }
 }

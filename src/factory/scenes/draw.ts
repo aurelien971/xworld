@@ -26,12 +26,20 @@ const face = (w: Weight) => {
   return f;
 };
 
+/** A glyph's outline as SVG path data. Written here, number by number: the font library's own formatter now and then writes NaN, which blots the letter out. */
+function outline(p: { commands: { type: string; x?: number; y?: number; x1?: number; y1?: number; x2?: number; y2?: number }[] }) {
+  const n = (v?: number) => (v ?? 0).toFixed(2);
+  return p.commands
+    .map((c) => (c.type === "M" || c.type === "L" ? `${c.type}${n(c.x)} ${n(c.y)}` : c.type === "Q" ? `Q${n(c.x1)} ${n(c.y1)} ${n(c.x)} ${n(c.y)}` : c.type === "C" ? `C${n(c.x1)} ${n(c.y1)} ${n(c.x2)} ${n(c.y2)} ${n(c.x)} ${n(c.y)}` : "Z"))
+    .join("");
+}
+
 export async function cover(image: Buffer, width: number, height: number) {
   return sharp(image).rotate().resize(width, height, { fit: "cover", position: "centre" }).toBuffer();
 }
 
 /** One block of type as a transparent image, wrapped to maxWidth and centred, with its real size. */
-export async function type(text: string, o: { size: number; weight?: Weight; color?: string; opacity?: number; maxWidth: number; spacing?: number }) {
+export async function type(text: string, o: { size: number; weight?: Weight; color?: string; opacity?: number; maxWidth: number; spacing?: number; align?: "centre" | "left" }) {
   const font = face(o.weight ?? "SemiBold");
   const tracking = o.spacing ?? 0;
   const measure = (s: string) => font.getAdvanceWidth(s, o.size) + tracking * Math.max(0, s.length - 1);
@@ -55,9 +63,9 @@ export async function type(text: string, o: { size: number; weight?: Weight; col
   // One outline per glyph: the SVG renderer cuts a single very long outline short, so a long hook lost its end.
   const fill = `fill="${o.color ?? "#FFFFFF"}" fill-opacity="${o.opacity ?? 1}"`;
   const glyphs = lines.flatMap((l, i) => {
-    const x = pad + (width - pad * 2 - measure(l)) / 2;
+    const x = o.align === "left" ? pad : pad + (width - pad * 2 - measure(l)) / 2;
     const y = pad + i * lineHeight + (lineHeight - o.size * 1.0) / 2 + ascent * 0.92;
-    return font.getPaths(l, x, y, o.size, { letterSpacing: tracking / o.size }).map((g) => g.toPathData(2)).filter(Boolean).map((d) => `<path d="${d}" ${fill}/>`);
+    return font.getPaths(l, x, y, o.size, { letterSpacing: tracking / o.size }).map(outline).filter(Boolean).map((d) => `<path d="${d}" ${fill}/>`);
   });
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">${glyphs.join("")}</svg>`;
   return { input: await sharp(Buffer.from(svg)).png().toBuffer(), width, height };

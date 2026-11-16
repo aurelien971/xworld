@@ -1,0 +1,52 @@
+{
+  "id": "dump",
+  "name": "Dump",
+  "kind": "carousel",
+  "platforms": [
+    "instagram",
+    "tiktok"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1350
+  },
+  "needs": {
+    "count": 4,
+    "mode": "same-filter"
+  },
+  "scenes": [
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "pair": 0,
+        "text": "hook"
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "pair": 1
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "pair": 2
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "pair": 3,
+        "label": "filter"
+      }
+    }
+  ]
+}

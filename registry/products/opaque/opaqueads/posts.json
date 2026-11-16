@@ -1,0 +1,24 @@
+[
+  {
+    "account" : "getopaque",
+    "adId" : "599F370A-530C-45C5-8FAA-9A8782D31C20",
+    "date" : "2026-08-10T17:58:52Z",
+    "file" : "ads\/plan1.mp4",
+    "id" : "0E6CDC6E-DE19-4112-A92C-AD9CBB5790FE",
+    "link" : "",
+    "platform" : "tiktok",
+    "runId" : "plan_20260809_233046",
+    "variantKey" : "h:your camera roll nee|r:|e:none|corporate+film_authentic+pixar3d|23700FA2|fmt:seq:2CF0F7E9"
+  },
+  {
+    "account" : "getopaque",
+    "adId" : "6A7532B0-CDE7-4DFA-BF24-45CE6593FFAE",
+    "date" : "2026-08-10T20:09:09Z",
+    "file" : "ads\/plan1.mp4",
+    "id" : "8DAE1FFB-5DA4-466B-8ED5-C49B3B4BD166",
+    "link" : "",
+    "platform" : "tiktok",
+    "runId" : "tpl_20260810_210708",
+    "variantKey" : "h:face card: restored.|r:|e:none|film_authentic+pixar3d+polaroid|23700FA2|fmt:seq:2CF0F7E9"
+  }
+]

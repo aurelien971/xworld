@@ -1,0 +1,27 @@
+{
+  "id": "pick-one",
+  "name": "Pick one",
+  "kind": "carousel",
+  "platforms": [
+    "instagram",
+    "x",
+    "tiktok"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1350
+  },
+  "needs": {
+    "count": 4,
+    "mode": "same-asset"
+  },
+  "scenes": [
+    {
+      "scene": "grid",
+      "options": {}
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "it-girl",
+  "name": "Maya",
+  "product": "opaque",
+  "stance": "influencer",
+  "can": [
+    "before-after",
+    "callout",
+    "face"
+  ],
+  "voice": "Pretty, confident, a little smug. Gives away her editing secrets as if she shouldn't.",
+  "kit": {
+    "idea": "An influencer account. She is the result people want; the app is the secret she lets slip.",
+    "handles": [
+      "mayaposts",
+      "maya.edits",
+      "itsmayaok"
+    ],
+    "bio": "i edit. you can too.\nask me which filter, i'll tell you.",
+    "picture": "Her best after, close crop, direct eye contact.",
+    "pillars": [
+      "gatekeeping, then not",
+      "get the look",
+      "night out",
+      "what i actually post"
+    ],
+    "first": [
+      "'F*ck gatekeeping' slider reel",
+      "A DM reveal answering 'how do you edit'",
+      "A night-out flash dump"
+    ]
+  }
+}

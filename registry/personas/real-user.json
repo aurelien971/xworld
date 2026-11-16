@@ -1,0 +1,32 @@
+{
+  "id": "real-user",
+  "name": "Just a girl",
+  "product": "opaque",
+  "stance": "user",
+  "can": [
+    "before-after",
+    "callout"
+  ],
+  "voice": "An ordinary girl who found the app. Self-deprecating, surprised, honest.",
+  "kit": {
+    "idea": "A user account. Testimonial energy from someone with no reason to sell: 'i look bad in photos, then i found this'.",
+    "handles": [
+      "notphotogenic.club",
+      "ihatemypics",
+      "takenonmyphone"
+    ],
+    "bio": "not photogenic. working on it.",
+    "picture": "An unremarkable selfie. The point is that she is normal.",
+    "pillars": [
+      "i look bad in photos",
+      "the group photo problem",
+      "dating profile",
+      "before i knew"
+    ],
+    "first": [
+      "Stacked still: 'i almost deleted this'",
+      "Flash-cut reel on a bad selfie",
+      "A verdict post"
+    ]
+  }
+}

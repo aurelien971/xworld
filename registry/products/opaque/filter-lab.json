@@ -1,0 +1,349 @@
+{
+  "note": "The filter lab. audits: what was seen in the real outputs of each tested filter. rewrites: a new variation for a weak one, with what changed and why. filters: new ones, written for what travels as a before/after. Nothing here is used in a post until it has been generated, looked at and approved.",
+  "audits": {
+    "black": {
+      "verdict": "strong",
+      "note": "Deep editorial black and white. Reads instantly at thumbnail size and flatters every face it was run on."
+    },
+    "cinematic": {
+      "verdict": "strong",
+      "note": "Big mood change: dark teal surroundings, warm skin. One of the few that changes the whole photo while the face stays hers. Slightly dark for a profile picture."
+    },
+    "polaroid": {
+      "verdict": "mixed",
+      "note": "The flash variation is excellent: night, hard flash, glossy skin. Classic and vintage wash the photo out so the after looks worse than the before, and the paper border shrinks the photo, which breaks a wipe.",
+      "weak": [
+        "classic",
+        "vintage"
+      ]
+    },
+    "polaroid_retro": {
+      "verdict": "weak",
+      "note": "Sunwashed fades the face to a pale ghost. Nobody would post it."
+    },
+    "corporate": {
+      "verdict": "strong",
+      "note": "Changes outfit and backdrop to a studio headshot. Dramatic and useful, but for LinkedIn and dating profiles, not the core glow-up audience."
+    },
+    "film_authentic": {
+      "verdict": "mixed",
+      "weak": [
+        "vintage"
+      ],
+      "note": "The vintage variation lays an orange wash over everything, flattens contrast and adds a light leak. It reads as a mistake, not as film. The other variations have never been generated."
+    },
+    "pixar3d": {
+      "verdict": "strong",
+      "note": "Fun and unmistakable. It changes her face by design, so use it for novelty formats, never as a glow-up."
+    },
+    "cartoon2d": {
+      "verdict": "usable",
+      "note": "Clear change, good for novelty and pick-one posts. The comic outline flatters less than the 3D look."
+    },
+    "clarity": {
+      "verdict": "weak",
+      "note": "No visible difference between before and after at any size. Dead as content."
+    },
+    "color_pop": {
+      "verdict": "weak",
+      "note": "The natural variation is indistinguishable from the original."
+    },
+    "natural_glow": {
+      "verdict": "weak",
+      "note": "Indistinguishable from the original. The prompt asks for so little that the model does nothing."
+    },
+    "studio_background": {
+      "verdict": "usable",
+      "note": "Swaps the backdrop for a grey studio sweep. Clean, but only matters when the original background is messy."
+    }
+  },
+  "rewrites": [
+    {
+      "filter": "natural_glow",
+      "variation": "glow_v2",
+      "label": "Glow",
+      "replaces": "glow",
+      "why": "The old prompt said 'enhance naturally' and the model did nothing. This one names the light and what it does to skin, so there is a visible result that is still her.",
+      "prompt": "Relight this photo as if a large soft light source sat just above and in front of the subject. Lift the shadows under the eyes, nose and chin, even out the skin tone, and add a clear dewy highlight along the cheekbones, the bridge of the nose and the cupid's bow. Brighten the whites of the eyes slightly and add a small catchlight. Warm the skin by a touch and deepen the colour of the lips and hair so they read richer. Keep every pore, freckle and strand of hair: this is better light, not smoothing."
+    },
+    {
+      "filter": "clarity",
+      "variation": "crisp_v2",
+      "label": "Crisp",
+      "replaces": "crisp",
+      "why": "The old result was invisible. A sharpening filter only shows if contrast and light change with it, so this one grades the photo as well as sharpening it.",
+      "prompt": "Regrade this photo so it looks like it was shot on a full-frame camera with a sharp prime lens instead of a phone. Increase local contrast and micro-detail in the eyes, lashes, hair and fabric. Deepen the blacks, add a gentle S-curve so the subject separates from the background, and blur the background slightly as a wide aperture would. Remove the flat grey haze phone photos have. Colours stay true but richer. The difference from the original must be obvious at a glance."
+    },
+    {
+      "filter": "color_pop",
+      "variation": "natural_v2",
+      "label": "Pop",
+      "replaces": "natural",
+      "why": "Indistinguishable before. This asks for a specific, visible grade: one accent colour pushed, everything else held back.",
+      "prompt": "Regrade this photo so its colours look like a magazine travel spread. Pick the dominant colours already in the scene and make them rich and clean: deeper blue in any sky or water, greener foliage, warmer golden skin. Pull the muddy mid-tones apart so each colour is distinct. Brighten the subject by half a stop against the background. Keep skin natural, never orange. The change must be clearly visible next to the original."
+    },
+    {
+      "filter": "film_authentic",
+      "variation": "portra_v2",
+      "label": "Portra",
+      "replaces": "vintage",
+      "why": "The vintage variation washed everything orange and killed contrast. Real film that people love keeps contrast and gives skin a creamy tone; this describes that stock instead of 'vintage'.",
+      "prompt": "Make this photo look like it was shot on Kodak Portra 400 and scanned by a good lab. Creamy, slightly warm skin tones, soft pastel greens and blues, highlights that roll off gently instead of clipping, clean deep shadows with a faint green tint. Fine, even film grain across the whole frame. Keep full contrast and clarity in the face. No light leaks, no borders, no fading, no orange wash: it should look like an expensive film photograph, not an old one."
+    },
+    {
+      "filter": "polaroid",
+      "variation": "flash_full",
+      "label": "Flash, full frame",
+      "replaces": "classic",
+      "why": "The flash look is the one that works, but the paper border shrinks the photo so the before and after cannot be laid over each other. Same look, no border, so it wipes cleanly.",
+      "prompt": "Relight this photo as an instant-film flash photograph taken at night. Darken the surroundings to a deep warm black, light the subject with a hard direct flash from the camera, glossy highlights on the skin, a hard shadow close behind. Colours slightly warm and saturated with the soft, slightly milky contrast of instant film. Fill the whole frame edge to edge: no paper border, no white frame, no caption strip."
+    }
+  ],
+  "filters": [
+    {
+      "id": "digicam_2007",
+      "name": "Digicam",
+      "category": "style",
+      "benefit": "Shot on a 2007 point-and-shoot",
+      "quality": "high",
+      "why": "The low-quality digicam look is the biggest trend in the category: the two top videos using it reached 26M and 32M views. Opaque had nothing for it.",
+      "variations": [
+        {
+          "id": "flash",
+          "label": "Flash",
+          "prompt": "Re-photograph this exact scene as if it were taken on a cheap 2007 compact digital camera with a small CCD sensor. Hard direct on-camera flash that flattens the face and throws a crisp shadow just behind the subject. Slightly blown highlights on the skin, cool white balance with a faint magenta tint, visible noise in the shadows, soft low-resolution detail and light JPEG compression. Colours a little oversaturated, the way old digicams rendered them. No date stamp and no border. Only the camera changes."
+        },
+        {
+          "id": "daylight",
+          "label": "Daylight",
+          "prompt": "Re-photograph this exact scene as if it were taken in daylight on a cheap 2007 compact digital camera with a small CCD sensor. Slightly overexposed, washed highlights, cool blue-leaning white balance, punchy oversaturated colour, soft low-resolution detail, light noise and JPEG compression, mild softness toward the corners. It should look like a photo found on an old memory card. No date stamp and no border."
+        }
+      ]
+    },
+    {
+      "id": "night_flash",
+      "name": "Night Out",
+      "category": "style",
+      "benefit": "Direct flash, 1am, looking unreal",
+      "quality": "high",
+      "why": "The Polaroid flash variation was the best result in the whole library. This is that look as its own filter, without the paper frame, for party season.",
+      "variations": [
+        {
+          "id": "direct",
+          "label": "Direct flash",
+          "prompt": "Relight this photo as a night-out flash photograph. Turn the surroundings into a deep, near-black evening while a hard direct flash lights the subject from the camera position: bright, crisp skin with glossy highlights on the cheekbones, nose and lips, clear catchlights in the eyes, a hard-edged shadow just behind. Hair and jewellery catch the light. Warm skin against cool darkness. Change only the light and the time of day."
+        }
+      ]
+    },
+    {
+      "id": "golden_hour",
+      "name": "Golden Hour",
+      "category": "sky",
+      "benefit": "Ten minutes before sunset, every time",
+      "quality": "high",
+      "why": "The most asked-for light there is, and the change is obvious on any outdoor photo: flat midday becomes warm and low.",
+      "variations": [
+        {
+          "id": "low_sun",
+          "label": "Low sun",
+          "prompt": "Relight this photo as if the sun were ten minutes from setting, low and slightly behind the subject to one side. A warm golden rim of light along the hair and one cheek, long soft shadows, honey-coloured skin, a gentle haze in the air, the background glowing amber and falling slightly out of focus. Add a faint natural lens flare only if the sun direction allows it. Keep the scene and the subject exactly where they are."
+        }
+      ]
+    },
+    {
+      "id": "clean_girl",
+      "name": "Clean Girl",
+      "category": "enhance",
+      "benefit": "Bright, dewy, nothing out of place",
+      "quality": "high",
+      "why": "A named aesthetic the audience already searches for. It replaces Natural Glow, which did nothing, with a look that has a clear identity.",
+      "variations": [
+        {
+          "id": "dewy",
+          "label": "Dewy",
+          "prompt": "Regrade and relight this photo into the clean-girl look. Bright, soft, even daylight on the face with no harsh shadows. Fresh dewy skin with a real highlight on the cheekbones and the tip of the nose, groomed brows, softly glossy lips, slightly brighter eyes. Neutral, airy colour: clean whites, soft beige and cream tones, nothing oversaturated. Tidy any flyaway hairs. Skin keeps its texture and freckles. The result is polished and minimal, never made-up."
+        }
+      ]
+    },
+    {
+      "id": "soft_studio",
+      "name": "Studio Light",
+      "category": "professional",
+      "benefit": "A softbox in your pocket",
+      "quality": "high",
+      "why": "Studio Background only swapped the wall. People want the studio's light on their face, which is the part that flatters.",
+      "variations": [
+        {
+          "id": "softbox",
+          "label": "Softbox",
+          "prompt": "Relight this photo as a professional studio portrait. One large softbox high and to one side of the camera: smooth, wrapping light across the face, a soft shadow on the far cheek that gives it shape, a clear catchlight in each eye. A plain, softly lit neutral backdrop that falls slightly darker toward the edges. Rich, accurate skin tones and crisp detail in the eyes and hair. Clothes, pose and expression stay exactly as they are."
+        }
+      ]
+    },
+    {
+      "id": "old_money",
+      "name": "Old Money",
+      "category": "style",
+      "benefit": "Quiet, muted, expensive",
+      "quality": "high",
+      "why": "The 'expensive' look is a reliable hook ('ranked by how expensive you look'). Film vintage was meant to cover it and failed.",
+      "variations": [
+        {
+          "id": "muted",
+          "label": "Muted",
+          "prompt": "Regrade this photo into a quiet, expensive film look. Muted, slightly desaturated colour with warm cream highlights and deep olive-brown shadows. Soft contrast that still holds true blacks. Skin even and matte with a gentle warmth. Fine film grain. Light that feels like late afternoon through tall windows. Nothing bright, nothing loud: the palette of a heritage fashion campaign. No borders, no leaks, no text."
+        }
+      ]
+    },
+    {
+      "id": "pinterest_winter",
+      "name": "Winter Pinterest",
+      "category": "seasons",
+      "benefit": "The cosy winter photo you never took",
+      "quality": "high",
+      "why": "A 13M-view video opened on 'don't have cute winter pics?'. It is mid November: this is the seasonal filter for the next eight weeks.",
+      "variations": [
+        {
+          "id": "cosy",
+          "label": "Cosy",
+          "prompt": "Turn this photo into a cosy winter photograph of the kind saved on Pinterest. Cold, soft overcast daylight, a muted palette of cream, grey, camel and deep green, a faint mist in the air and a light dusting of frost on surfaces in the background. Her cheeks and the tip of her nose slightly flushed from the cold. Add a soft warm glow from any windows or lights behind her. Keep her, her pose and her clothes; change the season and the light around her."
+        }
+      ]
+    },
+    {
+      "id": "snow_day",
+      "name": "Snow Day",
+      "category": "seasons",
+      "benefit": "It is snowing now",
+      "quality": "high",
+      "why": "The most visible seasonal change possible. Works as a pick-one or filter-run option next to Winter Pinterest and Christmas Lights.",
+      "variations": [
+        {
+          "id": "falling",
+          "label": "Falling snow",
+          "prompt": "Make it snow in this photo. Large soft snowflakes falling through the frame at different depths, some out of focus close to the lens. A thin layer of fresh snow settled on the ground, ledges and foliage. Cool blue-grey light, a bright overcast sky, breath-cold air. A few flakes caught in her hair and on her shoulders. Skin stays warm and natural against the cold scene. Keep her pose, clothes and the place recognisable."
+        }
+      ]
+    },
+    {
+      "id": "christmas_lights",
+      "name": "Christmas Lights",
+      "category": "seasons",
+      "benefit": "Warm fairy lights behind you",
+      "quality": "high",
+      "why": "December content. Warm bokeh behind a face is flattering on every photo and reads at thumbnail size.",
+      "variations": [
+        {
+          "id": "bokeh",
+          "label": "Fairy lights",
+          "prompt": "Relight this photo for a December evening. Fill the background with out-of-focus warm fairy lights, large soft golden circles of bokeh, as if strings of lights hung a few metres behind her. Dim the ambient light to early evening. A warm glow wraps the edges of her hair and shoulders from those lights, while her face stays softly and evenly lit. Deep reds and greens in the scene become richer. Keep her and her pose exactly as they are."
+        }
+      ]
+    },
+    {
+      "id": "window_light",
+      "name": "Window Light",
+      "category": "enhance",
+      "benefit": "The light photographers wait for",
+      "quality": "high",
+      "why": "Gives the photographer persona something true to teach: soft side light is why portraits look professional, and this fakes it.",
+      "variations": [
+        {
+          "id": "side",
+          "label": "Side light",
+          "prompt": "Relight this photo as if she stood beside a large window on an overcast day. Soft directional light from one side, bright on the near cheek and falling gradually into gentle shadow on the far side, which gives the face depth. A soft catchlight in the eyes. The room behind her falls a stop darker and slightly cooler. Skin is natural and detailed. Calm, quiet, flattering: the light of a good portrait, with nothing else changed."
+        }
+      ]
+    },
+    {
+      "id": "beach_tan",
+      "name": "Sun-Kissed",
+      "category": "enhance",
+      "benefit": "Two weeks away, in one tap",
+      "quality": "high",
+      "why": "Winter is when people want this most. A tan is an instantly visible change that still looks like her.",
+      "variations": [
+        {
+          "id": "tan",
+          "label": "Tan",
+          "prompt": "Give her the look of two weeks in the sun. A natural, even golden tan on all visible skin, a little deeper on the shoulders, nose and cheeks, with a soft sheen as if from sun oil. A few lighter sun-streaks in the hair. Whites of the eyes and teeth read brighter against the tan. Warm the light slightly, as on a late beach afternoon. Never orange, never patchy, and her features do not change."
+        }
+      ]
+    },
+    {
+      "id": "magazine_cover",
+      "name": "Cover Shoot",
+      "category": "professional",
+      "benefit": "Lit like a magazine cover",
+      "quality": "high",
+      "why": "'Cover' is a strong word for a hook, and beauty-dish lighting is a bigger, cleaner change than Glam. No text is added, so the photo stays hers to post.",
+      "variations": [
+        {
+          "id": "beauty",
+          "label": "Beauty light",
+          "prompt": "Relight and retouch this photo to the standard of a fashion magazine cover. A beauty dish directly in front of and slightly above her: bright, sculpted light with a soft shadow under the cheekbones and jaw, luminous even skin that keeps its real texture, defined eyes with a ring catchlight, saturated lips. A clean seamless backdrop in a single soft colour taken from her clothes. High-end colour, crisp focus on the eyes. Add no text, no logo and no masthead."
+        }
+      ]
+    },
+    {
+      "id": "disposable",
+      "name": "Disposable",
+      "category": "style",
+      "benefit": "From the camera at the back of the drawer",
+      "quality": "high",
+      "why": "The warmer cousin of the digicam look, and the one people use for dumps. Gives the camera-roll persona a signature filter.",
+      "variations": [
+        {
+          "id": "flash",
+          "label": "Flash",
+          "prompt": "Make this photo look like it came from a disposable film camera. A small weak flash that lights the subject and lets the background fall dark, warm slightly green-yellow colour, soft focus with a little blur toward the edges, visible grain, lifted milky blacks and gently clipped highlights. Colours are nostalgic and slightly faded but skin stays warm and alive. No date stamp, no border, no light leak."
+        }
+      ]
+    },
+    {
+      "id": "dark_feminine",
+      "name": "Dark Feminine",
+      "category": "style",
+      "benefit": "Low light, red lip, no apology",
+      "quality": "high",
+      "why": "A named aesthetic with its own audience, and the moodier answer to Clean Girl. Pairs well in good-better-best and pick-one posts.",
+      "variations": [
+        {
+          "id": "noir",
+          "label": "Noir",
+          "prompt": "Regrade and relight this photo into a dark feminine mood. Low, directional light from one side that leaves half the face in soft shadow. Deep rich blacks, warm candle-toned highlights on the skin, a deeper red on the lips, darker more defined lashes and brows. The background sinks into shadow with a hint of deep burgundy. Glossy hair. Sultry, expensive and controlled, with her features and expression unchanged."
+        }
+      ]
+    },
+    {
+      "id": "glass_skin",
+      "name": "Glass Skin",
+      "category": "face",
+      "benefit": "Lit from within",
+      "quality": "high",
+      "why": "The single most searched skin look. Touch Up smooths; this adds light, which is what reads as healthy on camera.",
+      "variations": [
+        {
+          "id": "luminous",
+          "label": "Luminous",
+          "prompt": "Give her glass skin. Even, clear, deeply hydrated-looking skin with a wet-look luminous highlight on the high points of the face: cheekbones, brow bone, bridge and tip of the nose, cupid's bow, chin. Pores and fine texture remain visible under the sheen so it looks like real skin, not plastic. Soften redness and shadows under the eyes. Lips slightly glossy. Do not change the shape of any feature, the makeup style or the rest of the photo."
+        }
+      ]
+    },
+    {
+      "id": "coquette",
+      "name": "Coquette",
+      "category": "style",
+      "benefit": "Soft pink, ribbon-and-lace mood",
+      "quality": "high",
+      "why": "A soft, pink, highly shareable aesthetic that none of the current filters touch. Strong contrast with Dark Feminine in a filter-run.",
+      "variations": [
+        {
+          "id": "blush",
+          "label": "Blush",
+          "prompt": "Regrade this photo into a soft coquette mood. A gentle haze of diffused light, pastel blush-pink and cream tones through the highlights, rosy flushed cheeks and a soft pink tint on the lips, a faint bloom around the brightest areas. Shadows lift slightly and warm toward rose. Everything feels soft, romantic and delicate, like a vintage perfume advert. Keep her clothes, pose and the setting; change only the light and colour."
+        }
+      ]
+    }
+  ]
+}

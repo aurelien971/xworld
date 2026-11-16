@@ -7,8 +7,7 @@
     "tiktok"
   ],
   "requires": [
-    "before-after",
-    "callout"
+    "before-after"
   ],
   "size": {
     "width": 1080,
@@ -19,14 +18,14 @@
       "scene": "full",
       "options": {
         "side": "after",
-        "text": "She edits her photos too much"
+        "text": "hook"
       }
     },
     {
       "scene": "full",
       "options": {
         "side": "before",
-        "text": "Damn you're right"
+        "text": "text"
       }
     }
   ]

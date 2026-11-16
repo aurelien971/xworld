@@ -9,7 +9,7 @@ import { z } from "zod";
 export const STATES = ["planned", "generating", "reviewing", "ready", "published", "failed"] as const;
 export type State = (typeof STATES)[number];
 
-export const Variation = z.object({ id: z.string(), label: z.string(), prompt: z.string() });
+export const Variation = z.object({ id: z.string(), label: z.string(), prompt: z.string(), replaces: z.string().optional(), why: z.string().optional() });
 export const Filter = z.object({
   id: z.string(),
   name: z.string(),
@@ -17,6 +17,9 @@ export const Filter = z.object({
   benefit: z.string().default(""),
   quality: z.string().default("medium"),
   approved: z.boolean().default(false),
+  /** Where it came from: the Opaque app's catalog, or the filter lab. And why it was written. */
+  origin: z.enum(["opaque", "lab"]).default("opaque"),
+  why: z.string().optional(),
   variations: z.array(Variation).min(1),
 });
 export type Filter = z.infer<typeof Filter>;
@@ -33,6 +36,8 @@ export const Product = z.object({
   icon: z.string().optional(),
   /** Pairs the planner may ask the image model for each day, beyond what is already generated. */
   freshPerDay: z.number().int().min(0).default(0),
+  /** What the campaign is aiming for, and how many posts a day to stockpile for a slot that has no account yet. */
+  campaign: z.object({ posts: z.number(), ideas: z.number(), photos: z.number(), filters: z.number(), accounts: z.number(), stockpilePerDay: z.number().default(1) }).optional(),
 });
 export type Product = z.infer<typeof Product>;
 
@@ -40,10 +45,12 @@ export const Persona = z.object({
   id: z.string(),
   name: z.string(),
   product: z.string(),
-  stance: z.enum(["official", "creator", "reviewer", "tips"]),
+  stance: z.string(),
   /** What the persona can do. A format lists what it requires; the grid is computed from the two. */
   can: z.array(z.string()),
   voice: z.string(),
+  /** Everything needed to open the account: the idea behind it, handles to try, the bio, the picture, what it posts about, what to post first. */
+  kit: z.object({ idea: z.string(), handles: z.array(z.string()), bio: z.string(), picture: z.string(), pillars: z.array(z.string()), first: z.array(z.string()) }).optional(),
 });
 export type Persona = z.infer<typeof Persona>;
 
@@ -71,8 +78,10 @@ export const Format = z.object({
   requires: z.array(z.string()),
   /** The recipe: scenes in order. Each scene is a composer the code knows by name. */
   scenes: z.array(z.object({ scene: z.string(), options: z.record(z.string(), z.unknown()).default({}) })).default([]),
-  /** A video format names its renderer and that renderer's timings instead of scenes. */
-  video: z.object({ renderer: z.string(), options: z.record(z.string(), z.number()).default({}) }).optional(),
+  /** A format that needs more than one pair: several filters on one photo, or one filter on several photos. */
+  needs: z.object({ count: z.number().int().min(2), mode: z.enum(["same-asset", "same-filter"]) }).optional(),
+  /** A video format names how its frames are ordered (plan) and its timings instead of scenes. */
+  video: z.object({ renderer: z.string(), plan: z.enum(["single", "flash", "run", "photos"]).default("single"), options: z.record(z.string(), z.number()).default({}) }).optional(),
   size: z.object({ width: z.number(), height: z.number() }),
 });
 export type Format = z.infer<typeof Format>;
@@ -85,7 +94,22 @@ export const Angles = z.object({
 });
 export type Angles = z.infer<typeof Angles>;
 
+export const Idea = z.object({
+  id: z.string(), persona: z.string(), format: z.string(), pillar: z.string().default(""), hook: z.string(), caption: z.string(),
+  filter: z.string().default(""), text: z.string().default(""), why: z.string().default(""),
+});
+export type Idea = z.infer<typeof Idea>;
+
+export type PairRef = { asset: string; filter: string; variation: string };
+
 export type Inputs = {
+  /** Further pairs for a format that needs several; the first pair is asset/filter/variation below. */
+  more?: PairRef[];
+  /** The idea this brief came from, with its words. Without one, hook and captionHook name validated hooks. */
+  idea?: string;
+  hookText?: string;
+  captionText?: string;
+  text?: string;
   asset: string;
   filter: string;
   variation: string;

@@ -1,0 +1,59 @@
+{
+  "id": "ranked",
+  "name": "Ranked",
+  "kind": "carousel",
+  "platforms": [
+    "instagram",
+    "tiktok"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1350
+  },
+  "needs": {
+    "count": 3,
+    "mode": "same-asset"
+  },
+  "scenes": [
+    {
+      "scene": "title",
+      "options": {
+        "from": "text"
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "pair": 2,
+        "tag": "3",
+        "label": "filter"
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "pair": 1,
+        "tag": "2",
+        "label": "filter"
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "pair": 0,
+        "tag": "1",
+        "label": "filter"
+      }
+    },
+    {
+      "scene": "cta",
+      "options": {}
+    }
+  ]
+}

@@ -32,6 +32,8 @@ alter table briefs add column if not exists video jsonb;
 alter table briefs add column if not exists align jsonb;
 create table if not exists alignments (key text primary key, result jsonb not null);
 create table if not exists persona_links (persona text primary key, model text not null, name text, linked_at timestamptz not null default now());
+create table if not exists idea_state (id text primary key, state text not null, at timestamptz not null default now());
+create table if not exists filter_state (id text primary key, approved boolean not null, at timestamptz not null default now());
 create table if not exists events (
   id bigserial primary key, brief_id text not null, at timestamptz not null default now(),
   state text not null, note text);

@@ -1,0 +1,100 @@
+[
+  {
+    "analysis" : "The transformation involves a significant warming of the color temperature, enhancing the reds and oranges to create a more vibrant and warm atmosphere. The contrast is increased, with deeper blacks and more pronounced highlights, giving the image a more dynamic range. Texture is enhanced with subtle sharpening, while a slight vignette draws focus towards the center. The image appears to have a slight halation effect, adding a soft glow around bright areas. No major content edits are observed, but the overall lighting appears more dramatic, emphasizing the subject.",
+    "attempts" : [
+      {
+        "costUSD" : 0.127584,
+        "id" : "E3A931CA-E0AC-402E-909A-F95C58ACAF40",
+        "index" : 1,
+        "prompt" : "Apply a warm color temperature shift, enhancing reds and oranges for a vibrant look. Increase contrast to deepen blacks and brighten highlights, creating a dynamic range. Add subtle sharpening and a slight vignette to focus attention towards the center. Introduce a gentle halation effect for a soft glow around bright areas, enhancing the dramatic lighting and emphasizing the subject.",
+        "resultFile" : "attempt_1.jpg",
+        "score" : 65,
+        "suggestions" : "Reduce the intensity of the warm color shift to balance reds and oranges with cooler tones. Increase contrast to enhance dynamic range. Soften the halation effect to maintain subtlety. Adjust sharpening to achieve a crisper look.",
+        "verdict" : "Image 3 exhibits a much warmer color temperature than Image 2, with an overwhelming emphasis on reds and oranges, which deviates from the more balanced and slightly cooler tone of Image 2. The contrast in Image 3 is less pronounced, resulting in a softer look compared to the dynamic range in Image 2. Additionally, the halation effect in Image 3 is more intense, creating a glow that overshadows the subtlety seen in Image 2. Overall, Image 3 lacks the crispness and balanced warmth of Image 2."
+      },
+      {
+        "costUSD" : 0.0579925,
+        "id" : "C31E415D-3899-4C98-AB19-09E72DC41E3D",
+        "index" : 2,
+        "prompt" : "Apply a moderate warm color temperature shift, balancing reds and oranges with cooler tones for a harmonious look. Enhance contrast to deepen blacks and brighten highlights, achieving a dynamic range. Adjust sharpening to create a crisper texture, while maintaining subtlety. Introduce a gentle vignette to subtly draw focus towards the center. Soften the halation effect to ensure a delicate glow around bright areas, enhancing the dramatic lighting and emphasizing the subject.",
+        "resultFile" : "attempt_2.jpg",
+        "score" : 75,
+        "suggestions" : "Increase the intensity of the orange and teal color grading. Enhance contrast further to deepen shadows and brighten highlights. Strengthen the vignette effect to draw more focus towards the center. Amplify the halation effect for a more pronounced glow around bright areas.",
+        "verdict" : "Image 3 captures some elements of the transformation style seen in Image 2, such as enhanced contrast and a warm color shift. However, it lacks the pronounced orange and teal color grading and the dramatic contrast present in Image 2. The vignette and halation effects are also less pronounced, resulting in a less dynamic and focused look. Overall, Image 3 does not fully replicate the vibrant and stylized appearance of Image 2."
+      },
+      {
+        "costUSD" : 0.0582,
+        "id" : "4622A520-E068-4A5E-AA92-3EA4A6153952",
+        "index" : 3,
+        "prompt" : "Apply a strong warm color temperature shift, intensifying the orange and teal tones to create a vibrant and harmonious atmosphere. Significantly enhance contrast to deepen shadows and brighten highlights, achieving a more dynamic range. Increase sharpening to enhance texture while maintaining subtlety. Strengthen the vignette effect to draw more focus towards the center of the image. Amplify the halation effect to create a more pronounced glow around bright areas, enhancing the dramatic lighting and emphasizing the subject.",
+        "resultFile" : "attempt_3.jpg",
+        "score" : 75,
+        "suggestions" : "Adjust the color temperature to reduce the orange dominance and introduce more teal tones. Soften the halation effect to match the subtle glow in Image 2. Reduce the sharpening slightly to maintain texture without overemphasis. Fine-tune the vignette to ensure it doesn't overpower the image.",
+        "verdict" : "Image 3 captures some elements of the style seen in Image 2, such as the enhanced contrast and vignette effect. However, it leans too heavily into warm tones, resulting in an overly orange hue that diverges from the balanced orange and teal look of Image 2. The halation effect is also more pronounced in Image 3, which detracts from the subtle glow in Image 2. Additionally, the sharpening in Image 3 is less subtle, affecting the overall texture fidelity."
+      }
+    ],
+    "benefit" : "Enhance vibrancy and focus.",
+    "category" : "style",
+    "chosenAttemptId" : "C31E415D-3899-4C98-AB19-09E72DC41E3D",
+    "createdAt" : "2026-07-10T18:36:19Z",
+    "domain" : "human",
+    "id" : "clone_20260710-193619",
+    "log" : [
+      "Analyzed. Draft prompt ready.",
+      "FAILED: Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID req_906b1780ee7b4d77ae1f491e03747b62. safety_violations=[sexual].",
+      "FAILED: Your request was rejected by the safety system. If you believe this is an error, contact us at help.openai.com and include the request ID req_c8c77e10f8584df0babb821858070939. safety_violations=[sexual].",
+      "Attempt 1 scored 65.",
+      "Attempt 2: OpenAI safety rejection → fell back to Grok.",
+      "Attempt 2 scored 75.",
+      "Attempt 3: OpenAI safety rejection → fell back to Grok.",
+      "Attempt 3 scored 75.",
+      "Ready for review — best score 75, total $0.25.",
+      "Approved — added to the local filter catalog.",
+      "PUBLISH FAILED: Firebase error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Permission denied.\"\n  }\n}",
+      "PUBLISH FAILED: Firebase error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Permission denied.\"\n  }\n}",
+      "PUBLISH FAILED: Firebase error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Permission denied.\"\n  }\n}",
+      "PUBLISH FAILED: Firebase error 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Permission denied.\"\n  }\n}",
+      "PUBLISH FAILED: Firebase error 403: STORAGE upload of examples\/clone_20260710-193619\/base\/before.jpg refused — check Storage rules. {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Permission denied.\"\n  }\n}"
+    ],
+    "name" : "Warm Glow",
+    "sourceNote" : "get the motion and color differences and blur. ",
+    "status" : "approved",
+    "tests" : [
+
+    ],
+    "totalCostUSD" : 0.253684
+  },
+  {
+    "analysis" : "The transformation involves converting the image to black and white, removing all color information. The contrast is enhanced, with a slight increase in midtone contrast to add depth. Blacks are slightly crushed to deepen shadows, while highlights are preserved to maintain detail.",
+    "attempts" : [
+      {
+        "costUSD" : 0.0871,
+        "id" : "A1",
+        "index" : 1,
+        "prompt" : "Convert the image to black and white, removing all color information. Enhance contrast by increasing midtone contrast slightly to add depth. Crush blacks subtly to deepen shadows while preserving highlight details. Add a subtle grain texture to emulate a film-like quality, and apply a slight vignette.",
+        "resultFile" : "attempt_1.jpg",
+        "score" : 75,
+        "suggestions" : "Reduce the contrast to maintain more midtone detail. Soften the grain texture. Decrease the vignette intensity.",
+        "verdict" : "Image 3 has higher contrast than the target, more prominent grain and a stronger vignette; the target is softer with smoother tonal transitions."
+      }
+    ],
+    "benefit" : "Timeless black and white elegance.",
+    "category" : "style",
+    "chosenAttemptId" : "A1",
+    "createdAt" : "2026-07-10T13:59:00Z",
+    "domain" : "human",
+    "id" : "clone_20260710-135900",
+    "log" : [
+      "Analyzed. Draft prompt ready.",
+      "Attempt 1 scored 75.",
+      "Ready for review — best score 75, total $0.09."
+    ],
+    "name" : "Classic Monochrome",
+    "sourceNote" : "Pipeline validation test (local grayscale ground truth)",
+    "status" : "review",
+    "tests" : [
+
+    ],
+    "totalCostUSD" : 0.0871
+  }
+]

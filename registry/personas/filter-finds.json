@@ -4,7 +4,29 @@
   "product": "opaque",
   "stance": "reviewer",
   "can": [
-    "before-after"
+    "before-after",
+    "review"
   ],
-  "voice": "Tries photo filters so you don't have to. Plain verdicts, names the filter every time."
+  "voice": "Tries photo filters so you don't have to. Plain verdicts, names the filter every time.",
+  "kit": {
+    "idea": "A reviewer account. Rankings and scores make people argue in the comments, which is reach.",
+    "handles": [
+      "filterfinds",
+      "ratedfilters",
+      "filter.verdict"
+    ],
+    "bio": "i test filters. you get the good ones.",
+    "picture": "A plain mark: a number out of ten.",
+    "pillars": [
+      "ranked",
+      "tested",
+      "worth it or not",
+      "trend check"
+    ],
+    "first": [
+      "Ranked top three",
+      "Pick-one with four filters",
+      "Good, better, best"
+    ]
+  }
 }
