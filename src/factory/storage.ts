@@ -3,9 +3,19 @@ import path from "node:path";
 import { MEDIA } from "./paths";
 
 /**
- * Media by key. Local disk for now (/data/media, served at /media/<key>);
- * a bucket takes the same three calls when the factory moves off this Mac.
+ * Media by key, in one of two places. With a database address set (the
+ * deployed factory, or this Mac pointed at it) media lives in the Vercel
+ * Blob store; otherwise on disk under /data/media. Either way it is read
+ * back through /media/<key>, behind the password.
  */
+export const TYPES: Record<string, string> = { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".mp4": "video/mp4" };
+const typeOf = (key: string) => TYPES[path.extname(key).toLowerCase()] ?? "application/octet-stream";
+const token = () => process.env.BLOB_READ_WRITE_TOKEN?.trim();
+export const cloud = () => !!process.env.DATABASE_URL && !!token();
+
+/** The store's public address, which is its id from the token. */
+const blobUrl = (key: string) => `https://${token()!.split("_")[3].toLowerCase()}.public.blob.vercel-storage.com/${key.split("/").map(encodeURIComponent).join("/")}`;
+
 const safe = (key: string) => {
   const full = path.resolve(MEDIA, key);
   if (!full.startsWith(path.resolve(MEDIA) + path.sep)) throw new Error("Bad media key");
@@ -13,18 +23,32 @@ const safe = (key: string) => {
 };
 
 export async function put(key: string, data: Buffer) {
+  if (cloud()) {
+    const { put: upload } = await import("@vercel/blob");
+    await upload(key, data, { access: "public", addRandomSuffix: false, allowOverwrite: true, contentType: typeOf(key), cacheControlMaxAge: 60 });
+    return key;
+  }
   const file = safe(key);
   await fs.mkdir(path.dirname(file), { recursive: true });
   await fs.writeFile(file, data);
   return key;
 }
 
-export const get = (key: string) => fs.readFile(safe(key));
-/** A short tag that changes when the file does, so a browser can keep a copy and still notice a remake. */
+export async function get(key: string): Promise<Buffer> {
+  if (cloud()) {
+    const res = await fetch(blobUrl(key), { cache: "no-store" });
+    if (!res.ok) throw new Error(`No media at ${key}`);
+    return Buffer.from(await res.arrayBuffer());
+  }
+  return fs.readFile(safe(key));
+}
+
+/** A short tag that changes when the file does, so a browser can keep a copy and still notice a remake. Local disk only. */
 export const tag = async (key: string) => {
+  if (cloud()) return null;
   const s = await fs.stat(safe(key));
   return `"${s.size.toString(36)}-${Math.round(s.mtimeMs).toString(36)}"`;
 };
-export const has = (key: string) => fs.access(safe(key)).then(() => true, () => false);
+
 export const mediaUrl = (key: string) => `/media/${key}`;
-export const TYPES: Record<string, string> = { ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png", ".webp": "image/webp", ".mp4": "video/mp4" };
+export const contentType = typeOf;

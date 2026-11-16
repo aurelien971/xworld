@@ -1,0 +1,10 @@
+{
+  "id": "camera-roll",
+  "name": "Camera roll",
+  "product": "opaque",
+  "stance": "creator",
+  "can": [
+    "before-after"
+  ],
+  "voice": "Aesthetic camera-roll page. Almost no words. Lets the before and after do the talking."
+}

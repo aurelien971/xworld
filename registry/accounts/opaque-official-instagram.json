@@ -1,0 +1,16 @@
+{
+  "id": "opaque-official-instagram",
+  "persona": "opaque-official",
+  "platform": "instagram",
+  "handle": "getopaque",
+  "perDay": 6,
+  "times": [
+    "09:00",
+    "11:30",
+    "14:00",
+    "17:00",
+    "19:30",
+    "22:00"
+  ],
+  "status": "warming"
+}

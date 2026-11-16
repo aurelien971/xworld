@@ -1,3 +1,5 @@
+import { liveAccount } from "./accounts";
+import { aligned, type Alignment } from "./align";
 import { brief as load, briefsOn, claim, update } from "./briefs";
 import { sql } from "./db";
 import * as registry from "./registry";
@@ -23,6 +25,13 @@ function captionFor(b: Brief) {
   return angles.captionLine.replace("{hook}", hook).replace("{filter}", filter.name).trim();
 }
 
+/** The pair, registered: the after laid over the before and both cut to what they share. Worked out once per pair and kept. */
+async function registered(key: string, before: Buffer, after: Buffer) {
+  const out = await aligned(before, after);
+  await sql("insert into alignments (key, result) values ($1,$2) on conflict (key) do update set result = excluded.result", [key, JSON.stringify(out.alignment)]);
+  return out as { before: Buffer; after: Buffer; alignment: Alignment };
+}
+
 const waiting = (note: string) => ({ by: "none" as const, outcome: "hold" as const, note, at: new Date().toISOString() });
 
 /** "Film · '70s Vintage", but only the filter's name when the variation's label just repeats it. */
@@ -46,11 +55,13 @@ export async function runBrief(id: string) {
     if (!generation.cached) cost += generation.costUsd ?? 0;
     await update(id, null, generation.cached ? "Used the kept generation" : `Generated${generation.costUsd ? ` for $${generation.costUsd.toFixed(3)}` : ""}`, { costUsd: cost });
 
-    const [before, after] = await Promise.all([get(asset.media_key), get(generation.mediaKey)]);
+    const pair = await registered(generation.key, await get(asset.media_key), await get(generation.mediaKey));
+    const { before, after } = pair;
+    if (pair.alignment.applied) await update(id, null, `After laid over the before: ${Math.round(Math.abs(pair.alignment.scale - 1) * 100)}% zoom corrected`);
     const hook = registry.angles(b.product).hooks.find((h) => h.id === b.inputs.hook)?.text ?? "";
     const format = registry.format(b.format);
-    const slides = await compose({ briefId: id, format, before, after, hook, filterLabel: filterLabel(filter.name, variation.label) });
-    await update(id, "reviewing", `${slides.length} slides made`, { slides, caption: captionFor(b) });
+    const { slides, video } = await compose({ briefId: id, format, product: registry.product(b.product), before, after, hook, filterLabel: filterLabel(filter.name, variation.label) });
+    await update(id, "reviewing", video ? `Video made, ${video.seconds}s` : `${slides.length} slides made`, { slides, video, align: pair.alignment, caption: captionFor(b) });
 
     if (!judgeAvailable()) {
       await update(id, null, "Waiting for a person: no review model is set", { review: waiting("No review model is set.") });
@@ -87,10 +98,10 @@ export async function remake(id: string) {
   const [asset] = await sql<{ media_key: string }>("select media_key from assets where id = $1", [b.inputs.asset]);
   const [gen] = variation ? await sql<{ media_key: string }>("select media_key from generations where key = $1", [generationKey(b.inputs.asset, filter.id, variation.id, variation.prompt)]) : [];
   if (!variation || !asset || !gen) return false;
-  const [before, after] = await Promise.all([get(asset.media_key), get(gen.media_key)]);
+  const pair = await registered(generationKey(b.inputs.asset, filter.id, variation.id, variation.prompt), await get(asset.media_key), await get(gen.media_key));
   const hook = registry.angles(b.product).hooks.find((h) => h.id === b.inputs.hook)?.text ?? "";
-  const slides = await compose({ briefId: id, format: registry.format(b.format), before, after, hook, filterLabel: filterLabel(filter.name, variation.label) });
-  await update(id, null, "Slides made again", { slides });
+  const { slides, video } = await compose({ briefId: id, format: registry.format(b.format), product: registry.product(b.product), before: pair.before, after: pair.after, hook, filterLabel: filterLabel(filter.name, variation.label) });
+  await update(id, null, "Made again", { slides, video, align: pair.alignment });
   return true;
 }
 
@@ -122,8 +133,8 @@ export async function reviewBrief(id: string, pass: boolean) {
 export async function dispatch(id: string) {
   const b = await load(id);
   if (!b || b.state !== "ready" || b.publish?.ref) return;
-  const account = registry.account(b.account);
-  if (publishBlocker(account)) return;
+  const account = await liveAccount(b.account);
+  if (!account || publishBlocker(account)) return;
   try {
     const publish = await send(b, account, registry.product(b.product).hashtags);
     await update(id, null, `Sent to the publisher, due ${b.inputs.time}`, { publish });
@@ -136,7 +147,8 @@ export async function dispatch(id: string) {
 export async function measure(product: string, day: string) {
   for (const b of await briefsOn(product, day)) {
     if (!b.publish?.ref) continue;
-    const s = await standing(b, registry.account(b.account)).catch(() => null);
+    const account = await liveAccount(b.account);
+    const s = account ? await standing(b, account).catch(() => null) : null;
     if (!s) continue;
     const publish = { ...b.publish, status: s.status, url: s.url ?? b.publish.url, error: s.error };
     const metrics = s.metrics ? { ...s.metrics, at: new Date().toISOString() } : b.metrics;

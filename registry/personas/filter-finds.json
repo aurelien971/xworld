@@ -1,0 +1,10 @@
+{
+  "id": "filter-finds",
+  "name": "Filter finds",
+  "product": "opaque",
+  "stance": "reviewer",
+  "can": [
+    "before-after"
+  ],
+  "voice": "Tries photo filters so you don't have to. Plain verdicts, names the filter every time."
+}

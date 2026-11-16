@@ -1,0 +1,12 @@
+{
+  "id": "camera-roll-youtube",
+  "persona": "camera-roll",
+  "platform": "youtube",
+  "handle": "",
+  "perDay": 2,
+  "times": [
+    "11:00",
+    "18:00"
+  ],
+  "status": "placeholder"
+}

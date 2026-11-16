@@ -1,0 +1,33 @@
+{
+  "id": "the-verdict",
+  "name": "The verdict",
+  "kind": "carousel",
+  "platforms": [
+    "instagram",
+    "tiktok"
+  ],
+  "requires": [
+    "before-after",
+    "callout"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1350
+  },
+  "scenes": [
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "text": "She edits her photos too much"
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "before",
+        "text": "Damn you're right"
+      }
+    }
+  ]
+}

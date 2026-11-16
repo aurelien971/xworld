@@ -1,0 +1,12 @@
+{
+  "id": "edit-receipts-x",
+  "persona": "edit-receipts",
+  "platform": "x",
+  "handle": "",
+  "perDay": 2,
+  "times": [
+    "10:00",
+    "17:00"
+  ],
+  "status": "placeholder"
+}

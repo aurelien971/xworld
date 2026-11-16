@@ -1,0 +1,12 @@
+{
+  "id": "filter-finds-youtube",
+  "persona": "filter-finds",
+  "platform": "youtube",
+  "handle": "",
+  "perDay": 2,
+  "times": [
+    "11:00",
+    "18:00"
+  ],
+  "status": "placeholder"
+}

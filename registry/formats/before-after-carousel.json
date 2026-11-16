@@ -2,12 +2,41 @@
   "id": "before-after-carousel",
   "name": "Before / after carousel",
   "kind": "carousel",
-  "platforms": ["instagram", "tiktok"],
-  "requires": ["before-after"],
-  "size": { "width": 1080, "height": 1350 },
+  "platforms": [
+    "instagram",
+    "tiktok"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1350
+  },
   "scenes": [
-    { "scene": "split-cover", "options": { "hook": true } },
-    { "scene": "full", "options": { "side": "before", "label": "before" } },
-    { "scene": "full", "options": { "side": "after", "label": "filter" } }
+    {
+      "scene": "split-cover",
+      "options": {
+        "hook": true
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "before",
+        "label": "before"
+      }
+    },
+    {
+      "scene": "full",
+      "options": {
+        "side": "after",
+        "label": "filter"
+      }
+    },
+    {
+      "scene": "cta",
+      "options": {}
+    }
   ]
 }

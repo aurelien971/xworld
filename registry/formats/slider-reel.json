@@ -1,0 +1,26 @@
+{
+  "id": "slider-reel",
+  "name": "Slider reel",
+  "kind": "video",
+  "platforms": [
+    "instagram",
+    "tiktok",
+    "youtube"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1920
+  },
+  "video": {
+    "renderer": "slider",
+    "options": {
+      "beforeHold": 0.9,
+      "wipe": 1.2,
+      "afterHold": 1.3,
+      "cta": 1.6
+    }
+  }
+}

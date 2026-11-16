@@ -4,14 +4,14 @@ import type { Brief, BriefEvent, State } from "./types";
 type Row = {
   id: string; day: string; seq: number; product: string; persona: string; account: string; format: string;
   inputs: Brief["inputs"]; state: State; error: string | null; caption: string | null; slides: Brief["slides"];
-  review: Brief["review"]; publish: Brief["publish"]; metrics: Brief["metrics"]; cost_usd: string;
+  video: Brief["video"]; align: Brief["align"]; review: Brief["review"]; publish: Brief["publish"]; metrics: Brief["metrics"]; cost_usd: string;
   created_at: Date | string; updated_at: Date | string;
 };
 const iso = (d: Date | string) => new Date(d).toISOString();
-const COLS = "id, day::text as day, seq, product, persona, account, format, inputs, state, error, caption, slides, review, publish, metrics, cost_usd, created_at, updated_at";
+const COLS = "id, day::text as day, seq, product, persona, account, format, inputs, state, error, caption, slides, video, align, review, publish, metrics, cost_usd, created_at, updated_at";
 const toBrief = (r: Row): Brief => ({
   id: r.id, day: r.day, seq: r.seq, product: r.product, persona: r.persona, account: r.account, format: r.format,
-  inputs: r.inputs, state: r.state, error: r.error, caption: r.caption, slides: r.slides ?? [], review: r.review, publish: r.publish, metrics: r.metrics,
+  inputs: r.inputs, state: r.state, error: r.error, caption: r.caption, slides: r.slides ?? [], video: r.video ?? null, align: r.align ?? null, review: r.review, publish: r.publish, metrics: r.metrics,
   costUsd: Number(r.cost_usd), createdAt: iso(r.created_at), updatedAt: iso(r.updated_at),
 });
 
@@ -25,11 +25,11 @@ export const brief = async (id: string) => {
 export const eventsOf = async (id: string) =>
   (await sql<{ at: Date; state: State; note: string | null }>("select at, state, note from events where brief_id = $1 order by id", [id])).map((e): BriefEvent => ({ at: iso(e.at), state: e.state, note: e.note }));
 
-const JSON_FIELDS = new Set(["slides", "review", "publish", "metrics", "inputs"]);
+const JSON_FIELDS = new Set(["slides", "video", "align", "review", "publish", "metrics", "inputs"]);
 const COLUMN: Record<string, string> = { costUsd: "cost_usd" };
 
 /** Move a brief to a state (or keep it), with what changed and a line for its history. */
-export async function update(id: string, state: State | null, note: string | null, patch: Partial<Pick<Brief, "error" | "caption" | "slides" | "review" | "publish" | "metrics" | "costUsd">> = {}) {
+export async function update(id: string, state: State | null, note: string | null, patch: Partial<Pick<Brief, "error" | "caption" | "slides" | "video" | "align" | "review" | "publish" | "metrics" | "costUsd">> = {}) {
   const sets = ["updated_at = now()"];
   const params: unknown[] = [id];
   if (state) {

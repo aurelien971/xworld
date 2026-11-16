@@ -1,11 +1,13 @@
 "use client";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { State } from "@/factory/types";
 import type { BriefDetail, BriefView, DayView, WallView } from "@/factory/view";
 import { Detail } from "./Detail";
 import { Button, cx, IconButton, money, StateMark } from "./primitives";
+import { Accounts } from "./Accounts";
 import { Wall } from "./Wall";
 
 /**
@@ -16,6 +18,8 @@ import { Wall } from "./Wall";
 
 const shift = (day: string, by: number) => new Date(Date.parse(`${day}T12:00:00Z`) + by * 86_400_000).toISOString().slice(0, 10);
 const longDate = (day: string) => new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }).format(new Date(`${day}T12:00:00Z`));
+type Mode = "day" | "wall" | "accounts";
+const MODES: Mode[] = ["day", "wall", "accounts"];
 const working = (b: BriefView) => b.state === "generating" || (b.state === "reviewing" && !b.needsPerson);
 const firstOfInterest = (v: DayView) => (v.briefs.find((b) => b.needsPerson || b.state === "failed") ?? v.briefs[0])?.id ?? null;
 
@@ -26,7 +30,7 @@ async function call<T>(url: string, body?: unknown): Promise<T> {
   return data as T;
 }
 
-export function Floor({ initial }: { initial: DayView }) {
+export function Floor({ initial, view: initialMode = "day" }: { initial: DayView; view?: Mode }) {
   const [view, setView] = useState(initial);
   const [selected, setSelected] = useState<string | null>(() => firstOfInterest(initial));
   const [detail, setDetail] = useState<BriefDetail | null>(null);
@@ -35,9 +39,10 @@ export function Floor({ initial }: { initial: DayView }) {
   const [error, setError] = useState<string | null>(null);
   const [slide, setSlide] = useState(0);
   const request = useRef(0);
+  const product = initial.product.id;
   const list = useRef<HTMLOListElement>(null);
 
-  const [mode, setMode] = useState<"day" | "wall">("day");
+  const [mode, setMode] = useState<Mode>(initialMode);
   const [wall, setWall] = useState<WallView | null>(null);
 
   // What is on screen: the day's briefs, or every brief on the wall.
@@ -45,13 +50,13 @@ export function Floor({ initial }: { initial: DayView }) {
   const current = useMemo(() => source.find((b) => b.id === selected) ?? null, [source, selected]);
   const active = source.some(working) || view.briefs.some(working) || busy === "run";
 
-  const loadWall = useCallback(() => call<WallView>("/api/wall").then(setWall, (e) => setError((e as Error).message)), []);
+  const loadWall = useCallback(() => call<WallView>(`/api/wall?product=${product}`).then(setWall, (e) => setError((e as Error).message)), [product]);
 
   /** Read a day. Only the newest request may land, so a slow answer never overwrites a newer one. */
   const load = useCallback(async (day: string, opts: { select?: boolean } = {}) => {
     const mine = ++request.current;
     try {
-      const next = await call<DayView>(`/api/day?day=${day}`);
+      const next = await call<DayView>(`/api/day?product=${product}&day=${day}`);
       if (mine !== request.current) return;
       setView(next);
       setError(null);
@@ -59,17 +64,17 @@ export function Floor({ initial }: { initial: DayView }) {
     } catch (e) {
       if (mine === request.current) setError((e as Error).message);
     }
-  }, []);
+  }, [product]);
 
   const goTo = useCallback(
     async (day: string) => {
       setBusy("day");
-      window.history.replaceState(null, "", day === view.today ? "/" : `/?day=${day}`);
+      window.history.replaceState(null, "", day === view.today ? `/${product}` : `/${product}?day=${day}`);
       await load(day, { select: true });
       setSlide(0);
       setBusy(null);
     },
-    [load, view.today],
+    [load, product, view.today],
   );
 
   // Keep the day fresh: often while something is being made, rarely otherwise, never in a hidden tab.
@@ -87,13 +92,23 @@ export function Floor({ initial }: { initial: DayView }) {
     };
   }, [active, load, loadWall, mode, view.day]);
 
-  const toggleMode = useCallback(() => {
-    setMode((m) => {
-      if (m === "day") loadWall();
-      return m === "day" ? "wall" : "day";
-    });
-    setOpen(false);
-  }, [loadWall]);
+  const show = useCallback(
+    (m: Mode) => {
+      if (m === "wall") loadWall();
+      setMode(m);
+      setOpen(false);
+    },
+    [loadWall],
+  );
+  const toggleMode = useCallback(() => show(mode === "day" ? "wall" : "day"), [mode, show]);
+
+  // Opened straight on the wall (a link, or coming back from somewhere): read it once.
+  const opened = useRef(false);
+  useEffect(() => {
+    if (opened.current || initialMode !== "wall") return;
+    opened.current = true;
+    loadWall();
+  }, [initialMode, loadWall]);
 
   // The selected brief in full, read again whenever it changes.
   const stamp = current?.updatedAt;
@@ -116,7 +131,7 @@ export function Floor({ initial }: { initial: DayView }) {
     async (action: "plan" | "run") => {
       setBusy(action);
       try {
-        const next = await call<DayView>(`/api/day?day=${view.day}`, { action });
+        const next = await call<DayView>(`/api/day?product=${product}&day=${view.day}`, { action });
         setView(action === "run" ? { ...next, briefs: next.briefs.map((b) => (b.state === "planned" ? { ...b, state: "generating" as State } : b)) } : next);
         if (action === "plan") setSelected(firstOfInterest(next));
         setError(null);
@@ -125,7 +140,7 @@ export function Floor({ initial }: { initial: DayView }) {
       }
       setBusy(null);
     },
-    [view.day],
+    [product, view.day],
   );
 
   /** A person's action on a brief. The row changes at once; the server's answer then confirms or corrects it. */
@@ -198,23 +213,30 @@ export function Floor({ initial }: { initial: DayView }) {
   return (
     <div className="flex h-dvh flex-col">
       <header className="flex h-13 shrink-0 items-center gap-3 border-b border-line px-4 sm:gap-4 sm:px-6">
-        <span className="font-medium">{view.product.name}</span>
+        <nav className="flex items-center gap-2" aria-label="Where you are">
+          <Link href="/" className="text-ink-3 transition-colors duration-150 hover:text-ink">
+            Factory
+          </Link>
+          <span className="text-ink-3" aria-hidden>
+            /
+          </span>
+          <span className="font-medium">{view.product.name}</span>
+        </nav>
         <span className="h-3.5 w-px bg-line-2" aria-hidden />
         <div className="flex gap-0.5" role="tablist" aria-label="View">
-          {(["day", "wall"] as const).map((m) => (
+          {MODES.map((m) => (
             <button
               key={m}
               role="tab"
               aria-selected={mode === m}
-              title={mode === m ? undefined : "G"}
-              onClick={() => mode !== m && toggleMode()}
+              onClick={() => mode !== m && show(m)}
               className={cx("rounded-md px-2 py-1 text-xs capitalize transition-colors duration-150 ease-out", mode === m ? "bg-wash text-ink" : "text-ink-3 hover:text-ink")}
             >
               {m}
             </button>
           ))}
         </div>
-        <div className={cx("flex items-center gap-1", mode === "wall" && "hidden")}>
+        <div className={cx("flex items-center gap-1", mode !== "day" && "hidden")}>
           <IconButton label="Previous day  [" onClick={() => goTo(shift(view.day, -1))}>
             <ChevronLeft size={15} strokeWidth={1.75} />
           </IconButton>
@@ -254,9 +276,11 @@ export function Floor({ initial }: { initial: DayView }) {
         </p>
       )}
 
-      <div className="grid min-h-0 flex-1 min-[1100px]:grid-cols-[minmax(0,1fr)_560px]">
+      <div className={cx("grid min-h-0 flex-1", mode !== "accounts" && "min-[1100px]:grid-cols-[minmax(0,1fr)_560px]")}>
         <main className={cx("scroll-quiet min-h-0 overflow-y-auto transition-opacity duration-150 ease-out", busy === "day" && "opacity-50")}>
-          {mode === "wall" ? (
+          {mode === "accounts" ? (
+            <Accounts product={product} />
+          ) : mode === "wall" ? (
             <Wall wall={wall} selected={selected} onSelect={(id) => select(id, true)} />
           ) : view.briefs.length === 0 ? (
             <Empty view={view} busy={busy === "plan"} onPlan={() => dayAction("plan")} />
@@ -269,7 +293,7 @@ export function Floor({ initial }: { initial: DayView }) {
           )}
         </main>
 
-        {current && (
+        {current && mode !== "accounts" && (
           <Detail
             brief={current}
             detail={detail?.id === current.id ? detail : null}
@@ -286,7 +310,9 @@ export function Floor({ initial }: { initial: DayView }) {
 }
 
 function QueueRow({ brief: b, selected, onSelect }: { brief: BriefView; selected: boolean; onSelect: () => void }) {
-  const slots = b.slides.length ? b.slides : [b.before ? { thumb: b.before, width: 4, height: 5 } : null, null, null];
+  // Always three places, so every row lines up whatever the format: the first three slides, or the source photo until there are any.
+  const first = b.slides.length ? b.slides.slice(0, 3) : b.before ? [{ thumb: b.before, width: 4, height: 5 }] : [];
+  const slots = [0, 1, 2].map((i) => first[i] ?? null);
   return (
     <li data-id={b.id}>
       <button
@@ -311,8 +337,11 @@ function QueueRow({ brief: b, selected, onSelect }: { brief: BriefView; selected
         <div className="min-w-0">
           <p className="line-clamp-2 text-base text-ink sm:line-clamp-1">{b.hook}</p>
           <p className="mt-0.5 truncate text-ink-2">
-            {b.filterName}
-            <span className="text-ink-3"> · {b.variationLabel}</span>
+            {b.formatName}
+            <span className="text-ink-3">
+              {" "}
+              · {b.filterName}, {b.variationLabel}
+            </span>
           </p>
           <p className="mt-2 hidden truncate font-mono text-2xs text-ink-3 sm:block">
             @{b.handle} · {b.platform} · {b.inputs.time}

@@ -84,9 +84,30 @@ export async function label(text: string, o: { x: number; y: number; size: numbe
   return [{ input: blurred, left: left - 12, top: top - 12 }, { input: t.input, left, top }];
 }
 
+/** A flat veil over the whole frame, so type on a photo reads. */
+export const scrim = (width: number, height: number, opacity: number): Layer => ({
+  input: Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}"><rect width="${width}" height="${height}" fill="#000" fill-opacity="${opacity}"/></svg>`),
+  left: 0,
+  top: 0,
+});
+
+/** An app icon at a size, with the rounded corners an icon has on a phone. */
+export async function appIcon(image: Buffer, size: number): Promise<Buffer> {
+  const mask = Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><rect width="${size}" height="${size}" rx="${Math.round(size * 0.225)}" fill="#fff"/></svg>`);
+  return sharp(image).resize(size, size, { fit: "cover" }).composite([{ input: mask, blend: "dest-in" }]).png().toBuffer();
+}
+
+/** Layers on a clear frame, as a PNG: what a video lays over its pictures. */
+export async function overlay(width: number, height: number, layers: Layer[]) {
+  return sharp({ create: { width, height, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
+    .composite(layers.map((l) => ({ input: l.input, left: l.left, top: l.top })))
+    .png()
+    .toBuffer();
+}
+
 export async function canvas(width: number, height: number, layers: Layer[]) {
   return sharp({ create: { width, height, channels: 3, background: "#000000" } })
-    .composite(layers.map((l) => ({ input: l.input, left: l.left, top: l.top })))
+    .composite(layers.map((l) => ({ input: l.input, left: Math.round(l.left), top: Math.round(l.top) })))
     .jpeg({ quality: 90, chromaSubsampling: "4:4:4", mozjpeg: true })
     .toBuffer();
 }

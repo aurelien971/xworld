@@ -3,5 +3,13 @@
   "name": "Opaque",
   "promise": "One tap turns an ordinary photo into the one you post.",
   "audience": "Women 16 to 28 who post photos of themselves and edit before posting.",
-  "hashtags": ["photoediting", "filters", "glowup", "AIphotoeditor", "Opaque"]
+  "hashtags": [
+    "photoediting",
+    "filters",
+    "glowup",
+    "AIphotoeditor",
+    "Opaque"
+  ],
+  "cta": "Get Opaque on the App Store",
+  "icon": "icon.jpg"
 }

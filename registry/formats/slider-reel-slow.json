@@ -1,0 +1,26 @@
+{
+  "id": "slider-reel-slow",
+  "name": "Slider reel, slow",
+  "kind": "video",
+  "platforms": [
+    "instagram",
+    "tiktok",
+    "youtube"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1920
+  },
+  "video": {
+    "renderer": "slider",
+    "options": {
+      "beforeHold": 1.3,
+      "wipe": 2.0,
+      "afterHold": 1.8,
+      "cta": 1.6
+    }
+  }
+}

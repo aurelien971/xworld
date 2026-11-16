@@ -1,0 +1,26 @@
+{
+  "id": "slider-reel-instant",
+  "name": "Slider reel, instant",
+  "kind": "video",
+  "platforms": [
+    "instagram",
+    "tiktok",
+    "youtube"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1920
+  },
+  "video": {
+    "renderer": "slider",
+    "options": {
+      "beforeHold": 0.3,
+      "wipe": 0.8,
+      "afterHold": 1.4,
+      "cta": 1.5
+    }
+  }
+}

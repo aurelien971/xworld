@@ -3,6 +3,8 @@
   "name": "Opaque",
   "product": "opaque",
   "stance": "official",
-  "can": ["faceless", "before-after"],
+  "can": [
+    "before-after"
+  ],
   "voice": "Lowercase, short, dry. Speaks to her, about her photos. Never explains the app."
 }

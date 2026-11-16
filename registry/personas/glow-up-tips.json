@@ -1,0 +1,10 @@
+{
+  "id": "glow-up-tips",
+  "name": "Glow up tips",
+  "product": "opaque",
+  "stance": "tips",
+  "can": [
+    "before-after"
+  ],
+  "voice": "Faceless tips page. One fix per post: lighting, colour, skin. Says what to do, then shows it."
+}

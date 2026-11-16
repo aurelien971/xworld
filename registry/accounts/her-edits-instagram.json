@@ -1,0 +1,13 @@
+{
+  "id": "her-edits-instagram",
+  "persona": "her-edits",
+  "platform": "instagram",
+  "handle": "",
+  "perDay": 3,
+  "times": [
+    "09:00",
+    "13:30",
+    "19:30"
+  ],
+  "status": "placeholder"
+}

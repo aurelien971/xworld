@@ -28,6 +28,9 @@ export const Product = z.object({
   audience: z.string(),
   link: z.string().optional(),
   hashtags: z.array(z.string()).default([]),
+  /** What every post asks for at its end, and the app's icon (a file beside product.json). */
+  cta: z.string().default(""),
+  icon: z.string().optional(),
   /** Pairs the planner may ask the image model for each day, beyond what is already generated. */
   freshPerDay: z.number().int().min(0).default(0),
 });
@@ -53,9 +56,10 @@ export const Account = z.object({
   perDay: z.number().int().positive(),
   /** Local posting times, HH:MM, used in order through the day. */
   times: z.array(z.string()).min(1),
-  status: z.enum(["warming", "active", "paused"]),
+  /** placeholder: a slot that has no real account behind it yet. Nothing is planned for it. */
+  status: z.enum(["placeholder", "warming", "active", "paused"]),
   /** Where its posts are handed over: the Mitsushiro creator that holds this account's sign-in. Absent until it is connected. */
-  target: z.object({ kind: z.literal("mitsushiro"), uid: z.string(), model: z.string() }).optional(),
+  target: z.object({ kind: z.literal("mitsushiro"), model: z.string() }).optional(),
 });
 export type Account = z.infer<typeof Account>;
 
@@ -66,7 +70,9 @@ export const Format = z.object({
   platforms: z.array(z.string()),
   requires: z.array(z.string()),
   /** The recipe: scenes in order. Each scene is a composer the code knows by name. */
-  scenes: z.array(z.object({ scene: z.string(), options: z.record(z.string(), z.unknown()).default({}) })),
+  scenes: z.array(z.object({ scene: z.string(), options: z.record(z.string(), z.unknown()).default({}) })).default([]),
+  /** A video format names its renderer and that renderer's timings instead of scenes. */
+  video: z.object({ renderer: z.string(), options: z.record(z.string(), z.number()).default({}) }).optional(),
   size: z.object({ width: z.number(), height: z.number() }),
 });
 export type Format = z.infer<typeof Format>;
@@ -90,6 +96,7 @@ export type Inputs = {
   time: string;
 };
 
+export type Video = { key: string; seconds: number; width: number; height: number };
 export type Slide = { scene: string; key: string; thumb: string; width: number; height: number };
 
 export type Review = {
@@ -130,6 +137,10 @@ export type Brief = {
   error: string | null;
   caption: string | null;
   slides: Slide[];
+  /** A video post's file. Its slides are then three stills of it, for the queue. */
+  video: Video | null;
+  /** How the after was laid over the before. */
+  align: { scale: number; dx: number; dy: number; score: number; kept: number; applied: boolean } | null;
   review: Review | null;
   publish: Publish | null;
   metrics: Metrics | null;

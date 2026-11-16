@@ -28,6 +28,10 @@ create table if not exists briefs (
   cost_usd numeric not null default 0,
   created_at timestamptz not null default now(), updated_at timestamptz not null default now());
 create index if not exists briefs_day on briefs (day, seq);
+alter table briefs add column if not exists video jsonb;
+alter table briefs add column if not exists align jsonb;
+create table if not exists alignments (key text primary key, result jsonb not null);
+create table if not exists persona_links (persona text primary key, model text not null, name text, linked_at timestamptz not null default now());
 create table if not exists events (
   id bigserial primary key, brief_id text not null, at timestamptz not null default now(),
   state text not null, note text);
@@ -38,6 +42,13 @@ create table if not exists costs (
   id bigserial primary key, at timestamptz not null default now(), kind text not null,
   usd numeric not null, ref text);
 `;
+
+/** The deployed factory was opened before a database was connected to it. */
+export class NoDatabase extends Error {
+  constructor() {
+    super("No database is connected yet.");
+  }
+}
 
 const g = globalThis as unknown as { __factoryDb?: Promise<Runner> };
 
@@ -57,6 +68,9 @@ async function open(): Promise<Runner> {
     const { neon } = await import("@neondatabase/serverless");
     const sql = neon(url);
     runner = { query: async (text, params = []) => (await sql.query(text, params)) as Row[], close: async () => {} };
+  } else if (process.env.VERCEL) {
+    // A deployment has no disk to keep a database on.
+    throw new NoDatabase();
   } else {
     const dir = path.join(DATA, "pg");
     const lock = path.join(DATA, "pg.lock");

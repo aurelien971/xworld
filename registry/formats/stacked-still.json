@@ -1,0 +1,22 @@
+{
+  "id": "stacked-still",
+  "name": "Stacked still",
+  "kind": "carousel",
+  "platforms": [
+    "instagram",
+    "x"
+  ],
+  "requires": [
+    "before-after"
+  ],
+  "size": {
+    "width": 1080,
+    "height": 1350
+  },
+  "scenes": [
+    {
+      "scene": "stack",
+      "options": {}
+    }
+  ]
+}

@@ -48,13 +48,17 @@ export function Detail({ brief: b, detail, slide, onSlide, onAct, open, onClose 
 
         <div className="grid grid-cols-[232px_minmax(0,1fr)] gap-5">
           <div>
-            <div className="aspect-[4/5] overflow-hidden rounded-md bg-wash">
-              {(shown || b.before) && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img key={shown?.url ?? "before"} src={shown?.url ?? b.before!} alt="" className="size-full object-cover" />
+            <div className={cx("overflow-hidden rounded-md bg-wash", b.video || (shown && shown.height / shown.width > 1.5) ? "aspect-[9/16]" : "aspect-[4/5]")}>
+              {b.video ? (
+                <video key={b.video.url + b.updatedAt} src={b.video.url} poster={b.slides[0]?.url} controls loop muted autoPlay playsInline className="size-full object-cover" />
+              ) : (
+                (shown || b.before) && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img key={shown?.url ?? "before"} src={shown?.url ?? b.before!} alt="" className="size-full object-cover" />
+                )
               )}
             </div>
-            {b.slides.length > 1 && (
+            {b.slides.length > 1 && !b.video && (
               <div className="mt-2 flex gap-1" role="tablist" aria-label="Slides">
                 {b.slides.map((s, i) => (
                   <button
@@ -132,8 +136,16 @@ export function Detail({ brief: b, detail, slide, onSlide, onAct, open, onClose 
                   : detail.source.generation.source === "factory"
                     ? `Generated ${dateOf(detail.source.generation.createdAt)}${detail.source.generation.costUsd ? ` for ${money(detail.source.generation.costUsd)}` : ""}`
                     : `Kept from Opaque Ads, made ${dateOf(detail.source.generation.createdAt)}`}
-              {b.slides.length > 0 && ` · ${b.slides.length} slides at ${b.slides[0].width}×${b.slides[0].height}`}
             </p>
+            <p className="text-ink-2">
+              {b.formatName}
+              {b.video ? `, ${b.video.seconds}s at ${b.video.width}×${b.video.height}` : b.slides.length > 0 ? `, ${b.slides.length} ${b.slides.length === 1 ? "picture" : "slides"} at ${b.slides[0].width}×${b.slides[0].height}` : ""}
+            </p>
+            {b.align && (
+              <p className="font-mono text-2xs text-ink-3">
+                {b.align.applied ? `after laid over before: scale ${b.align.scale.toFixed(3)}, shift ${(b.align.dx * 100).toFixed(1)}% ${(b.align.dy * 100).toFixed(1)}%` : "after already sits on the before"} · match {b.align.score.toFixed(2)}
+              </p>
+            )}
             {detail?.source.prompt && (
               <Disclosure label="Prompt">
                 <p className="font-mono text-2xs leading-[18px] text-ink-2">{detail.source.prompt}</p>

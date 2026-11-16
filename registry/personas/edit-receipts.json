@@ -1,0 +1,11 @@
+{
+  "id": "edit-receipts",
+  "name": "Edit receipts",
+  "product": "opaque",
+  "stance": "creator",
+  "can": [
+    "before-after",
+    "callout"
+  ],
+  "voice": "Calls out edited photos, then admits the original was worse. Dry, teasing, never cruel."
+}
