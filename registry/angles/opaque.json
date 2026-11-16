@@ -1,0 +1,176 @@
+{
+  "product": "opaque",
+  "hooks": [
+    {
+      "id": "417d0204",
+      "text": "make your camera roll dangerous",
+      "validated": true
+    },
+    {
+      "id": "7a2c0bde",
+      "text": "you’re about to become annoyingly photogenic",
+      "validated": true
+    },
+    {
+      "id": "647faac8",
+      "text": "this app understands your face better than your camera",
+      "validated": true
+    },
+    {
+      "id": "24e16aa8",
+      "text": "one tap = main character",
+      "validated": true
+    },
+    {
+      "id": "072da293",
+      "text": "the before is disrespectful.",
+      "validated": true
+    },
+    {
+      "id": "f5923def",
+      "text": "this filter is actually unfair.",
+      "validated": true
+    },
+    {
+      "id": "1b13e67d",
+      "text": "you were never the problem.",
+      "validated": true
+    },
+    {
+      "id": "e8f61a6a",
+      "text": "your camera roll needs therapy.",
+      "validated": true
+    },
+    {
+      "id": "282bf297",
+      "text": "delete less. post more.",
+      "validated": true
+    },
+    {
+      "id": "e0e3bf8a",
+      "text": "face card: restored.",
+      "validated": true
+    },
+    {
+      "id": "4b88b7fa",
+      "text": "pretty privilege, one tap away.",
+      "validated": true
+    },
+    {
+      "id": "cd2fa2c3",
+      "text": "your ex is going to see this.",
+      "validated": true
+    },
+    {
+      "id": "a5e69c0c",
+      "text": "the glow up your camera forgot.",
+      "validated": true
+    },
+    {
+      "id": "7c7a779d",
+      "text": "turn ‘maybe’ into profile picture.",
+      "validated": true
+    },
+    {
+      "id": "108941a2",
+      "text": "your camera is doing you dirty.",
+      "validated": true
+    },
+    {
+      "id": "588db1d9",
+      "text": "you’d post more if you looked like this.",
+      "validated": true
+    },
+    {
+      "id": "3b60b403",
+      "text": "stop deleting photos of yourself.",
+      "validated": true
+    },
+    {
+      "id": "dad5bced",
+      "text": "this is why her pictures always eat.",
+      "validated": true
+    },
+    {
+      "id": "527ec877",
+      "text": "make them regret unfollowing you.",
+      "validated": true
+    },
+    {
+      "id": "cae0c434",
+      "text": "the photo wasn’t ugly. the edit was.",
+      "validated": true
+    },
+    {
+      "id": "6810608d",
+      "text": "hot girls don’t post the first version.",
+      "validated": true
+    },
+    {
+      "id": "a619ff96",
+      "text": "your face card deserves better lighting.",
+      "validated": true
+    },
+    {
+      "id": "194f2104",
+      "text": "she’s not prettier. she edits better.",
+      "validated": true
+    },
+    {
+      "id": "74e9bf8b",
+      "text": "\"How do you get this many likes on your pictures?\"",
+      "validated": true
+    },
+    {
+      "id": "f42dc936",
+      "text": "F*ck gatekeeping, here's the filter",
+      "validated": true
+    },
+    {
+      "id": "207ff96a",
+      "text": "\"How do you edit your photos?\"",
+      "validated": true
+    },
+    {
+      "id": "f64e115d",
+      "text": "your camera roll is about to change",
+      "validated": true
+    },
+    {
+      "id": "9811fc22",
+      "text": "wait for the glow up",
+      "validated": true
+    },
+    {
+      "id": "c0c1c72f",
+      "text": "POV: you found the filter app",
+      "validated": true
+    },
+    {
+      "id": "dd16fa5a",
+      "text": "this took one tap",
+      "validated": true
+    },
+    {
+      "id": "cbd1ef4d",
+      "text": "how is this free",
+      "validated": true
+    },
+    {
+      "id": "9a91b773",
+      "text": "would you post this?",
+      "validated": true
+    },
+    {
+      "id": "bce6944c",
+      "text": "the before hurts to look at",
+      "validated": true
+    },
+    {
+      "id": "a04a80f9",
+      "text": "your photos deserve this",
+      "validated": true
+    }
+  ],
+  "captionLine": "{hook}\n{filter} in Opaque."
+}

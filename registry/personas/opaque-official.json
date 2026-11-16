@@ -1,0 +1,8 @@
+{
+  "id": "opaque-official",
+  "name": "Opaque",
+  "product": "opaque",
+  "stance": "official",
+  "can": ["faceless", "before-after"],
+  "voice": "Lowercase, short, dry. Speaks to her, about her photos. Never explains the app."
+}

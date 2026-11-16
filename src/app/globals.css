@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * The whole design system. Warm paper, near-black ink, hairlines, and one
+ * accent that means a single thing: this needs you. Type is Geist at six
+ * sizes; technical values are Geist Mono. Spacing is Tailwind's 4px grid.
+ */
+@theme {
+  --color-paper: #f8f7f4;
+  --color-surface: #ffffff;
+  --color-ink: #141413;
+  --color-ink-2: #5c5b56;
+  --color-ink-3: #94938c;
+  --color-line: rgb(20 20 19 / 0.08);
+  --color-line-2: rgb(20 20 19 / 0.16);
+  --color-wash: rgb(20 20 19 / 0.04);
+  --color-accent: #c2410c;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --text-2xs: 11px;
+  --text-2xs--line-height: 16px;
+  --text-xs: 12px;
+  --text-xs--line-height: 16px;
+  --text-sm: 13px;
+  --text-sm--line-height: 20px;
+  --text-base: 15px;
+  --text-base--line-height: 22px;
+  --text-lg: 20px;
+  --text-lg--line-height: 26px;
+  --text-xl: 30px;
+  --text-xl--line-height: 34px;
+
+  --radius-sm: 3px;
+  --radius-md: 6px;
+
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-size: 13px;
+  line-height: 20px;
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: rgb(20 20 19 / 0.12);
+}
+
+:focus-visible {
+  outline: 1.5px solid var(--color-ink);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: default;
+}
+
+/* The one motion that carries meaning: work is in progress on this brief. */
+@keyframes working {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.working {
+  animation: working 1.4s var(--ease-out) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .working { animation: none; }
+  * { transition-duration: 0ms !important; }
+}
+
+.scroll-quiet {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line-2) transparent;
 }

@@ -1,0 +1,1367 @@
+[
+  {
+    "id": "natural_glow",
+    "category": "enhance",
+    "name": "Natural Glow",
+    "benefit": "Effortless, real enhancement",
+    "quality": "medium",
+    "approved": true,
+    "variations": [
+      {
+        "id": "natural",
+        "label": "Natural",
+        "prompt": "Enhance this photo naturally with a light touch. Subtly improve exposure, white balance, contrast and clarity, gently even the skin tone and add a soft natural glow. Keep it completely photorealistic and true to the original — the person and scene unchanged, simply captured at its best."
+      },
+      {
+        "id": "glow",
+        "label": "Glow",
+        "prompt": "Give this photo a polished natural glow-up. Improve the lighting, balance the colours, brighten and even the skin tone, add gentle radiance and clarity and subtly sharpen detail. Keep it realistic and flattering without looking over-edited. Preserve identity, pose and composition."
+      },
+      {
+        "id": "radiant",
+        "label": "Radiant",
+        "prompt": "Apply a professional beauty-grade enhancement: luminous balanced lighting, refined even skin tone with preserved natural texture, bright clear eyes, rich natural colour and crisp detail for a radiant magazine-quality finish. Keep it photorealistic and true to the person — noticeable but never artificial."
+      }
+    ]
+  },
+  {
+    "id": "auto_enhance",
+    "category": "enhance",
+    "name": "Auto Enhance",
+    "benefit": "One-tap quality boost",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Auto Enhance",
+        "prompt": "Improve the overall image quality with better exposure, contrast, clarity, sharpness, and color balance. Keep the image realistic and natural."
+      }
+    ]
+  },
+  {
+    "id": "better_lighting",
+    "category": "enhance",
+    "name": "Better Lighting",
+    "benefit": "Fix dim or harsh light",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Better Lighting",
+        "prompt": "Improve the lighting so the subject is well-lit and balanced. Fix underexposure, harsh shadows, and uneven light while keeping the scene realistic and natural."
+      }
+    ]
+  },
+  {
+    "id": "fix_blur",
+    "category": "enhance",
+    "name": "Fix Blur",
+    "benefit": "Sharpen soft photos",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Fix Blur",
+        "prompt": "Reduce blur and increase sharpness and detail so the image looks crisp and clear, while keeping it realistic and avoiding artifacts."
+      }
+    ]
+  },
+  {
+    "id": "clear_skin",
+    "category": "face",
+    "name": "Clear Skin",
+    "benefit": "Remove blemishes naturally",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "subtle",
+        "label": "Natural",
+        "prompt": "Lightly reduce visible blemishes and redness while fully preserving natural skin texture, pores, facial structure, and realism."
+      },
+      {
+        "id": "medium",
+        "label": "Smooth",
+        "prompt": "Remove visible blemishes, redness, acne, and minor skin imperfections while preserving natural skin texture, pores, facial structure, and realism."
+      },
+      {
+        "id": "strong",
+        "label": "Flawless",
+        "prompt": "Create a polished beauty edit with smoother skin, even tone, and soft glow while keeping the face realistic and not over-edited."
+      }
+    ]
+  },
+  {
+    "id": "whiten_teeth",
+    "category": "face",
+    "name": "Whiten Teeth",
+    "benefit": "Brighter smile",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Whiten Teeth",
+        "prompt": "Naturally whiten the teeth slightly while keeping the mouth, lips, gums, and facial expression realistic."
+      }
+    ]
+  },
+  {
+    "id": "bright_eyes",
+    "category": "face",
+    "name": "Bright Eyes",
+    "benefit": "Clear, awake eyes",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Bright Eyes",
+        "prompt": "Make the eyes look slightly brighter, clearer, and more awake while preserving the original eye color and realistic facial features."
+      }
+    ]
+  },
+  {
+    "id": "better_hair",
+    "category": "face",
+    "name": "Better Hair",
+    "benefit": "Fuller, cleaner hair",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Better Hair",
+        "prompt": "Make the hair look cleaner, fuller, smoother, and more styled while preserving the original hairstyle and realistic texture."
+      }
+    ]
+  },
+  {
+    "id": "subtle_slim",
+    "category": "body",
+    "name": "Slim",
+    "benefit": "Subtle body refinement",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "subtle",
+        "label": "Subtle Slim",
+        "prompt": "Make the body appear subtly slimmer by around 5% while preserving natural proportions, pose, clothing texture, and full realism."
+      },
+      {
+        "id": "medium",
+        "label": "Slimmer",
+        "prompt": "Make the body appear slimmer by around 10% while preserving natural proportions, pose, clothing texture, and full realism."
+      },
+      {
+        "id": "strong",
+        "label": "Snatched",
+        "prompt": "Make the body appear noticeably slimmer and more contoured by around 15% while keeping proportions believable, the pose intact, and the result realistic."
+      }
+    ]
+  },
+  {
+    "id": "toned_body",
+    "category": "body",
+    "name": "Toned",
+    "benefit": "Slightly more defined",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Toned",
+        "prompt": "Make the body look slightly more toned and defined while keeping realistic anatomy, natural proportions, and the original pose."
+      }
+    ]
+  },
+  {
+    "id": "posture_fix",
+    "category": "body",
+    "name": "Posture Fix",
+    "benefit": "Stand tall and confident",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Posture Fix",
+        "prompt": "Improve the person's posture slightly so they look more confident and upright while keeping the body shape and pose realistic."
+      }
+    ]
+  },
+  {
+    "id": "longer_legs",
+    "category": "body",
+    "name": "Longer Legs",
+    "benefit": "Subtle elongation",
+    "quality": "medium",
+    "approved": true,
+    "variations": [
+      {
+        "id": "subtle",
+        "label": "Subtle",
+        "prompt": "Very subtly elongate the legs while preserving realistic body proportions, clothing, background perspective, and natural anatomy."
+      },
+      {
+        "id": "medium",
+        "label": "Longer",
+        "prompt": "Subtly elongate the legs while preserving realistic body proportions, clothing, background perspective, and natural anatomy."
+      },
+      {
+        "id": "strong",
+        "label": "Model",
+        "prompt": "Elongate the legs for a model-like proportion while keeping the result believable, clothing and perspective consistent, and anatomy natural."
+      }
+    ]
+  },
+  {
+    "id": "remove_background",
+    "category": "background",
+    "name": "Remove BG",
+    "benefit": "Clean cut-out",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Remove BG",
+        "prompt": "Remove the background cleanly and isolate the main subject with accurate edges, especially around hair, clothes, and small details."
+      }
+    ]
+  },
+  {
+    "id": "studio_background",
+    "category": "background",
+    "name": "Studio",
+    "benefit": "Pro studio backdrop",
+    "quality": "medium",
+    "approved": true,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Studio",
+        "prompt": "Replace the background with a clean professional studio background with soft lighting while keeping the person realistic and naturally integrated."
+      }
+    ]
+  },
+  {
+    "id": "beach_upgrade",
+    "category": "background",
+    "name": "Beach",
+    "benefit": "Sunny beach scene",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Beach",
+        "prompt": "Transform the background into a beautiful sunny beach scene with natural lighting and realistic shadows while preserving the person accurately."
+      }
+    ]
+  },
+  {
+    "id": "remove_object",
+    "category": "background",
+    "name": "Remove Object",
+    "benefit": "Erase distractions",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Remove Object",
+        "prompt": "Remove unwanted objects from the image and fill the area naturally so the background looks realistic and seamless."
+      }
+    ]
+  },
+  {
+    "id": "luxury_edit",
+    "category": "style",
+    "name": "Luxury",
+    "benefit": "High-end campaign look",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Luxury",
+        "prompt": "Make the photo look like a high-end luxury campaign image with premium lighting, rich contrast, refined colors, and polished detail."
+      }
+    ]
+  },
+  {
+    "id": "cinematic_portrait",
+    "category": "style",
+    "name": "Cinematic",
+    "benefit": "Dramatic film look",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Cinematic",
+        "prompt": "Transform the image into a cinematic portrait with dramatic lighting, shallow depth of field, rich tones, and realistic premium detail."
+      }
+    ]
+  },
+  {
+    "id": "outfit_cleaner",
+    "category": "style",
+    "name": "Outfit Fix",
+    "benefit": "Crisp, premium clothing",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Outfit Fix",
+        "prompt": "Make the outfit look cleaner, smoother, and more premium. Remove wrinkles, stains, and distractions while preserving the original clothing design."
+      }
+    ]
+  },
+  {
+    "id": "linkedin_photo",
+    "category": "professional",
+    "name": "LinkedIn",
+    "benefit": "Professional profile photo",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "LinkedIn",
+        "prompt": "Turn this into a professional LinkedIn profile photo with clean lighting, sharp detail, natural retouching, and a simple professional background."
+      }
+    ]
+  },
+  {
+    "id": "dating_upgrade",
+    "category": "professional",
+    "name": "Dating",
+    "benefit": "Warm, confident, natural",
+    "quality": "medium",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Dating",
+        "prompt": "Enhance this photo to look more attractive, confident, warm, and natural while keeping the person realistic and not over-edited."
+      }
+    ]
+  },
+  {
+    "id": "toyify",
+    "category": "fun",
+    "name": "Toy-ify",
+    "benefit": "Turn yourself into a collectible",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "chibi",
+        "label": "Chibi",
+        "prompt": "Transform the subject into an adorable chibi-style collectible figurine. Give them an oversized head, large glossy expressive eyes, a tiny rounded vinyl-toy body, and a smooth premium plastic texture. Keep their recognisable hairstyle, hair colour, outfit colours and key features so they are clearly identifiable as the same person. Place the figure on a clean surface with soft studio product-lighting, a gentle contact shadow and a softly blurred background. Make it look like a high-end designer chibi toy."
+      },
+      {
+        "id": "figure",
+        "label": "Action Figure",
+        "prompt": "Turn the subject into a highly detailed collectible action figure sealed inside premium retail blister packaging. Render them as a realistic moulded plastic figure with subtle articulation joints, a glossy toy finish, and their recognisable face, hairstyle and outfit. Add printed cardboard backing with stylish branding, a name label at the top, and one or two miniature accessories moulded into the plastic tray. Light it like professional product photography. Make it look like a limited-edition figure on a store shelf."
+      },
+      {
+        "id": "clay",
+        "label": "Clay",
+        "prompt": "Transform the subject into a handcrafted polymer-clay / claymation character. Give everything a soft matte modelling-clay texture with gentle fingerprint imperfections, warm rounded stylised proportions and cosy studio lighting. Preserve their recognisable hairstyle, colours and features so they stay identifiable. Make it look like a charming hand-sculpted stop-motion clay figure."
+      }
+    ]
+  },
+  {
+    "id": "film_authentic",
+    "category": "style",
+    "name": "Film",
+    "benefit": "Authentic analog film look",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "natural",
+        "label": "Natural 35mm",
+        "prompt": "Regrade this photo to look like it was genuinely shot on 35mm film with a natural, understated look. Add fine organic film grain, gently softened highlights, subtle halation around bright areas and slightly lifted faded blacks for an analog feel. Keep colours true and natural with a light warm cast. Preserve the subject's identity, pose, framing and every real detail — this should look like the exact same photo authentically captured on film, not a digital filter."
+      },
+      {
+        "id": "vintage",
+        "label": "'70s Vintage",
+        "prompt": "Make this photo look like a genuine 1970s 35mm film photograph. Apply warm faded colour grading with muted greens and golden tones, soft low contrast, visible film grain, a gentle light leak in one corner, mild halation on the highlights and a subtle vignette. Keep the subject fully recognisable and the composition unchanged — the goal is an authentic vintage film look, never an obvious effect."
+      },
+      {
+        "id": "grainy",
+        "label": "Heavy Grain",
+        "prompt": "Give this photo a raw, high-grain analog film aesthetic. Add pronounced organic film grain, crushed faded blacks, softly blown highlights, strong halation and a nostalgic muted colour palette as if shot on expired film. Keep the person and scene fully recognisable. It should feel imperfect, moody and authentically un-AI."
+      }
+    ]
+  },
+  {
+    "id": "y2k_camcorder",
+    "category": "style",
+    "name": "Y2K Camcorder",
+    "benefit": "Early-2000s party nostalgia",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "camcorder",
+        "label": "Camcorder '03",
+        "prompt": "Edit this photo so it looks like a still frame from a cheap 2003 handheld camcorder. Add a small date/time timestamp overlay in the corner, harsh on-camera flash overexposure on the subject, low-resolution softness, heavy compression artefacts, slight VHS-style colour bleeding and cool indoor fluorescent tones. Keep the subject recognisable. Capture that chaotic early-2000s party-photo charm."
+      },
+      {
+        "id": "vhs",
+        "label": "VHS",
+        "prompt": "Make this photo look like a paused frame from an old VHS tape. Add faint horizontal scanlines, subtle tracking distortion, chromatic colour-bleed, soft blur, washed-out muted colours and a faint timestamp. Keep the person identifiable. It should feel like nostalgic analog home-video footage."
+      },
+      {
+        "id": "digicam",
+        "label": "Digicam Flash",
+        "prompt": "Recreate an early-2000s digital point-and-shoot photo taken with direct flash at night. Add harsh bright on-camera flash, a deep dark background, slightly warm early-digital colour, low dynamic range, mild sensor noise and that unmistakable 2000s digicam party aesthetic. Keep the subject clearly recognisable."
+      }
+    ]
+  },
+  {
+    "id": "cinematic",
+    "category": "style",
+    "name": "Cinematic",
+    "benefit": "Movie-still lighting & grade",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "soft",
+        "label": "Soft Cinematic",
+        "prompt": "Regrade this into a cinematic portrait with soft directional key lighting, gentle falloff into shadow, rich but natural colour, subtle cool teal shadows against warm skin tones and a shallow depth-of-field feel. Preserve the subject's identity, pose and framing exactly. It should look like a beautifully lit frame from a film — completely photorealistic."
+      },
+      {
+        "id": "dramatic",
+        "label": "Dramatic",
+        "prompt": "Transform this into a dramatic cinematic portrait with strong chiaroscuro lighting, deep contrast, moody shadows, a single directional light source and film-grade colour. Add subtle atmosphere and depth. Keep the person fully recognisable and the composition intact — photorealistic, like a still from a prestige drama."
+      },
+      {
+        "id": "tealorange",
+        "label": "Teal & Orange",
+        "prompt": "Apply a modern blockbuster teal-and-orange cinematic colour grade: warm orange skin tones against cool teal shadows and background, rich contrast, a slight bloom on highlights and a widescreen film feel. Preserve identity, pose and framing exactly. Keep it fully photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "restore",
+    "category": "tools",
+    "name": "Restore",
+    "benefit": "Repair & revive old photos",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "repair",
+        "label": "Restore",
+        "prompt": "Restore this old, damaged or low-quality photograph. Remove scratches, dust, creases, stains and noise; repair torn or faded areas, recover lost detail, reduce softness and improve clarity and contrast — especially on faces. Keep it black-and-white if the original is black-and-white, and fully preserve the real people's identities, features, clothing and the original composition. The result should look like a well-preserved version of the exact same photo."
+      },
+      {
+        "id": "colorize",
+        "label": "Restore + Colour",
+        "prompt": "Restore and naturally colourise this old photograph. First repair scratches, dust, creases and fading and recover detail; then add realistic, historically plausible colour to skin, hair, clothing and background with natural believable tones. Preserve the people's real identities, features and the original composition exactly. The result should look like an authentic colour photo from that era."
+      },
+      {
+        "id": "hd",
+        "label": "Restore + HD",
+        "prompt": "Restore this old or low-resolution photo to modern high-definition quality. Remove damage and noise, dramatically increase sharpness and fine detail (especially facial features) and enhance clarity and dynamic range while keeping it fully photorealistic and true to the original people and scene. Do not alter identity, expression or composition."
+      }
+    ]
+  },
+  {
+    "id": "headshot",
+    "category": "professional",
+    "name": "Headshot",
+    "benefit": "Professional profile photo",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "classic",
+        "label": "Classic",
+        "prompt": "Turn this into a polished professional headshot suitable for LinkedIn. Give clean flattering soft studio lighting, a simple neutral softly-blurred grey or office backdrop, natural professional retouching (even skin tone, reduced shine, tidied stray hairs) and crisp sharpness. Preserve the person's exact identity, face, hairstyle and expression — subtle, realistic and corporate-appropriate. Do not change their features."
+      },
+      {
+        "id": "modern",
+        "label": "Modern",
+        "prompt": "Create a modern professional headshot with bright airy lighting, a softly blurred contemporary office background, confident natural retouching and a clean approachable look. Keep the subject's real identity, features and expression fully intact. Photorealistic and LinkedIn-ready."
+      },
+      {
+        "id": "executive",
+        "label": "Executive",
+        "prompt": "Create a premium executive portrait: refined directional lighting, a dark elegant softly-blurred background, sharp detail, subtle professional retouching and an authoritative confident tone. Preserve the person's exact identity and features. Keep it photorealistic and high-end."
+      }
+    ]
+  },
+  {
+    "id": "anime",
+    "category": "fun",
+    "name": "Anime",
+    "benefit": "Become an anime character",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "soft",
+        "label": "Soft Anime",
+        "prompt": "Transform the subject into a soft modern anime illustration. Convert them into clean anime linework with large expressive eyes, smooth cel-shaded skin, stylised but recognisable hair matching their real hairstyle and colour, and a gently painted background. Keep their outfit and key features identifiable. Warm, high-quality anime-film aesthetic."
+      },
+      {
+        "id": "bold",
+        "label": "Bold Anime",
+        "prompt": "Convert the subject into a bold vibrant anime style with crisp outlines, saturated colours, dramatic cel shading, sharp eye highlights and dynamic lighting. Keep their recognisable hairstyle, colours and outfit. Make it look like a striking key-visual from a modern anime series."
+      },
+      {
+        "id": "painterly",
+        "label": "Painterly",
+        "prompt": "Render the subject as a cinematic hand-painted anime scene with soft painterly textures, gentle natural lighting, a lush watercolour-style background, warm nostalgic colours and delicate detail. Keep the person recognisable. A wholesome, film-quality animation look."
+      }
+    ]
+  },
+  {
+    "id": "hdr",
+    "category": "enhance",
+    "name": "HDR",
+    "benefit": "Balanced highlights & shadows",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "balanced",
+        "label": "Balanced",
+        "prompt": "Apply a natural, professional HDR enhancement. Recover detail in the brightest highlights and the deepest shadows for a full, balanced tonal range with rich local contrast, clean neutral midtones and true-to-life colour. Keep skin tones natural and realistic; avoid halos, grey flatness, noise and any over-processed look. The result must look like a perfectly exposed professional photograph, with the person, scene, composition and every detail completely unchanged."
+      },
+      {
+        "id": "vivid",
+        "label": "Vivid",
+        "prompt": "Apply a vivid yet realistic HDR grade. Expand dynamic range to reveal detail across highlights and shadows, boost clarity and micro-contrast, and enrich colours so they feel deep, saturated and punchy without looking artificial or cartoonish. Preserve natural skin tones and avoid halos or noise. Keep it fully photorealistic and true to the original scene and composition."
+      },
+      {
+        "id": "dramatic",
+        "label": "Dramatic",
+        "prompt": "Apply a bold, dramatic HDR treatment with strong local contrast, deep rich shadows, luminous controlled highlights and crisp, textured detail for a striking editorial feel. Keep skin realistic and avoid grunge, halos or an obviously processed look. The photo must remain photorealistic with the subject and framing unchanged."
+      }
+    ]
+  },
+  {
+    "id": "studio_light",
+    "category": "enhance",
+    "name": "Studio Light",
+    "benefit": "Flattering studio lighting",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "soft",
+        "label": "Soft",
+        "prompt": "Relight this photo with soft, flattering studio lighting as if shot with a large softbox and gentle fill. Add smooth, even illumination on the subject, a soft key light with a natural falloff, delicate catchlights in the eyes and a clean gentle background separation. Keep the person's identity, features, pose and framing exactly the same; only improve the lighting. Fully photorealistic, warm and professional."
+      },
+      {
+        "id": "bright",
+        "label": "Bright & Airy",
+        "prompt": "Relight this photo with a bright, airy high-key studio look: clean even lighting, luminous skin, soft shadows, a fresh light background and an overall crisp, magazine-fresh feel. Preserve identity, features, pose and composition exactly. Photorealistic and flattering, never blown-out or flat."
+      },
+      {
+        "id": "rembrandt",
+        "label": "Rembrandt",
+        "prompt": "Relight this portrait with classic Rembrandt studio lighting: a directional key light creating a soft triangle of light on the shadowed cheek, gentle shadow modelling that sculpts the face, rich depth and a subtly darker background. Keep the subject's identity, features, pose and framing exactly. Photorealistic, timeless and refined."
+      }
+    ]
+  },
+  {
+    "id": "clarity",
+    "category": "enhance",
+    "name": "Clarity",
+    "benefit": "Crisp detail & sharpness",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "crisp",
+        "label": "Crisp",
+        "prompt": "Sharpen and clarify this photo for a crisp, high-quality finish. Enhance fine detail and micro-contrast in the eyes, hair, edges and textures, remove softness, haze and mild blur, and improve overall definition — while keeping a natural, un-crunchy result with no halos, no noise and no over-sharpening artefacts. Keep the subject, colours, composition and framing exactly the same. Fully photorealistic."
+      },
+      {
+        "id": "detail",
+        "label": "Detail Boost",
+        "prompt": "Bring out maximum realistic detail: enhance textures, fine structure and clarity across the whole image, deepen local contrast subtly and make everything look sharp, clean and high-resolution while staying completely natural and photorealistic. No halos, no noise, no over-processing. Preserve identity, colour, composition and framing exactly."
+      },
+      {
+        "id": "dehaze",
+        "label": "Dehaze",
+        "prompt": "Remove haze, fog and atmospheric flatness from this photo to restore clarity, contrast and colour depth. Recover crisp detail and true tones as if the air were perfectly clear, without introducing halos, noise or an artificial look. Keep the subject, composition and framing exactly the same. Photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "color_pop",
+    "category": "enhance",
+    "name": "Color Pop",
+    "benefit": "Rich, true-to-life colour",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "natural",
+        "label": "Natural",
+        "prompt": "Enhance the colours of this photo to be rich, clean and true to life. Balance the white balance perfectly, deepen and clarify colours for a vibrant but believable look, and keep skin tones natural and accurate. Avoid oversaturation, colour casts or an artificial feel. Keep the subject, composition and framing exactly the same. Fully photorealistic."
+      },
+      {
+        "id": "punchy",
+        "label": "Punchy",
+        "prompt": "Give this photo punchy, eye-catching colour: bold saturated tones, deep blues and greens, warm vibrant skin and strong contrast for a lively, scroll-stopping look — while keeping it realistic and avoiding neon or clipped colours. Preserve identity, composition and framing exactly. Photorealistic."
+      },
+      {
+        "id": "cinematic",
+        "label": "Cinematic",
+        "prompt": "Apply a refined cinematic colour grade: gently warmed highlights, cool teal-leaning shadows, rich filmic contrast and smooth, controlled saturation for a premium movie-still look. Keep skin tones natural and the result photorealistic, with the subject, composition and framing unchanged."
+      }
+    ]
+  },
+  {
+    "id": "polaroid",
+    "category": "polaroid",
+    "name": "Classic Polaroid",
+    "benefit": "Nostalgic instant-photo look",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "classic",
+        "label": "Classic",
+        "prompt": "Make this look like a genuine vintage Polaroid instant photo. Place the image inside a real white Polaroid frame with the signature wide bottom border. Give it soft focus, slightly washed muted colours, a gentle warm cast, mild vignetting and the faint bloom of an instant print. Keep the subject fully recognisable and the composition intact. It should feel like an authentic shaken-it Polaroid, not a digital filter."
+      },
+      {
+        "id": "flash",
+        "label": "Flash",
+        "prompt": "Recreate a Polaroid taken indoors at night with the built-in flash. Add a bright direct flash falloff on the subject, a darker background, slightly overexposed skin, warm instant-film colours and the classic white Polaroid frame with a wide bottom border. Keep the person clearly recognisable. Authentic party-Polaroid energy."
+      },
+      {
+        "id": "vintage",
+        "label": "Faded",
+        "prompt": "Make this a faded, aged Polaroid from decades ago. Heavily muted and yellowed colours, low contrast, soft blur, dust and light-leak imperfections, and a slightly discoloured white Polaroid frame with a wide bottom border. Keep the subject identifiable. It should look like a real old instant photo found in a drawer."
+      }
+    ]
+  },
+  {
+    "id": "pixar3d",
+    "category": "fun",
+    "name": "3D Character",
+    "benefit": "Become an animated movie star",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "pixar",
+        "label": "Pixar",
+        "prompt": "Transform the subject into a Pixar-style 3D animated character. Give them large expressive eyes, smooth stylised CGI skin, soft rounded features and warm cinematic 3D-render lighting, while keeping their recognisable hairstyle, hair colour, skin tone, outfit and key features so they are clearly the same person. Add a softly blurred animated-movie background. Make it look like a polished frame from a modern 3D animated film."
+      },
+      {
+        "id": "disney",
+        "label": "Disney",
+        "prompt": "Turn the subject into a classic Disney-style 3D animated character with big sparkling eyes, smooth expressive features, warm magical lighting and a gentle painterly background. Preserve their real hairstyle, colours and outfit so they stay recognisable. Wholesome, high-quality animated-feature look."
+      },
+      {
+        "id": "avatar",
+        "label": "3D Avatar",
+        "prompt": "Render the subject as a stylised 3D game-avatar character: clean subsurface-scattering skin, crisp modern real-time-render lighting, subtly exaggerated features and a simple soft gradient studio background. Keep their hairstyle, colours and outfit recognisable. Make it look like a premium 3D profile avatar."
+      }
+    ]
+  },
+  {
+    "id": "ghibli",
+    "category": "fun",
+    "name": "Ghibli",
+    "benefit": "Dreamy hand-painted anime world",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "classic",
+        "label": "Ghibli",
+        "prompt": "Transform this photo into a dreamy Studio-Ghibli-style hand-painted anime scene. Use soft watercolour textures, warm gentle lighting, lush painterly detail, clean expressive anime linework and nostalgic pastel colours. Reimagine the subject as a Ghibli-style character while keeping their recognisable hairstyle, colours and outfit. Whimsical, cinematic and heartfelt."
+      },
+      {
+        "id": "meadow",
+        "label": "Meadow",
+        "prompt": "Place the subject in a lush Ghibli-style outdoor scene — rolling green meadow, big soft clouds and warm golden light — rendered as a hand-painted anime illustration with delicate detail and gentle colours. Keep them recognisable as the same person in anime form. Nostalgic and serene."
+      },
+      {
+        "id": "watercolor",
+        "label": "Watercolour",
+        "prompt": "Render this as a soft watercolour anime painting: loose painterly brush textures, gentle bleeding colours, warm light and a delicate storybook feel. Reimagine the subject in this style while preserving their hairstyle, colours and key features. Calm, artistic and beautiful."
+      }
+    ]
+  },
+  {
+    "id": "glam",
+    "category": "face",
+    "name": "Glam",
+    "benefit": "Flawless editorial makeup",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "soft",
+        "label": "Soft Glam",
+        "prompt": "Apply a natural soft-glam makeup look to the subject. Add subtly defined eyes, softly blended neutral eyeshadow, gentle contour, a healthy blush, fluttery natural lashes and a soft satin lip in a flattering nude tone. Even and brighten the skin while keeping realistic texture. Preserve the person's exact identity, face shape and features — polished and wearable, never a mask. Fully photorealistic."
+      },
+      {
+        "id": "bold",
+        "label": "Bold Glam",
+        "prompt": "Give the subject a bold full-glam makeup look: sculpted contour and highlight, a defined smokey or winged eye with volumised lashes, filled bold brows, radiant complexion and a striking lip. Keep skin realistic with preserved texture, and keep the person's exact identity and features intact. High-impact, magazine-editorial glamour — photorealistic, not cartoonish."
+      },
+      {
+        "id": "glass",
+        "label": "Glass Skin",
+        "prompt": "Give the subject a dewy 'glass skin' beauty look: luminous hydrated complexion, even glowing skin tone with preserved natural texture, softly defined brows, fresh flushed cheeks and a glossy natural lip. Subtle, clean and radiant. Preserve the person's exact identity and features. Fully photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "flash",
+    "category": "style",
+    "name": "Flash",
+    "benefit": "Editorial on-camera flash",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "paparazzi",
+        "label": "Paparazzi",
+        "prompt": "Regrade this into a paparazzi-style direct-flash shot. Add a bright hard on-camera flash lighting the subject from the front, deep falloff into a dark background, crisp highlights, slightly blown skin and a candid nightlife feel. Keep the subject fully recognisable and the composition intact. Photorealistic editorial flash photography."
+      },
+      {
+        "id": "direct",
+        "label": "Direct Flash",
+        "prompt": "Apply a fashion-editorial direct-flash look: strong frontal flash, punchy contrast, sharp detail, bold saturated colour and a hard flash shadow behind the subject. Keep the person identifiable and the framing unchanged. Cool, modern, magazine-flash aesthetic — photorealistic."
+      },
+      {
+        "id": "night",
+        "label": "Night Flash",
+        "prompt": "Make this look shot at night with a bright camera flash: dark surroundings, a well-lit flashed subject, warm skin highlights, subtle motion energy and rich shadows. Keep the subject recognisable. Authentic flash-at-night party photography, photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "hair_women",
+    "category": "hair",
+    "name": "Women's Hair",
+    "benefit": "Try trending haircuts",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "curtain",
+        "label": "Curtain Bangs",
+        "prompt": "Restyle the subject's hair into soft face-framing curtain bangs with long flowing layers, parted in the middle and gently sweeping away from the face. Keep the same hair colour and the person's exact face, identity and features unchanged; only change the hairstyle. Blend the new hair naturally with realistic texture, volume and lighting. Fully photorealistic."
+      },
+      {
+        "id": "wolfcut",
+        "label": "Wolf Cut",
+        "prompt": "Give the subject a trendy wolf cut — choppy shaggy layers, textured volume on top, wispy face-framing pieces and a lived-in edgy finish. Keep the same hair colour and preserve the person's exact face, identity and features; change only the hairstyle. Blend it in with natural texture and lighting. Photorealistic."
+      },
+      {
+        "id": "bob",
+        "label": "Lived-in Bob",
+        "prompt": "Restyle the subject's hair into a chic lived-in bob that falls around chin-to-shoulder length with soft natural movement and a tousled finish. Keep the same hair colour and preserve the person's exact face, identity and features; change only the hairstyle. Realistic texture and lighting, fully photorealistic."
+      },
+      {
+        "id": "layers",
+        "label": "Long Layers",
+        "prompt": "Give the subject long, voluminous layered hair with soft cascading layers, healthy shine and gentle face-framing pieces. Keep the same hair colour and preserve the person's exact face, identity and features; change only the hairstyle. Blend naturally with realistic texture and lighting. Photorealistic."
+      },
+      {
+        "id": "pixie",
+        "label": "Pixie",
+        "prompt": "Restyle the subject's hair into a stylish textured pixie cut — short, cropped and tousled with soft volume on top and tapered sides. Keep the same hair colour and preserve the person's exact face, identity and features; change only the hairstyle. Realistic and flattering, fully photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "hair_men",
+    "category": "hair",
+    "name": "Men's Hair",
+    "benefit": "Try trending men's cuts",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "crop",
+        "label": "Textured Crop",
+        "prompt": "Restyle the subject's hair into a modern textured crop — short tapered sides with a forward-styled textured fringe on top. Keep the same hair colour and preserve the person's exact face, identity and features; change only the hairstyle (and neaten any facial hair to match). Blend naturally with realistic texture and lighting. Fully photorealistic."
+      },
+      {
+        "id": "fade",
+        "label": "Skin Fade",
+        "prompt": "Give the subject a clean skin fade — tight faded sides blending from skin up to more length on top, styled neatly. Keep the same hair colour and preserve the person's exact face, identity and features; change only the hairstyle. Sharp, realistic and photorealistic."
+      },
+      {
+        "id": "mullet",
+        "label": "Modern Mullet",
+        "prompt": "Restyle the subject's hair into a modern mullet — shorter textured top and sides with longer length at the back, styled with an edgy lived-in finish. Keep the same hair colour and preserve the person's exact face, identity and features; change only the hairstyle. Photorealistic with natural texture and lighting."
+      },
+      {
+        "id": "buzz",
+        "label": "Buzz Cut",
+        "prompt": "Give the subject a clean short buzz cut with an even, natural finish. Keep the same hair colour and preserve the person's exact face, identity and features; change only the hairstyle. Realistic scalp and hairline, natural lighting, fully photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "remove_bg",
+    "category": "tools",
+    "name": "Remove Background",
+    "benefit": "Clean cut-out background",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "remove",
+        "label": "Remove BG",
+        "prompt": "Cleanly remove the background behind the main subject and replace it with a plain seamless pure-white studio backdrop. Cut the subject out precisely with crisp, natural edges — including fine details like hair strands — with no leftover fringing or halo. Keep the subject completely unchanged: identical pose, lighting, colours, identity and every detail. Only the background changes. Photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "upscale",
+    "category": "tools",
+    "name": "Upscale HD",
+    "benefit": "Sharper, higher resolution",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "upscale",
+        "label": "Upscale",
+        "prompt": "Upscale this photo to crisp high-definition quality. Dramatically increase sharpness, resolution and fine detail — especially facial features, hair, eyes and textures — while removing blur, noise and compression artefacts. Keep it fully photorealistic and completely faithful to the original people, colours, expression and composition. Do not alter identity, pose or content — only enhance clarity and detail."
+      }
+    ]
+  },
+  {
+    "id": "colorize",
+    "category": "tools",
+    "name": "Colourise",
+    "benefit": "Add colour to B&W photos",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "colorize",
+        "label": "Colourise",
+        "prompt": "Naturally colourise this black-and-white photograph. Add realistic, historically plausible colour to skin tones, hair, eyes, clothing and the background with believable natural tones and soft, even results. Preserve the people's real identities, features, expressions and the exact original composition and detail. It should look like an authentic colour photograph, not tinted. Photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "fix_old",
+    "category": "tools",
+    "name": "Fix Old Photo",
+    "benefit": "Repair damage & fading",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "fix",
+        "label": "Fix Old Photo",
+        "prompt": "Repair and restore this old, damaged or faded photograph. Remove scratches, dust, creases, tears, stains and noise; rebuild missing or degraded areas, recover lost detail and improve clarity, contrast and sharpness — especially on faces. Keep it black-and-white if the original is black-and-white. Fully preserve the real people's identities, features, clothing and the original composition. The result should look like a pristine version of the exact same photo. Photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "polaroid_flash",
+    "category": "polaroid",
+    "name": "Flash Polaroid",
+    "benefit": "Night-flash instant photo",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "party",
+        "label": "Party",
+        "prompt": "Recreate a Polaroid taken indoors at night with the built-in flash. Add a bright direct flash falloff on the subject, a darker background, slightly overexposed warm skin, muted instant-film colours and the classic thick white Polaroid frame with a wide bottom border. Keep the person clearly recognisable and the framing intact. Authentic party-Polaroid energy — not a digital filter."
+      },
+      {
+        "id": "mirror",
+        "label": "Mirror",
+        "prompt": "Make this look like a flash mirror-selfie captured on Polaroid instant film: a bright hard flash hotspot, warm washed colours, soft focus, mild grain and the thick white Polaroid frame with a wide bottom border. Keep the subject recognisable. Nostalgic and authentic."
+      }
+    ]
+  },
+  {
+    "id": "polaroid_retro",
+    "category": "polaroid",
+    "name": "Retro Polaroid",
+    "benefit": "Faded vintage instant film",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "faded",
+        "label": "Faded",
+        "prompt": "Make this a faded, aged Polaroid from decades ago. Heavily muted and yellowed colours, low contrast, soft blur, dust and light-leak imperfections, and a slightly discoloured thick white Polaroid frame with a wide bottom border. Keep the subject identifiable and composition intact. It should look like a real old instant photo found in a drawer."
+      },
+      {
+        "id": "sunwashed",
+        "label": "Sun-washed",
+        "prompt": "Give this a warm sun-washed vintage Polaroid look: pastel bleached colours, gentle haze, soft focus, a subtle light leak in one corner and the classic thick white Polaroid frame with a wide bottom border. Keep the person recognisable. Dreamy and nostalgic, authentically analog."
+      }
+    ]
+  },
+  {
+    "id": "beautifier",
+    "category": "face",
+    "name": "Beautifier",
+    "benefit": "Flawless natural retouch",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "natural",
+        "label": "Natural",
+        "prompt": "Apply a subtle, natural face retouch. Even out and gently smooth the skin while keeping realistic pores and texture, reduce shine and temporary blemishes, brighten and add catchlights to the eyes, whiten teeth slightly and add a soft healthy glow. Do NOT reshape the face or alter identity, bone structure or expression. Keep it completely photorealistic and true to the person — a great-skin-day, not a mask."
+      },
+      {
+        "id": "snatched",
+        "label": "Snatched",
+        "prompt": "Give a polished beauty retouch: smooth even skin with preserved texture, softly defined jawline and cheekbones through light contouring (no reshaping of identity), bright clear eyes, refined brows and a fresh radiant complexion. Keep the person fully recognisable and photorealistic — flattering but believable."
+      },
+      {
+        "id": "airbrush",
+        "label": "Airbrush",
+        "prompt": "Apply an editorial airbrush-style retouch: flawless luminous skin with subtle preserved texture, evened tone, removed blemishes and shine, bright eyes and a soft magazine-cover finish. Preserve the person's exact identity, features and expression. Photorealistic, high-end beauty retouching."
+      }
+    ]
+  },
+  {
+    "id": "black",
+    "category": "style",
+    "name": "Black",
+    "benefit": "Fine-art black & white",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "contrast",
+        "label": "High Contrast",
+        "prompt": "Convert this into a striking high-contrast fine-art black-and-white portrait. Deep rich blacks, luminous highlights, sculpted tonal range, crisp detail and a timeless monochrome mood. Preserve the subject's identity, pose and framing exactly. Photorealistic gallery-quality black & white."
+      },
+      {
+        "id": "soft",
+        "label": "Soft Mono",
+        "prompt": "Render this as a soft, elegant black-and-white portrait with gentle contrast, smooth tonal gradation, delicate highlights and a refined classic feel. Preserve identity, pose and composition exactly. Photorealistic, understated monochrome."
+      },
+      {
+        "id": "grain",
+        "label": "Film Noir",
+        "prompt": "Transform this into a moody film-noir black-and-white image: dramatic directional light, deep shadows, strong contrast, visible fine film grain and a cinematic atmosphere. Keep the subject fully recognisable and the composition intact. Photorealistic, timeless noir."
+      }
+    ]
+  },
+  {
+    "id": "spotlight",
+    "category": "style",
+    "name": "Spotlight",
+    "benefit": "Dramatic studio lighting",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "stage",
+        "label": "Stage",
+        "prompt": "Relight the subject with a dramatic single spotlight against a dark background, like a performer on a stage. Add a bright focused pool of light on the subject, soft falloff into deep shadow, gentle atmospheric haze and rich contrast. Preserve the person's exact identity, pose and features. Photorealistic and cinematic."
+      },
+      {
+        "id": "rim",
+        "label": "Rim Light",
+        "prompt": "Add bold rim lighting: a bright halo of light tracing the subject's edges and hair against a dark moody background, with a soft fill on the face so features stay clear. Keep identity, pose and framing intact. Photorealistic, high-end studio look."
+      },
+      {
+        "id": "neon",
+        "label": "Neon",
+        "prompt": "Relight the subject with vivid neon spotlights — cool blue and warm magenta beams crossing over the face and shoulders against a dark background, with glowing highlights and cinematic contrast. Keep the person fully recognisable. Photorealistic, modern and striking."
+      }
+    ]
+  },
+  {
+    "id": "cartoon2d",
+    "category": "fun",
+    "name": "2D Cartoon",
+    "benefit": "Retro hand-drawn cartoon",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "retro",
+        "label": "Retro 90s",
+        "prompt": "Transform the subject into a retro 1990s hand-drawn 2D cartoon character with bold black outlines, flat cel-shaded colours, simple expressive features and a nostalgic Saturday-morning look. Keep their recognisable hairstyle, colours and outfit so they're clearly the same person, cartoonised. Clean, fun and vintage."
+      },
+      {
+        "id": "comic",
+        "label": "Comic",
+        "prompt": "Turn the subject into a classic comic-book panel: bold ink outlines, halftone dot shading, punchy saturated colours and dramatic flat lighting. Keep their recognisable hairstyle, colours and outfit. Make it look like a hand-drawn comic illustration of the same person."
+      },
+      {
+        "id": "sunday",
+        "label": "Newspaper",
+        "prompt": "Render the subject as an old-school newspaper Sunday-funnies cartoon: simple linework, limited flat colour palette, light printing texture and a charming vintage comic-strip feel. Keep them recognisable and cartoonised. Wholesome and retro."
+      }
+    ]
+  },
+  {
+    "id": "corporate",
+    "category": "professional",
+    "name": "Corporate",
+    "benefit": "Polished corporate portrait",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "boardroom",
+        "label": "Boardroom",
+        "prompt": "Turn this into a polished corporate portrait for a senior professional. Dress the subject in sharp business attire (suit / blazer), place them against a tasteful blurred modern office or boardroom background, add clean flattering lighting and subtle professional retouching. Preserve the person's exact identity, face, hairstyle and expression. Authoritative, LinkedIn-ready and photorealistic."
+      },
+      {
+        "id": "startup",
+        "label": "Startup",
+        "prompt": "Create a modern startup-professional headshot: smart-casual business attire, a bright airy blurred contemporary office background, confident approachable lighting and natural retouching. Preserve the person's exact identity, features and expression. Clean, current and LinkedIn-ready. Photorealistic."
+      },
+      {
+        "id": "finance",
+        "label": "Finance",
+        "prompt": "Create a premium finance/executive corporate portrait: a tailored dark suit, a refined dark or neutral blurred background, crisp directional lighting, sharp detail and subtle professional retouching. Preserve the person's exact identity and features. High-end, authoritative and photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "magic_eraser",
+    "category": "eraser",
+    "name": "Magic Eraser",
+    "benefit": "Remove unwanted objects",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "erase",
+        "label": "Magic Eraser",
+        "prompt": "Remove distracting or unwanted elements from this photo — photobombers, stray people, trash, signs, clutter, blemishes on surfaces and other distractions — and cleanly fill the space with a natural, seamless continuation of the surrounding background. Keep the main subject completely unchanged: identical identity, pose, lighting and detail. The retouch must be invisible and fully photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "golden_light",
+    "category": "sky",
+    "name": "Golden Light",
+    "benefit": "Relight any scene beautifully",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "sunset",
+        "label": "Sunset Glow",
+        "prompt": "Relight this landscape as if captured during a breathtaking golden-hour sunset. Bathe the scene in warm amber and rose-gold light coming low from the horizon: long soft shadows stretching toward the camera, sun-kissed rim light on trees, buildings and terrain, gentle atmospheric haze glowing in the backlight, and a sky graded into layered apricot, coral and soft violet. Keep every element of the original composition, geography and structures exactly in place — only the light, sky and colour mood change. Fully photorealistic, like a professional landscape photographer waited hours for this exact moment."
+      },
+      {
+        "id": "sunrise",
+        "label": "Misty Sunrise",
+        "prompt": "Transform this scene into a serene early-morning sunrise. Add low, cool-gold light raking across the landscape, delicate ground mist hanging in valleys and between trees, dew-fresh clarity in the foreground, soft pastel sky in pale gold, blush and powder blue, and gentle god-rays where the sun breaks through. Preserve the exact composition, terrain and structures — only lighting, atmosphere and colour change. Photorealistic, tranquil, National-Geographic quality."
+      },
+      {
+        "id": "bluehour",
+        "label": "Blue Hour",
+        "prompt": "Regrade this scene into the magical blue hour just after sunset: a deep cobalt-and-indigo sky with a faint warm band at the horizon, cool ambient light over the landscape, and any windows, street lamps or city lights glowing warmly against the blue. Balance the exposure like a tripod long-exposure — clean shadows, no noise, crisp detail. Keep the composition and every element exactly in place; only light, sky and mood change. Fully photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "sky_swap",
+    "category": "sky",
+    "name": "Sky Swap",
+    "benefit": "Replace a boring sky",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "storm",
+        "label": "Dramatic Storm",
+        "prompt": "Replace the sky in this photo with a spectacular dramatic storm sky: towering charcoal cumulonimbus clouds with sculpted sunlit edges, shafts of light breaking through gaps, and a moody, cinematic atmosphere. Match the scene's lighting to the new sky — cooler, directional, with believable shadows and reflections updated to agree with the clouds. Keep the entire landscape and composition untouched otherwise. The blend at the horizon must be seamless and fully photorealistic."
+      },
+      {
+        "id": "firesky",
+        "label": "Sunset Fire",
+        "prompt": "Replace the sky with an explosive sunset: molten orange and crimson clouds streaked across the sky, purple-blue upper atmosphere, and the horizon burning gold. Recolour the scene's light to match — warm highlights on surfaces facing the sky, soft magenta fill in the shadows, water and glass reflecting the fire. Keep the landscape, buildings and composition exactly as they are; the sky replacement and relight must be seamless and photorealistic."
+      },
+      {
+        "id": "stars",
+        "label": "Starry Night",
+        "prompt": "Turn this into a stunning night scene under a crystal-clear starry sky: thousands of pin-sharp stars, a luminous Milky Way band arcing across the frame, and deep blue-black cosmic sky. Relight the landscape as a moonlit night — cool silver light, soft shadows, warm glow preserved in any windows or lamps. Keep the entire composition and every element in place. Astro-photography realism: no noise, no fake-looking star shapes, seamless horizon blend."
+      }
+    ]
+  },
+  {
+    "id": "seasons",
+    "category": "seasons",
+    "name": "Seasons",
+    "benefit": "See it in another season",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "autumn",
+        "label": "Autumn",
+        "prompt": "Transform this scene into peak autumn. Turn foliage into rich seasonal colour — flame red maples, amber oaks, golden birches — scatter fallen leaves naturally over the ground, and grade the light into warm, low-angle autumn sun with a crisp, slightly hazy atmosphere. Keep every structural element, the terrain and the composition identical; only vegetation, ground cover, light and colour change with the season. Fully photorealistic, like the same photo re-taken in October."
+      },
+      {
+        "id": "winter",
+        "label": "Winter Snow",
+        "prompt": "Transform this scene into a pristine winter day. Blanket the ground, roofs and branches in realistic fresh snow with natural accumulation and depth, frost the vegetation, add soft cool overcast light with pale blue shadows, and a quiet wintry atmosphere with faint falling snowflakes. Keep the composition, terrain and every structure identical — this must look like the exact same place photographed in January, fully photorealistic with physically believable snow."
+      },
+      {
+        "id": "spring",
+        "label": "Spring Bloom",
+        "prompt": "Transform this scene into radiant spring. Bring vegetation into fresh light-green leaf, add blossoming trees and wildflowers where natural, brighten the light into clear, gentle spring sunshine with a soft blue sky, and give the whole scene a clean, renewed atmosphere. Keep the composition, terrain and structures exactly the same — the same place in full bloom, photorealistic and vibrant without looking oversaturated."
+      }
+    ]
+  },
+  {
+    "id": "postcard",
+    "category": "seasons",
+    "name": "Postcard",
+    "benefit": "Travel-magazine perfection",
+    "quality": "high",
+    "approved": true,
+    "variations": [
+      {
+        "id": "vivid",
+        "label": "Vivid Postcard",
+        "prompt": "Grade this travel photo into a flawless picture-postcard: perfectly balanced exposure, deep polarised blue sky, rich but believable colour saturation, crystal-clear air with haze removed, crisp detail from foreground to horizon, and inviting warmth. Keep the scene and composition exactly as shot. It should look like the hero image on a premium travel brochure — photorealistic, aspirational, technically perfect."
+      },
+      {
+        "id": "vintage_pc",
+        "label": "Vintage Postcard",
+        "prompt": "Restyle this travel photo as a charming 1970s vintage postcard: gently faded Kodachrome-style colours with warm reds and soft cyans, subtle film grain, slightly soft edges, and a nostalgic sun-washed atmosphere. Keep the scene and composition exactly the same. It should feel like a treasured postcard found in a flea market — authentically retro, photorealistic, never a cheap filter."
+      }
+    ]
+  },
+  {
+    "id": "royal_pet",
+    "category": "pet_portraits",
+    "name": "Royal Portrait",
+    "benefit": "Your pet as nobility",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "monarch",
+        "label": "Monarch",
+        "prompt": "Transform this pet into a majestic royal oil painting. Dress them in regal attire — an ermine-trimmed velvet robe, ornate gold chain and a jewelled crown sized naturally to their head — seated against a dark palatial background with heavy drapery and warm candlelit tones. Render in the style of an 18th-century master portrait: visible brushwork, rich chiaroscuro lighting, museum-quality detail. The pet's face, markings, fur colour and expression must remain perfectly recognisable — it is unmistakably THIS animal as a monarch."
+      },
+      {
+        "id": "general",
+        "label": "The General",
+        "prompt": "Portray this pet as a distinguished military general in a classical oil painting: a decorated navy dress uniform with gold epaulettes, medals and braid, posed nobly against a smoky battlefield-sky backdrop. Painterly realism in the style of historical military portraiture — confident posture, dramatic light from one side, fine brushwork texture. Keep the pet's face, fur pattern and expression perfectly true to the original photo so the owner instantly recognises their animal."
+      },
+      {
+        "id": "duchess",
+        "label": "The Duchess",
+        "prompt": "Portray this pet as an elegant duchess in a romantic classical portrait: a lace-collared silk gown, pearl necklace and a delicate tiara, seated gracefully in a grand salon with soft window light and pastel drapery. Painted in refined rococo style with luminous skin-of-fur rendering, gentle brushstrokes and aristocratic poise. The pet's face, markings and expression must remain exactly recognisable as this specific animal."
+      }
+    ]
+  },
+  {
+    "id": "pet_studio",
+    "category": "pet_portraits",
+    "name": "Pet Headshot",
+    "benefit": "Studio-quality pet photo",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "classic",
+        "label": "Classic Studio",
+        "prompt": "Turn this into a professional studio pet portrait: a clean seamless dark charcoal backdrop, a large softbox key light producing catchlights in the eyes, gentle rim light separating the fur from the background, and crisp focus on the face with every whisker and fur strand resolved. Keep the pet's pose, expression, markings and proportions exactly as in the photo — only the setting and lighting become studio-grade. Photorealistic, award-winning pet-photography quality."
+      },
+      {
+        "id": "bright",
+        "label": "Bright & Airy",
+        "prompt": "Turn this into a bright, joyful studio pet portrait on a pure white seamless background: soft even wraparound lighting, clean true-to-life fur colour, sparkling catchlights, and a fresh commercial feel like a premium pet-brand campaign. Preserve the pet's exact pose, expression and markings. Fully photorealistic with immaculate edge detail around fur."
+      }
+    ]
+  },
+  {
+    "id": "cartoon_pet",
+    "category": "pet_fun",
+    "name": "Cartoon Pet",
+    "benefit": "Your pet, animated",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "pixar_pet",
+        "label": "3D Animated",
+        "prompt": "Transform this pet into a lovable 3D-animated movie character: big expressive eyes full of personality, soft stylised fur with visible groom, gently exaggerated proportions (larger head, rounder body), warm cinematic lighting and a softly blurred colourful background. Preserve the pet's exact fur colours, markings, ear shape and expression so it is instantly recognisable as this specific animal, starring in its own animated feature."
+      },
+      {
+        "id": "comic_pet",
+        "label": "Comic Strip",
+        "prompt": "Redraw this pet as a charming hand-drawn comic-strip character: clean confident ink outlines, flat cel colours matching their real fur and markings, simple expressive cartoon eyes, and a playful minimal background with a halftone texture. Keep the pose and expression from the photo. It should look like a beloved character from a classic Sunday comic — warm, funny, full of personality."
+      }
+    ]
+  },
+  {
+    "id": "pet_job",
+    "category": "pet_fun",
+    "name": "Dream Job",
+    "benefit": "Give your pet a career",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "astronaut",
+        "label": "Astronaut",
+        "prompt": "Put this pet in a highly detailed NASA-style astronaut suit, helmet visor open to show their real face, floating inside a realistic spacecraft interior with Earth glowing through the window behind them. Photorealistic rendering with accurate suit materials, soft cabin lighting and believable zero-gravity fur physics. The pet's face, markings and expression must remain exactly true to the photo — a proud space explorer, unmistakably this animal."
+      },
+      {
+        "id": "chef",
+        "label": "Chef",
+        "prompt": "Portray this pet as a professional head chef: a crisp white chef's jacket and toque, standing at a beautiful restaurant kitchen pass with warm tungsten light, gleaming pans and gentle steam rising in the background. Photorealistic, editorial food-magazine quality, with shallow depth of field. Keep the pet's face, markings and expression exactly recognisable — the culinary genius they were born to be."
+      },
+      {
+        "id": "pilot",
+        "label": "Pilot",
+        "prompt": "Portray this pet as a vintage aviator: a leather flight jacket, silk scarf and classic goggles pushed up on their head, seated in an open cockpit with a golden-hour sky and soft clouds behind. Photorealistic with rich material detail and warm heroic lighting. The pet's face, markings and expression stay perfectly true to the photo — a legend of the skies."
+      }
+    ]
+  },
+  {
+    "id": "studio_product",
+    "category": "product",
+    "name": "Studio Shot",
+    "benefit": "E-commerce ready in seconds",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "white",
+        "label": "Pure White",
+        "prompt": "Re-photograph this object as a flawless e-commerce product shot on a pure white seamless background (RGB 255): perfectly even studio lighting with soft shadows directly beneath the product for grounding, immaculate edges, accurate true-to-life colours and materials, and razor-sharp detail across the whole product. Keep the object's exact shape, proportions, branding and condition — only the environment and lighting change. Amazon/Shopify hero-image quality, fully photorealistic."
+      },
+      {
+        "id": "gradient",
+        "label": "Soft Studio",
+        "prompt": "Re-photograph this object as a premium product shot on a soft grey-to-white gradient studio sweep: a large diffused key light modelling the product's form, delicate reflection on a subtly glossy surface beneath it, gentle falloff into the background and crisp, catalogue-grade detail. Preserve the object's exact shape, colours, materials and branding. High-end product photography, fully photorealistic."
+      },
+      {
+        "id": "premium",
+        "label": "Black Premium",
+        "prompt": "Re-photograph this object as a luxury product shot on a deep matte black background: dramatic low-key lighting sculpting the product with precise speculars, a subtle rim light tracing its silhouette, faint reflection below, and rich, true material rendering. Preserve the exact shape, proportions, branding and colours. It should look like a flagship-launch hero image for a premium brand — cinematic, immaculate, photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "lifestyle_product",
+    "category": "product",
+    "name": "Lifestyle Scene",
+    "benefit": "Show it in real life",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "home",
+        "label": "Cozy Home",
+        "prompt": "Place this object naturally into a beautiful lifestyle scene: a warm, softly lit modern home — light oak table or linen surface, out-of-focus plants and morning window light in the background. Integrate it with physically correct shadows, reflections and colour bounce so it truly sits in the scene. Keep the object's exact shape, colours, materials and branding untouched. Aspirational catalogue realism, like a premium brand's Instagram content."
+      },
+      {
+        "id": "outdoor",
+        "label": "Golden Outdoor",
+        "prompt": "Place this object into a stunning outdoor golden-hour scene — warm sunlight, soft bokeh of nature or a terrace behind, natural surface beneath it (stone, wood or sand as appropriate). Integrate with accurate warm lighting, believable shadows and environmental reflections. The object's shape, colours, materials and branding stay exactly as photographed. Editorial advertising quality, fully photorealistic."
+      }
+    ]
+  },
+  {
+    "id": "marketplace",
+    "category": "resale",
+    "name": "Sell It Fast",
+    "benefit": "Listings that get clicks",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "clean",
+        "label": "Clean Listing",
+        "prompt": "Optimise this photo for a marketplace listing that sells: isolate the item by replacing the messy background with a clean, softly graded neutral backdrop, correct the white balance so colours are true, brighten and even out the lighting, sharpen the details and remove dust or minor distractions from the surface it sits on. Do NOT alter the item itself — its condition, wear, colour and features must stay perfectly honest and accurate. The result should look trustworthy and professional, like the best listings on eBay or Vinted."
+      },
+      {
+        "id": "bright",
+        "label": "Bright & Sharp",
+        "prompt": "Enhance this listing photo in place: fix the exposure and white balance, lift the shadows, sharpen fine detail, reduce noise and make the item's true colours pop naturally — keeping the original setting but making everything look clean, bright and professional. Do NOT change the item's condition or appearance; honesty sells. The result should read as a well-photographed, high-trust marketplace listing."
+      }
+    ]
+  },
+  {
+    "id": "gourmet",
+    "category": "food_style",
+    "name": "Gourmet Plate",
+    "benefit": "Michelin-level presentation",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "michelin",
+        "label": "Michelin",
+        "prompt": "Re-photograph this dish as a Michelin-starred editorial: moody directional window light raking across the plate, deep shadows with luminous highlights on sauces and textures, an elegant dark ceramic or stone table setting, shallow depth of field, and micro-detail on every garnish and glaze. Keep the actual dish, its ingredients, portion and arrangement exactly as photographed — only lighting, styling of the surroundings and grading change. Fine-dining magazine cover quality, fully photorealistic."
+      },
+      {
+        "id": "bistro",
+        "label": "Rustic Bistro",
+        "prompt": "Restyle this dish photo as warm rustic-bistro editorial: golden ambient light, a textured wooden table, soft linen napkin and blurred candlelight in the background, with the food's colours rich and appetising and steam gently visible if the dish is hot. Keep the dish itself — ingredients, portion, arrangement — exactly as photographed. Cozy, inviting, cookbook-quality photorealism."
+      }
+    ]
+  },
+  {
+    "id": "crave",
+    "category": "food_style",
+    "name": "Crave Boost",
+    "benefit": "Make it irresistible",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "golden",
+        "label": "Golden & Crispy",
+        "prompt": "Make this food look absolutely irresistible: deepen golden-brown crusts and char marks, add a fresh glisten to sauces and oils, enhance rising steam for hot dishes, saturate the natural colours of every ingredient to peak appetising vibrancy, and sharpen the textures — crisp edges, tender interiors. Keep the exact same dish, portion and arrangement; this is the same plate at its absolute best. Fast-food-commercial craveability, fully photorealistic."
+      },
+      {
+        "id": "fresh",
+        "label": "Fresh & Vibrant",
+        "prompt": "Make this food look garden-fresh and vibrant: brighten and clarify the natural colours — crisp greens, juicy reds, creamy whites — add delicate water droplets on fresh produce, clean up the plate edges, and light it with airy, soft daylight. Keep the exact dish, ingredients and arrangement unchanged. Healthy-lifestyle editorial quality: fresh, clean, photorealistic, genuinely appetising."
+      }
+    ]
+  },
+  {
+    "id": "clone_20260710-193619",
+    "category": "style",
+    "name": "Warm Glow",
+    "benefit": "Enhance vibrancy and focus.",
+    "quality": "high",
+    "approved": false,
+    "variations": [
+      {
+        "id": "default",
+        "label": "Warm Glow",
+        "prompt": "Apply a moderate warm color temperature shift, balancing reds and oranges with cooler tones for a harmonious look. Enhance contrast to deepen blacks and brighten highlights, achieving a dynamic range. Adjust sharpening to create a crisper texture, while maintaining subtlety. Introduce a gentle vignette to subtly draw focus towards the center. Soften the halation effect to ensure a delicate glow around bright areas, enhancing the dramatic lighting and emphasizing the subject."
+      }
+    ]
+  }
+]
