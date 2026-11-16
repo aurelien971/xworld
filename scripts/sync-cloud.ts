@@ -16,7 +16,7 @@ for (const line of fs.existsSync(".env.local") ? fs.readFileSync(".env.local", "
 const url = process.env.DATABASE_URL || process.env.POSTGRES_URL;
 const token = process.env.BLOB_READ_WRITE_TOKEN;
 
-const TABLES: [string, string][] = [["assets", "id"], ["generations", "key"], ["judgements", "key"], ["alignments", "key"], ["briefs", "id"], ["persona_links", "persona"], ["events", "id"], ["costs", "id"]];
+const TABLES: [string, string][] = [["assets", "id"], ["generations", "key"], ["judgements", "key"], ["alignments", "key"], ["briefs", "id"], ["idea_state", "id"], ["filter_state", "id"], ["connections", "account"], ["events", "id"], ["costs", "id"]];
 const JSONB = new Set(["tags", "meta", "inputs", "slides", "video", "align", "review", "publish", "metrics", "result"]);
 
 async function main() {
@@ -25,7 +25,8 @@ async function main() {
   delete process.env.DATABASE_URL;
   const local = await import("../src/factory/db");
   const rows = new Map<string, Record<string, unknown>[]>();
-  for (const [table] of TABLES) rows.set(table, await local.sql("select * from " + table));
+  // The finished ads brought in from Opaque Ads stay on this Mac: they are large and only for reference.
+  for (const [table] of TABLES) rows.set(table, await local.sql("select * from " + table + (table === "assets" ? " where kind <> 'ad'" : "")));
   await local.closeDb();
 
   process.env.DATABASE_URL = url;
@@ -54,6 +55,7 @@ async function main() {
     }
   };
   walk(MEDIA);
+  for (let i = files.length - 1; i >= 0; i--) if (path.relative(MEDIA, files[i]).startsWith("ads" + path.sep)) files.splice(i, 1);
   let done = 0;
   const workers = Array.from({ length: 8 }, async () => {
     for (let f = files.pop(); f; f = files.pop()) {
