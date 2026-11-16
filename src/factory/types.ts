@@ -65,8 +65,6 @@ export const Account = z.object({
   times: z.array(z.string()).min(1),
   /** placeholder: a slot that has no real account behind it yet. Nothing is planned for it. */
   status: z.enum(["placeholder", "warming", "active", "paused"]),
-  /** Where its posts are handed over: the Mitsushiro creator that holds this account's sign-in. Absent until it is connected. */
-  target: z.object({ kind: z.literal("mitsushiro"), model: z.string() }).optional(),
 });
 export type Account = z.infer<typeof Account>;
 

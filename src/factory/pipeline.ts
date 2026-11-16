@@ -9,6 +9,7 @@ import { judge, judgeAvailable } from "./stages/judge";
 import { publishBlocker, send, standing } from "./stages/publish";
 import { generationKey, transform } from "./stages/transform";
 import { get } from "./storage";
+import { dayOf, TZ } from "./time";
 import type { Brief, PairRef } from "./types";
 
 /**
@@ -169,31 +170,51 @@ export async function reviewBrief(id: string, pass: boolean) {
   return true;
 }
 
-/** Hand a ready brief to the publisher, when its account can take it. Otherwise it waits as ready, and says why. */
+/** Whether a brief's time has come: its own day, at or after its hour. Older days are never caught up, so connecting an account does not flood it. */
+const due = (b: Brief) => b.day === dayOf() && b.inputs.time <= new Intl.DateTimeFormat("en-GB", { timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date());
+
+/** Post a ready brief, when its time has come and its account takes posts. Otherwise it waits as ready, and the screen says why. */
 export async function dispatch(id: string) {
   const b = await load(id);
-  if (!b || b.state !== "ready" || b.publish?.ref) return;
+  if (!b || b.state !== "ready" || b.publish?.ref || !due(b)) return;
   const account = await liveAccount(b.account);
   if (!account || publishBlocker(account)) return;
+  // Three tries, then it waits for a person.
+  const tries = (b.publish?.status === "failed" ? (b.publish as { tries?: number }).tries ?? 1 : 0) + 1;
+  if (tries > 3) return;
   try {
     const publish = await send(b, account, registry.product(b.product).hashtags);
-    await update(id, null, `Sent to the publisher, due ${b.inputs.time}`, { publish });
+    const live = publish.status === "live";
+    await update(id, live ? "published" : null, live ? `Posted to ${account.platform} as @${account.handle}` : `Sent to ${account.platform}, still being processed`, { publish });
   } catch (e) {
-    await update(id, null, `Not sent: ${message(e)}`, { publish: { status: "failed", error: message(e), at: new Date().toISOString() } });
+    await update(id, null, `Not posted: ${message(e)}`, { publish: { status: "failed", error: message(e), at: new Date().toISOString(), tries } as Brief["publish"] });
   }
 }
 
-/** Ask the publisher where every sent post stands, and keep its numbers. */
-export async function measure(product: string, day: string) {
-  for (const b of await briefsOn(product, day)) {
-    if (!b.publish?.ref) continue;
-    const account = await liveAccount(b.account);
-    const s = account ? await standing(b, account).catch(() => null) : null;
-    if (!s) continue;
-    const publish = { ...b.publish, status: s.status, url: s.url ?? b.publish.url, error: s.error };
-    const metrics = s.metrics ? { ...s.metrics, at: new Date().toISOString() } : b.metrics;
-    const becameLive = s.status === "live" && b.state !== "published";
-    await update(b.id, becameLive ? "published" : null, becameLive ? "Live" : null, { publish, metrics });
+/** Everything that is ready and due today, posted; and what a platform was still processing, finished off. */
+export async function publishDue(product: string) {
+  for (const b of await briefsOn(product, dayOf())) {
+    if (b.state === "ready" && !b.publish?.ref) await dispatch(b.id);
+    else if (b.publish?.status === "sent") await settle(b);
+  }
+}
+
+async function settle(b: Brief) {
+  const account = await liveAccount(b.account);
+  const s = account ? await standing(b, account).catch(() => null) : null;
+  if (!s || !b.publish) return;
+  const publish = { ...b.publish, status: s.status, ref: s.ref ?? b.publish.ref, url: s.url ?? b.publish.url, error: s.error };
+  const metrics = s.metrics ? { ...s.metrics, at: new Date().toISOString() } : b.metrics;
+  const becameLive = s.status === "live" && b.state !== "published";
+  await update(b.id, becameLive ? "published" : null, becameLive ? "Live" : null, { publish, metrics });
+}
+
+/** The numbers of everything posted in the last two weeks, read again. */
+export async function measure(product: string) {
+  const ids = await sql<{ id: string }>("select id from briefs where product = $1 and publish->>'ref' is not null and day > current_date - 14", [product]);
+  for (const { id } of ids) {
+    const b = await load(id);
+    if (b) await settle(b);
   }
 }
 

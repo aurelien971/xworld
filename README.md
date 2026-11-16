@@ -10,7 +10,7 @@ generations and costs are in the database.
 npm run dev
 ```
 
-Sign in, open a product, press **Plan day**, then **Run**. Keys: `j` `k` move, `←` `→`
+Runs on http://localhost:3020. Sign in, open a product, press **Plan day**, then **Run**. Keys: `j` `k` move, `←` `→`
 slides, `a` approve, `x` reject, `r` run again, `g` day or wall, `[` `]` change day, `t` today.
 
 ## Layout
@@ -66,20 +66,22 @@ Stop the dev server before any of them.
 
 ## Accounts and publishing
 
-Mitsushiro holds every account's sign-in and does the posting. Each persona here is one
-creator there; each of its four platforms is a slot that is empty until an account is
-connected. In the Accounts view: link a persona to a creator (or make a new one), then
-Connect each platform. That goes through Mitsushiro's own platform apps and callback
-addresses and comes back here.
+The factory signs in to the platforms and posts to them itself. Each persona has a slot
+on each platform, empty until a real account is connected in the Accounts view: Connect
+goes to the platform's own sign-in and comes back. Sign-ins are sealed with
+`FACTORY_SECRET` and kept in the factory's own database.
 
-To switch it on:
+A connected account is planned for in full. The factory posts to it only once **Posting**
+is switched on beside it. A post goes out on its own day, at or after its time, once it
+has passed review; older days are never caught up.
 
-1. In Mitsushiro, merge the factory ingest routes and set `INGEST_SECRET` and
-   `INGEST_OWNER` (your account's email).
-2. Here, set `MITSUSHIRO_URL` and `MITSUSHIRO_INGEST_SECRET` (the same secret).
+It uses the developer apps it has keys for: `INSTAGRAM_APP_ID` / `INSTAGRAM_APP_SECRET`,
+`GOOGLE_OAUTH_CLIENT_ID` / `GOOGLE_OAUTH_CLIENT_SECRET`, `X_CLIENT_ID` / `X_CLIENT_SECRET`.
+A platform with no keys is not offered. The callback address is
+`<origin>/api/connect/<platform>/callback` and must be registered with the platform's app;
+on this Mac the factory runs on port 3020 because `http://localhost:3020` already is.
 
-A connected account is planned for every day. A brief that passes review is handed to
-Mitsushiro, which posts it at its time. Until then it stays at Ready and says why.
+The clock that posts runs while the dev server runs.
 
 ## The cloud
 

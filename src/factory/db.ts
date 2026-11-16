@@ -34,6 +34,10 @@ create table if not exists alignments (key text primary key, result jsonb not nu
 create table if not exists persona_links (persona text primary key, model text not null, name text, linked_at timestamptz not null default now());
 create table if not exists idea_state (id text primary key, state text not null, at timestamptz not null default now());
 create table if not exists filter_state (id text primary key, approved boolean not null, at timestamptz not null default now());
+create table if not exists connections (
+  account text primary key, provider text not null, username text not null, name text, avatar text,
+  sealed text not null, posting boolean not null default false, needs_reconnect boolean not null default false,
+  at timestamptz not null default now());
 create table if not exists events (
   id bigserial primary key, brief_id text not null, at timestamptz not null default now(),
   state text not null, note text);

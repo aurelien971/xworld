@@ -50,5 +50,16 @@ export const tag = async (key: string) => {
   return `"${s.size.toString(36)}-${Math.round(s.mtimeMs).toString(36)}"`;
 };
 
+/**
+ * An address on the open web for one file, for a platform that fetches media itself
+ * (Instagram). The file is copied to the Blob store under a name that cannot be guessed.
+ */
+export async function publicUrl(key: string, data: Buffer) {
+  if (!token()) throw new Error("Posting to Instagram needs the media store (BLOB_READ_WRITE_TOKEN): Instagram fetches each file from the web.");
+  const { put: upload } = await import("@vercel/blob");
+  const { url } = await upload(`out/${key}`, data, { access: "public", addRandomSuffix: true, contentType: typeOf(key) });
+  return url;
+}
+
 export const mediaUrl = (key: string) => `/media/${key}`;
 export const contentType = typeOf;

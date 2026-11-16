@@ -1,56 +1,46 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { AccountsView } from "@/app/api/accounts/route";
-import { Button, cx } from "./primitives";
+import { cx } from "./primitives";
 
 /**
- * Who posts, and where. Each persona is one creator in Mitsushiro, which
- * holds the sign-ins; each of its four platforms is a slot that is empty
- * until an account is connected to it. Connecting goes through Mitsushiro's
- * own sign-in with each platform, and comes back here.
+ * Who posts, and where. Each persona has a slot on each platform, empty
+ * until a real account is connected to it: Connect goes to the platform's
+ * own sign-in and comes back here. A connected account is planned for in
+ * full; the factory posts to it only once Posting is switched on.
  */
-const PLATFORM: Record<string, string> = { instagram: "Instagram", tiktok: "TikTok", youtube: "YouTube", x: "X" };
-
 export function Accounts({ product }: { product: string }) {
   const [view, setView] = useState<AccountsView | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [busy, setBusy] = useState<string | null>(null);
-
-  const post = useCallback(
-    async (body: Record<string, string>) => {
-      const res = await fetch(`/api/accounts?product=${product}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-      const data = await res.json().catch(() => null);
-      if (!res.ok) throw new Error(data?.error || "That didn't work.");
-      return data;
-    },
-    [product],
-  );
+  const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`/api/accounts?product=${product}`, { cache: "no-store" }).then((r) => r.json()).then((d) => (d.error && !d.personas ? setError(d.error) : setView(d)), () => setError("The accounts could not be read."));
+    // Coming back from a platform's sign-in: say how it went, then tidy the address.
+    const q = new URLSearchParams(window.location.search);
+    const connected = q.get("connected"), failed = q.get("connect-error");
+    if (connected || failed) window.history.replaceState(null, "", `/${product}?view=accounts`);
+    Promise.resolve().then(() => {
+      if (connected) setNotice(`Connected @${connected.split(":").slice(1).join(":")}. Posting is off until you switch it on.`);
+      if (failed) setError(failed);
+    });
+    fetch(`/api/accounts?product=${product}`, { cache: "no-store" }).then((r) => r.json()).then((d) => (d.error ? setError(d.error) : setView(d)), () => setError("The accounts could not be read."));
   }, [product]);
 
-  const act = async (key: string, body: Record<string, string>) => {
-    setBusy(key);
+  const act = async (body: { action: string; account: string; on?: boolean }) => {
     setError(null);
-    try {
-      const data = await post(body);
-      if (body.action === "connect") window.location.assign(data.url);
-      else setView(data);
-    } catch (e) {
-      setError((e as Error).message);
-    }
-    setBusy(null);
+    if (body.action === "posting") setView((v) => v && { personas: v.personas.map((p) => ({ ...p, slots: p.slots.map((s) => (s.id === body.account ? { ...s, posting: !!body.on } : s)) })) });
+    const res = await fetch(`/api/accounts?product=${product}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+    const data = await res.json().catch(() => null);
+    if (res.ok) setView(data);
+    else setError(data?.error ?? "That didn't work.");
   };
 
-  const connected = view?.personas.reduce((n, p) => n + p.slots.filter((s) => s.connected).length, 0) ?? 0;
-  const slots = view?.personas.reduce((n, p) => n + p.slots.length, 0) ?? 0;
-
+  const slots = view?.personas.flatMap((p) => p.slots) ?? [];
   return (
     <div className="px-4 pt-7 pb-10 sm:px-6">
       <dl className="flex gap-10">
-        {([["Connected", view ? connected : null], ["Slots", view ? slots : null], ["Personas", view?.personas.length ?? null]] as const).map(([label, n], i) => (
+        {([["Connected", view ? slots.filter((s) => s.connected).length : null], ["Posting", view ? slots.filter((s) => s.posting).length : null], ["Slots", view ? slots.length : null]] as const).map(([label, n], i) => (
           <div key={label}>
             <dd className={cx("font-mono text-xl tabular-nums", i > 0 && "text-ink-3")}>{n ?? " "}</dd>
             <dt className="mt-0.5 text-xs text-ink-3">{label}</dt>
@@ -58,19 +48,16 @@ export function Accounts({ product }: { product: string }) {
         ))}
       </dl>
 
-      {view && !view.configured && <p className="mt-6 text-ink-2">Mitsushiro is not linked yet, so nothing can be connected. Set its address and the shared secret, then come back.</p>}
-      {view?.configured && !view.error && view.creators.length === 0 && (
-        <p className="mt-6 text-ink-2">Mitsushiro is linked, but the login it was told to act for has no creators. Set INGEST_OWNER on Mitsushiro to the email you sign in to the studio with, then reload.</p>
-      )}
-      {(error || view?.error) && (
+      {notice && <p className="mt-6">{notice}</p>}
+      {error && (
         <p role="alert" className="mt-6 text-accent">
-          {error || view?.error}
+          {error}
         </p>
       )}
 
       <ul className="mt-6 border-t border-line">
         {view?.personas.map((p) => (
-          <li key={p.id} className="grid gap-x-8 gap-y-3 border-b border-line py-4 lg:grid-cols-[minmax(0,260px)_minmax(0,220px)_minmax(0,1fr)]">
+          <li key={p.id} className="grid gap-x-10 gap-y-4 border-b border-line py-4 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)]">
             <div className="min-w-0">
               <p className="text-base">
                 {p.name} <span className="ml-1 text-xs text-ink-3 capitalize">{p.stance.replace("-", " ")}</span>
@@ -89,64 +76,37 @@ export function Accounts({ product }: { product: string }) {
                   </dl>
                 </details>
               )}
-              <p className="mt-1.5 truncate font-mono text-2xs text-ink-3">{p.formats.length} formats</p>
             </div>
 
-            <div className="min-w-0">
-              <p className="text-xs text-ink-3">Creator in Mitsushiro</p>
-              {p.model ? (
-                <p className="mt-1 flex items-baseline gap-2">
-                  <span className="truncate">{p.creatorName ?? p.model}</span>
-                  <button onClick={() => act(`${p.id}:unlink`, { action: "unlink", persona: p.id })} className="shrink-0 text-xs text-ink-3 underline decoration-line-2 underline-offset-2 hover:text-ink">
-                    Unlink
-                  </button>
-                </p>
-              ) : (
-                <div className="mt-1 flex items-center gap-2">
-                  <select
-                    aria-label={`Creator for ${p.name}`}
-                    disabled={!view.configured || !view.creators.length}
-                    value=""
-                    onChange={(e) => e.target.value && act(`${p.id}:link`, { action: "link", persona: p.id, model: e.target.value })}
-                    className="h-7 min-w-0 flex-1 rounded-md border border-line-2 bg-surface px-1.5 text-sm text-ink-2 disabled:opacity-40"
-                  >
-                    <option value="">Choose one</option>
-                    {view.creators.map((c) => (
-                      <option key={c.id} value={c.id}>
-                        {c.name}
-                      </option>
-                    ))}
-                  </select>
-                  <Button disabled={!view.configured || busy === `${p.id}:create`} onClick={() => act(`${p.id}:create`, { action: "create", persona: p.id })}>
-                    New
-                  </Button>
-                </div>
-              )}
-            </div>
-
-            <div className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-4">
               {p.slots.map((s) => (
                 <div key={s.id} className="min-w-0">
                   <p className="text-xs text-ink-3">
-                    {PLATFORM[s.platform] ?? s.platform} <span className="font-mono">· {s.perDay}/day</span>
+                    {s.platformName} <span className="font-mono">· {s.perDay}/day</span>
                   </p>
                   {s.connected ? (
-                    <p className="mt-1 truncate">
-                      @{s.handle}
-                      {s.needsReconnect && (
-                        <button onClick={() => act(s.id, { action: "connect", persona: p.id, platform: s.platform })} className="ml-2 text-xs text-accent underline underline-offset-2">
-                          Reconnect
-                        </button>
+                    <>
+                      <p className="mt-1 truncate">@{s.handle}</p>
+                      {s.needsReconnect ? (
+                        <a href={`/api/connect/${s.platform}/start?account=${s.id}`} className="mt-1 block text-xs text-accent underline underline-offset-2">
+                          Connect again
+                        </a>
+                      ) : (
+                        <label className="mt-1 flex items-center gap-1.5 text-xs text-ink-2">
+                          <input type="checkbox" checked={s.posting} onChange={(e) => act({ action: "posting", account: s.id, on: e.target.checked })} className="accent-ink" />
+                          Posting
+                        </label>
                       )}
-                    </p>
+                      <button onClick={() => act({ action: "disconnect", account: s.id })} className="mt-1 text-xs text-ink-3 underline decoration-line-2 underline-offset-2 hover:text-ink">
+                        Disconnect
+                      </button>
+                    </>
+                  ) : s.offered ? (
+                    <a href={`/api/connect/${s.platform}/start?account=${s.id}`} className="mt-1 inline-block underline decoration-line-2 underline-offset-2 transition-colors duration-150 hover:decoration-ink">
+                      Connect
+                    </a>
                   ) : (
-                    <button
-                      disabled={!p.model || busy === s.id}
-                      onClick={() => act(s.id, { action: "connect", persona: p.id, platform: s.platform })}
-                      className="mt-1 text-sm underline decoration-line-2 underline-offset-2 transition-colors duration-150 hover:decoration-ink disabled:text-ink-3 disabled:no-underline"
-                    >
-                      {p.model ? "Connect" : s.status === "warming" ? `@${s.handle}, not connected` : "Empty"}
-                    </button>
+                    <p className="mt-1 text-ink-3">No keys yet</p>
                   )}
                 </div>
               ))}

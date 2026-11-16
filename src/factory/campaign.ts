@@ -1,6 +1,5 @@
 import { liveAccounts } from "./accounts";
 import { sql } from "./db";
-import * as mitsushiro from "./mitsushiro";
 import { ideaStates } from "./planner";
 import * as registry from "./registry";
 import { judgeAvailable } from "./stages/judge";
@@ -57,8 +56,8 @@ export async function campaignView(productId: string): Promise<CampaignView> {
   // What would move the campaign most, in order. Each is true right now, or it is not listed.
   const next: Step[] = [];
   if (!judgeAvailable()) next.push({ title: "Give the factory an image key with credit", detail: `Nothing new can be generated or judged without one. ${untested} new filters and ${blocked} ideas are waiting on it.`, view: "filters" });
-  if (!mitsushiro.configured()) next.push({ title: "Link Mitsushiro", detail: "It holds the sign-ins and does the posting. Until it is linked no account can be connected.", view: "accounts" });
-  else if (connected === 0) next.push({ title: "Connect the first account", detail: "The official Instagram first, then one account per persona.", view: "accounts" });
+  if (connected === 0) next.push({ title: "Connect the first account", detail: `${accounts.filter((x) => x.offered).length} of ${accounts.length} slots can be connected now. The official Instagram first, then one account per persona.`, view: "accounts" });
+  else if (!accounts.some((x) => x.posting)) next.push({ title: "Switch posting on", detail: "An account is connected but the factory may not post to it yet. The switch is beside each account.", view: "accounts" });
   if (a.waiting > 0) next.push({ title: `Look through ${a.waiting} photos`, detail: `Only ${a.approved} photos carry every post today, so faces repeat. Approving more is the fastest way to more variety.`, view: "library" });
   if (drafts > 0) next.push({ title: `Read ${drafts} ideas`, detail: "An approved idea becomes a post the next time a day is planned. Nothing is used until you approve it.", view: "ideas" });
   if (b.review > 0) next.push({ title: `Review ${b.review} posts`, detail: "Made and waiting for a yes or a no.", view: "wall" });
