@@ -10,8 +10,8 @@ generations and costs are in the database.
 npm run dev
 ```
 
-Open the day, press **Plan day**, then **Run**. Keys: `j` `k` move, `←` `→` slides,
-`a` approve, `x` reject, `r` run again, `[` `]` change day, `t` today.
+Sign in, open a product, press **Plan day**, then **Run**. Keys: `j` `k` move, `←` `→`
+slides, `a` approve, `x` reject, `r` run again, `g` day or wall, `[` `]` change day, `t` today.
 
 ## Layout
 
@@ -44,16 +44,35 @@ npm run import:opaqueads
 Reads `~/OpaqueAds` and the Mac app's filter catalog. Stop the dev server first: the
 embedded database is one process at a time.
 
-## Publishing
+## Accounts and publishing
 
-Finished posts go to Mitsushiro's `/api/ingest/post`, which stores the slides in the
-creator's folder and puts the post on her calendar; Mitsushiro's scheduler publishes
-it. To switch an account on:
+Mitsushiro holds every account's sign-in and does the posting. Each persona here is one
+creator there; each of its four platforms is a slot that is empty until an account is
+connected. In the Accounts view: link a persona to a creator (or make a new one), then
+Connect each platform. That goes through Mitsushiro's own platform apps and callback
+addresses and comes back here.
 
-1. In Mitsushiro, set `INGEST_SECRET` and deploy the ingest route.
-2. Connect the account to a creator in Mitsushiro's Socials.
-3. Here, set `MITSUSHIRO_URL` and `MITSUSHIRO_INGEST_SECRET`, and in the account's
-   registry file set `"status": "active"` and
-   `"target": { "kind": "mitsushiro", "uid": "…", "model": "…" }`.
+To switch it on:
 
-Until all three are done, a brief that passes review stays at Ready and says why.
+1. In Mitsushiro, merge the factory ingest routes and set `INGEST_SECRET` and
+   `INGEST_OWNER` (your account's email).
+2. Here, set `MITSUSHIRO_URL` and `MITSUSHIRO_INGEST_SECRET` (the same secret).
+
+A connected account is planned for every day. A brief that passes review is handed to
+Mitsushiro, which posts it at its time. Until then it stays at Ready and says why.
+
+## The cloud
+
+On a laptop the database and media are in `/data`. With `DATABASE_URL` (Neon) and
+`BLOB_READ_WRITE_TOKEN` (Vercel Blob) set, both live in the cloud, for the deployment
+and for this Mac alike.
+
+```bash
+vercel env pull .env.local
+npm run sync:cloud
+```
+
+The first pulls the project's settings; the second copies this Mac's posts and media up.
+Stop the dev server before the second.
+
+Videos are made with ffmpeg: the one shipped with the app, or `FFMPEG_PATH`.
