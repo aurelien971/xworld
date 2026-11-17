@@ -12,6 +12,7 @@ import { cx } from "./primitives";
 type View = Awaited<ReturnType<typeof filtersView>>;
 const VERDICT: Record<string, string> = { strong: "Strong", usable: "Usable", mixed: "Mixed", weak: "Weak" };
 const SHOW = ["new", "tested", "rewritten", "all"] as const;
+const day = (iso: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short" }).format(new Date(iso));
 
 export function Filters({ product }: { product: string }) {
   const [view, setView] = useState<View | null>(null);
@@ -54,6 +55,16 @@ export function Filters({ product }: { product: string }) {
               <p className="mt-2 font-mono text-2xs text-ink-3">
                 {f.id} · {f.origin === "lab" ? "new" : "from the app"} · {f.results} {f.results === 1 ? "result" : "results"}
               </p>
+              <p className="mt-1 font-mono text-2xs tabular-nums">
+                {f.tested ? (
+                  <span className="text-ink">
+                    tested {day(f.tested)}
+                    {f.score != null && ` · reviewer ${f.score}`}
+                  </span>
+                ) : (
+                  <span className="text-ink-3">not tested yet</span>
+                )}
+              </p>
               {f.audit && (
                 <p className="mt-3">
                   <span className={cx("text-xs", f.audit.verdict === "weak" ? "text-accent" : "text-ink")}>{VERDICT[f.audit.verdict]}</span>
@@ -76,6 +87,12 @@ export function Filters({ product }: { product: string }) {
                       {v.weak && <span className="ml-2 text-accent">weak, not planned</span>}
                       {v.replaces && <span className="ml-2 text-ink-3">rewrite of {v.replaces}</span>}
                       {v.results === 0 && <span className="ml-2 text-ink-3">never generated</span>}
+                      {v.results > 0 && (
+                        <span className="ml-2 font-mono text-2xs text-ink-3 tabular-nums">
+                          {v.results} {v.results === 1 ? "result" : "results"}
+                          {v.score != null && ` · reviewer avg ${v.score}`}
+                        </span>
+                      )}
                     </p>
                     {v.why && <p className="mt-1 text-ink-2">{v.why}</p>}
                     <p className="mt-1.5 font-mono text-2xs leading-[18px] text-ink-2">{v.prompt}</p>
@@ -83,11 +100,14 @@ export function Filters({ product }: { product: string }) {
                   {v.examples.length > 0 && (
                     <div className="flex gap-2">
                       {v.examples.map((e) => (
-                        <div key={e.after} className="flex gap-px overflow-hidden rounded-sm">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={e.before} alt="Before" loading="lazy" className="aspect-[3/4] w-16 object-cover" />
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={e.after} alt="After" loading="lazy" className="aspect-[3/4] w-16 object-cover" />
+                        <div key={e.after} title={e.note ?? undefined}>
+                          <div className="flex gap-px overflow-hidden rounded-sm">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={e.before} alt="Before" loading="lazy" className="aspect-[3/4] w-16 object-cover" />
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={e.after} alt="After" loading="lazy" className="aspect-[3/4] w-16 object-cover" />
+                          </div>
+                          {e.score != null && <p className="mt-1 font-mono text-2xs text-ink-3 tabular-nums">{e.score}</p>}
                         </div>
                       ))}
                     </div>

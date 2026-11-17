@@ -55,6 +55,56 @@
     "studio_background": {
       "verdict": "usable",
       "note": "Swaps the backdrop for a grey studio sweep. Clean, but only matters when the original background is messy."
+    },
+    "clean_girl": {
+      "verdict": "strong",
+      "note": "Tested 17 Nov on three original phone-style photos (night flash, dusk dinner, bedroom daylight). The clearest win: every photo comes out bright, clean and obviously better. But it rewrites the scene: the night photo became daytime and a blue dress turned white. The prompt needs a line that keeps the place, time of day and clothes.",
+      "weak": []
+    },
+    "night_flash": {
+      "verdict": "strong",
+      "note": "Tested 17 Nov on three original phone-style photos (night flash, dusk dinner, bedroom daylight). A convincing night-out flash look on the daylight and dusk photos. It blacks out the whole background, so the setting is lost, and it does almost nothing to a photo that was already taken with flash.",
+      "weak": []
+    },
+    "golden_hour": {
+      "verdict": "usable",
+      "note": "Tested 17 Nov on three original phone-style photos (night flash, dusk dinner, bedroom daylight). Dramatic and unmistakable outdoors. Too orange, and indoors it puts a setting sun inside a bedroom. Use on outdoor photos only until the prompt is toned down.",
+      "weak": []
+    },
+    "digicam_2007": {
+      "verdict": "mixed",
+      "note": "Tested 17 Nov on three original phone-style photos (night flash, dusk dinner, bedroom daylight). Barely changes anything: the night photo is nearly identical and the bedroom photo only gains a grey-blue cast that looks worse. Not a before/after anyone would notice. Needs a far stronger rewrite. The daylight variation has not been tested.",
+      "weak": [
+        "flash"
+      ]
+    },
+    "old_money": {
+      "verdict": "weak",
+      "note": "Tested 17 Nov on three original phone-style photos (night flash, dusk dinner, bedroom daylight). Turns every photo muddy brown and duller than the original, and replaced the dinner background with a wall. Reads as a downgrade.",
+      "weak": [
+        "muted"
+      ]
+    },
+    "dark_feminine": {
+      "verdict": "weak",
+      "note": "Tested 17 Nov on three original phone-style photos (night flash, dusk dinner, bedroom daylight). Far too dark: on the full-body photo the face is almost lost. The bedroom photo hints at the look, with the darker lip, but it is underexposed everywhere.",
+      "weak": [
+        "noir"
+      ]
+    },
+    "glass_skin": {
+      "verdict": "weak",
+      "note": "Tested 17 Nov on three original phone-style photos (night flash, dusk dinner, bedroom daylight). The shine is overdone and spreads to arms and chest, so skin looks wet or greasy rather than dewy. Needs to be face only and much subtler.",
+      "weak": [
+        "luminous"
+      ]
+    },
+    "coquette": {
+      "verdict": "weak",
+      "note": "Tested 17 Nov on three original phone-style photos (night flash, dusk dinner, bedroom daylight). A flat pink haze over the whole picture, like a cheap overlay. Nothing of the styling the name promises.",
+      "weak": [
+        "blush"
+      ]
     }
   },
   "rewrites": [

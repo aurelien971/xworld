@@ -2,7 +2,7 @@ import { liveAccounts } from "./accounts";
 import { sql } from "./db";
 import { ideaStates } from "./planner";
 import * as registry from "./registry";
-import { judgeAvailable } from "./stages/judge";
+import { judgeAvailable, overall } from "./stages/judge";
 
 /**
  * Where the campaign stands, as a few measures against their targets, and
@@ -82,17 +82,22 @@ export async function filtersView(productId: string) {
   const lab = registry.lab(productId);
   const overrides = await filterOverrides();
   const isWeak = registry.weak(productId);
-  const gens = await sql<{ filter_id: string; variation_id: string; media_key: string; asset: string }>(
-    "select g.filter_id, g.variation_id, g.media_key, a.media_key as asset from generations g join assets a on a.id = g.asset_id order by g.created_at",
+  const gens = await sql<{ filter_id: string; variation_id: string; media_key: string; asset: string; at: Date; scores: { realism: number; alignment: number; appeal: number; note: string } | null }>(
+    "select g.filter_id, g.variation_id, g.media_key, a.media_key as asset, g.created_at as at, j.result as scores from generations g join assets a on a.id = g.asset_id left join judgements j on j.key = g.key order by g.created_at",
   );
+  // What a test left behind: how many results, when the last one was made, and what the reviewer gave them.
+  const record = (list: typeof gens) => {
+    const scored = list.filter((g) => g.scores).map((g) => overall(g.scores!));
+    return { results: list.length, tested: list.length ? new Date(list.at(-1)!.at).toISOString() : null, score: scored.length ? Math.round(scored.reduce((a, b) => a + b, 0) / scored.length) : null };
+  };
   return registry.filters(productId).map((f) => {
     const mine = gens.filter((g) => g.filter_id === f.id);
     return {
       id: f.id, name: f.name, category: f.category, benefit: f.benefit, origin: f.origin, why: f.why ?? null,
-      approved: overrides.get(f.id) ?? f.approved, audit: lab.audits[f.id] ?? null, results: mine.length,
+      approved: overrides.get(f.id) ?? f.approved, audit: lab.audits[f.id] ?? null, ...record(mine),
       variations: f.variations.map((v) => {
         const of = mine.filter((g) => g.variation_id === v.id);
-        return { id: v.id, label: v.label, prompt: v.prompt, why: v.why ?? null, replaces: v.replaces ?? null, weak: isWeak(f.id, v.id), results: of.length, examples: of.slice(0, 2).map((g) => ({ before: `/media/${g.asset}`, after: `/media/${g.media_key}` })) };
+        return { id: v.id, label: v.label, prompt: v.prompt, why: v.why ?? null, replaces: v.replaces ?? null, weak: isWeak(f.id, v.id), ...record(of), examples: of.slice(-3).map((g) => ({ before: `/media/${g.asset}`, after: `/media/${g.media_key}`, score: g.scores ? overall(g.scores) : null, note: g.scores?.note ?? null })) };
       }),
     };
   });

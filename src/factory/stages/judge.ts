@@ -34,10 +34,10 @@ export async function judge(o: { key: string; before: Buffer; after: Buffer; fil
   if (!scores) {
     const text =
       `Image 1 is a phone photo. Image 2 is the same photo after the "${o.filterName}" filter (${o.benefit || "a photo filter"}) in a photo editing app. ` +
-      "The pair will be posted as a before/after to sell the app to young women who edit their photos. Score each 0-100:\n" +
+      "The pair will be posted as a before/after to sell the app to young women who edit their photos. Be a hard marker and use the whole scale: 50 is an ordinary, forgettable result, 70 is good, above 85 is rare. Score each 0-100:\n" +
       "realism: image 2 is free of generation faults (warped hands or teeth, melted detail, plastic skin, garbled text, a changed face). For a deliberately stylised filter, judge whether it is a convincing example of that style instead.\n" +
-      "alignment: the subject is the same person at the same position, size and crop as in image 1, so the two line up when shown side by side.\n" +
-      "appeal: at a glance, image 2 is clearly different from image 1 and is the one she would rather post.\n" +
+      "alignment: the subject is the same person at the same position, size and crop as in image 1, so the two line up when shown side by side. Take points off when the place, the time of day or the colour of her clothes changed and the filter was not about that.\n" +
+      "appeal: at a glance, image 2 is clearly different from image 1 and is the one she would rather post. Below 40 when the two are hard to tell apart, or when image 2 looks worse: too dark to see her face, muddy or dull colour, a flat colour haze over the whole picture, greasy or wet-looking skin.\n" +
       'Respond with JSON exactly: {"realism": <int>, "alignment": <int>, "appeal": <int>, "note": "<one plain sentence naming the weakest point>"}';
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",

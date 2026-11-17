@@ -1,0 +1,20 @@
+[
+  {
+    "id": "organic-gym-night",
+    "tags": ["full_body", "organic", "night"],
+    "gender": "female",
+    "prompt": "A candid, unedited iPhone photo taken by a friend, with the phone's flash on, at night. A 26-year-old woman with long dark wavy hair stands on a quiet pavement outside a gym, full body in frame, wearing a plain cream sports top, matching leggings and white trainers, a gym bag on one shoulder and a water bottle in her hand, laughing slightly off-guard. Harsh direct flash, dark background with a faint street light, slightly underexposed, flat colours, a little noise and softness, ordinary phone photo, not retouched, no filter, vertical 2:3."
+  },
+  {
+    "id": "organic-holiday-dinner",
+    "tags": ["portrait", "organic", "evening"],
+    "gender": "female",
+    "prompt": "A candid, unedited iPhone photo taken across a table by a friend. A 25-year-old woman with a short dark bob and light freckles sits at an outdoor beach restaurant at dusk, shown from the waist up, wearing a simple pale blue linen sundress and a thin pearl necklace, one elbow on the table, a glass of sparkling water and a small candle in front of her, palm trees and string lights out of focus behind. Mixed dim light, slightly too dark, dull colours, mild noise, ordinary phone photo, not retouched, no filter, vertical 2:3."
+  },
+  {
+    "id": "organic-getting-ready",
+    "tags": ["portrait", "organic", "daylight"],
+    "gender": "female",
+    "prompt": "A candid, unedited iPhone photo. A 24-year-old woman with light brown hair in a loose claw clip sits on the edge of her bed in an ordinary, slightly messy bedroom in the morning, shown from the chest up, wearing an oversized white t-shirt, no make-up, looking at the camera with a small tired smile. Flat grey window light from the side, washed-out colours, visible skin texture with a few blemishes, slight softness, ordinary phone photo, not retouched, no filter, vertical 2:3."
+  }
+]
