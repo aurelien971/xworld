@@ -1,3 +1,4 @@
+import { openaiKey } from "../keys";
 import { sql } from "../db";
 import { sharp } from "../scenes/draw";
 import type { Review } from "../types";
@@ -23,7 +24,7 @@ export const overall = (s: Scores) => Math.round(s.appeal * 0.4 + s.realism * 0.
 
 const small = async (image: Buffer) => (await sharp(image).rotate().resize({ width: 768, height: 768, fit: "inside" }).jpeg({ quality: 85 }).toBuffer()).toString("base64");
 
-export const judgeAvailable = () => !!process.env.OPENAI_API_KEY?.trim();
+export const judgeAvailable = () => !!openaiKey();
 
 export async function judge(o: { key: string; before: Buffer; after: Buffer; filterName: string; benefit: string }): Promise<Review & { costUsd: number; cached: boolean }> {
   const model = process.env.JUDGE_MODEL || "gpt-4o";
@@ -40,7 +41,7 @@ export async function judge(o: { key: string; before: Buffer; after: Buffer; fil
       'Respond with JSON exactly: {"realism": <int>, "alignment": <int>, "appeal": <int>, "note": "<one plain sentence naming the weakest point>"}';
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
-      headers: { Authorization: `Bearer ${process.env.OPENAI_API_KEY!.trim()}`, "Content-Type": "application/json" },
+      headers: { Authorization: `Bearer ${openaiKey()}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         model,
         temperature: 0.2,

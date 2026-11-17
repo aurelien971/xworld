@@ -1,3 +1,4 @@
+import { openaiKey } from "../keys";
 import crypto from "node:crypto";
 import { sql } from "../db";
 import { sharp } from "../scenes/draw";
@@ -57,8 +58,8 @@ export async function transform(o: { asset: string; assetKey: string; filter: st
   const hit = await cached(key);
   if (hit) return hit;
 
-  const apiKey = process.env.OPENAI_API_KEY?.trim();
-  if (!apiKey) throw new Error("This pair has not been generated yet and OPENAI_API_KEY is not set.");
+  const apiKey = openaiKey();
+  if (!apiKey) throw new Error("This pair has not been generated yet and no image model key is set.");
   const prepared = await prepare(await get(o.assetKey));
   const form = new FormData();
   form.set("model", process.env.IMAGE_MODEL || "gpt-image-1.5");

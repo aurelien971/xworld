@@ -12,7 +12,8 @@
     "smoke": "tsx scripts/smoke.ts",
     "sync:cloud": "tsx scripts/sync-cloud.ts",
     "import:library": "tsx scripts/import-library.ts",
-    "remake": "tsx scripts/remake.ts"
+    "remake": "tsx scripts/remake.ts",
+    "record": "tsx scripts/recorder/record.ts"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.16",
