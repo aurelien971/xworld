@@ -34,6 +34,17 @@ export async function put(key: string, data: Buffer) {
   return key;
 }
 
+/** Files that are no longer wanted. One that is already gone is not a fault. */
+export async function drop(keys: string[]) {
+  if (!keys.length) return;
+  if (cloud()) {
+    const { del } = await import("@vercel/blob");
+    await del(keys.map(blobUrl), { token: token() }).catch(() => {});
+    return;
+  }
+  for (const key of keys) await fs.unlink(safe(key)).catch(() => {});
+}
+
 export async function get(key: string): Promise<Buffer> {
   if (cloud()) {
     const res = await fetch(blobUrl(key), { cache: "no-store" });

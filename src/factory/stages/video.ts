@@ -22,6 +22,8 @@ async function ffmpeg() {
 
 /** How one frame gives way to the next: a line drawn across, a white flash, or a plain cut. */
 export type Transition = "wipe" | "flash" | "cut";
+/** How the video is drawn, apart from its timings: the slider's direction and motion, the hook's size and place, the flash. */
+export type Look = { direction: "ltr" | "rtl"; eased: boolean; handle: boolean; hookScale: number; hookAt: number; flash: number };
 export type Sequence = {
   /** Finished frames at the video's size, in order. */
   frames: Buffer[];
@@ -32,6 +34,7 @@ export type Sequence = {
   hook: string;
   /** Seconds: a frame arrived at by a cut is held for `hold`, a wipe lasts `wipe`, a revealed frame rests for `rest`, the closing card for `cta` (0: none, the video loops). */
   timings: { hold: number; wipe: number; rest: number; cta: number };
+  look: Look;
 };
 
 /**
@@ -41,11 +44,12 @@ export type Sequence = {
  * for every video format: a single slider, a flash cut, three filters in a
  * row, one filter across three photos.
  */
-export async function sequenceVideo(o: { briefId: string; width: number; height: number; sequence: Sequence; product: SceneContext["product"]; ctaLabel: string }): Promise<{ video: Video; slides: Slide[] }> {
+export async function sequenceVideo(o: { base: string; width: number; height: number; sequence: Sequence; product: SceneContext["product"]; ctaLabel: string }): Promise<{ video: Video; slides: Slide[] }> {
   const W = o.width, H = o.height;
-  const { frames, transitions, labels, hook, timings: t } = o.sequence;
+  const { frames, transitions, labels, hook, timings: t, look } = o.sequence;
   const n = frames.length;
-  const FLASH = 0.3;
+  const FLASH = look.flash;
+  const rtl = look.direction === "rtl";
 
   // When each frame arrives and how long it is held.
   const arrive: number[] = [0], done: number[] = [];
@@ -61,7 +65,7 @@ export async function sequenceVideo(o: { briefId: string; width: number; height:
   }
   const ctaAt = clock, total = +(clock + t.cta).toFixed(3);
 
-  const hookLayers: Layer[] = hook ? await pill(hook, { cx: W / 2, cy: Math.round(H * 0.24), size: Math.round(W * 0.05), maxWidth: Math.round(W * 0.82) }) : [];
+  const hookLayers: Layer[] = hook ? await pill(hook, { cx: W / 2, cy: Math.round(H * look.hookAt), size: Math.round(W * 0.05 * look.hookScale), maxWidth: Math.round(W * 0.82) }) : [];
   const card = t.cta > 0 ? await ctaLayers({ width: W, height: H, product: o.product, filterLabel: o.ctaLabel }) : [];
   const knob = 84, lineW = 6;
   const handle = await sharp(Buffer.from(
@@ -93,21 +97,21 @@ export async function sequenceVideo(o: { briefId: string; width: number; height:
       const kind = transitions[k - 1];
       const at = done[k - 1];
       // Progress of this frame's arrival: an eased line for a wipe, a step for a cut or a flash.
-      const p = kind === "wipe" ? `st(0,clip((t-${at})/${t.wipe},0,1));ld(0)*ld(0)*(3-2*ld(0))` : `gte(t,${at})`;
+      const p = kind !== "wipe" ? `gte(t,${at})` : look.eased ? `st(0,clip((t-${at})/${t.wipe},0,1));ld(0)*ld(0)*(3-2*ld(0))` : `clip((t-${at})/${t.wipe},0,1)`;
       graph.push(
-        // A mask that is white to the left of the line: this frame shows there, what came before to its right.
+        // A mask that is white behind the line: this frame shows there, what came before ahead of it.
         `color=white:s=${W}x${H}:r=30:d=${total}[mw${k}]`,
         `color=black:s=${W}x${H}:r=30:d=${total}[mb${k}]`,
-        `[mw${k}][mb${k}]overlay=x='(${p})*${W}':y=0:eval=frame,format=gray[m${k}]`,
+        `[mw${k}][mb${k}]overlay=x='${rtl ? "-" : ""}(${p})*${W}':y=0:eval=frame,format=gray[m${k}]`,
         `[${frameIn[k]}:v]format=rgba[fr${k}]`,
         `[fr${k}][m${k}]alphamerge[fm${k}]`,
         `${cur}[fm${k}]overlay=0:0[s${k}]`,
       );
       cur = `[s${k}]`;
-      if (kind === "wipe") {
+      if (kind === "wipe" && look.handle) {
         // Each wipe draws its own copy of the handle.
         const handleIn = await add(`h${k}.png`, handle);
-        graph.push(`[${handleIn}:v]format=rgba[h${k}]`, `${cur}[h${k}]overlay=x='(${p})*${W}-${knob / 2}':y=0:eval=frame:enable='between(t,${at},${at + t.wipe})'[sh${k}]`);
+        graph.push(`[${handleIn}:v]format=rgba[h${k}]`, `${cur}[h${k}]overlay=x='${rtl ? `(1-(${p}))` : `(${p})`}*${W}-${knob / 2}':y=0:eval=frame:enable='between(t,${at},${at + t.wipe})'[sh${k}]`);
         cur = `[sh${k}]`;
       }
       if (kind === "flash") {
@@ -144,17 +148,17 @@ export async function sequenceVideo(o: { briefId: string; width: number; height:
       throw new Error(`The video could not be made: ${(e.stderr || e.message).trim().split("\n").slice(-2).join(" ").slice(0, 300)}`);
     });
 
-    const base = `briefs/${o.briefId}`;
+    const base = o.base;
     const key = `${base}/video.mp4`;
     await put(key, await fs.readFile(file("out.mp4")));
 
     // Three stills of it for the queue: the opening, a change half way, the end.
     const half = Math.round(W / 2);
     const mid = Math.min(n - 1, Math.max(1, Math.round((n - 1) / 2)));
-    const leftOfMid = await sharp(frames[mid]).extract({ left: 0, top: 0, width: half, height: H }).toBuffer();
+    const arrived = await sharp(frames[mid]).extract({ left: rtl ? half : 0, top: 0, width: W - half, height: H }).toBuffer();
     const stills: [string, Buffer][] = [
       ["opening", await canvas(W, H, [{ input: frames[0], left: 0, top: 0 }, ...hookLayers])],
-      ["change", await canvas(W, H, [{ input: frames[mid - 1], left: 0, top: 0 }, { input: leftOfMid, left: 0, top: 0 }, { input: handle, left: half - knob / 2, top: 0 }])],
+      ["change", await canvas(W, H, [{ input: frames[mid - 1], left: 0, top: 0 }, { input: arrived, left: rtl ? half : 0, top: 0 }, ...(look.handle ? [{ input: handle, left: half - knob / 2, top: 0 }] : [])])],
       ["closing", await canvas(W, H, [{ input: frames[n - 1], left: 0, top: 0 }, ...card])],
     ];
     const slides: Slide[] = [];

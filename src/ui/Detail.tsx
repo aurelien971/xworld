@@ -2,8 +2,10 @@
 
 import { ArrowUpRight, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
+import type { Scope } from "@/factory/tuning";
 import type { BriefDetail, BriefView } from "@/factory/view";
 import { Button, cx, IconButton, money, Row, StateMark } from "./primitives";
+import { Tuning } from "./Tuning";
 
 /**
  * One brief in full: the post as it will go out, then where it came from,
@@ -17,6 +19,9 @@ type Props = {
   slide: number;
   onSlide: (i: number) => void;
   onAct: (action: "approve" | "reject" | "retry") => void;
+  /** Set the format's dials from this post: for it alone, for its format, or for everything. */
+  onTune: (changes: Record<string, number | string | null>, scope: Scope) => void;
+  tuning: boolean;
   open: boolean;
   onClose: () => void;
 };
@@ -25,7 +30,7 @@ const clock = (iso: string) => new Intl.DateTimeFormat("en-GB", { hour: "2-digit
 const dateOf = (iso: string) => new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short" }).format(new Date(iso));
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export function Detail({ brief: b, detail, slide, onSlide, onAct, open, onClose }: Props) {
+export function Detail({ brief: b, detail, slide, onSlide, onAct, onTune, tuning, open, onClose }: Props) {
   const shown = b.slides[slide];
   return (
     <aside
@@ -152,6 +157,12 @@ export function Detail({ brief: b, detail, slide, onSlide, onAct, open, onClose 
               </Disclosure>
             )}
           </Row>
+
+          {detail?.tuning && (
+            <Row label="Tuning">
+              <Tuning key={b.id} formatId={b.format} formatName={`Every ${b.formatName}`} settings={detail.tuning.settings} scopes={["post", "format", "all"]} posts={detail.tuning.posts} uses={detail.tuning.uses} busy={tuning} onApply={onTune} />
+            </Row>
+          )}
 
           <Row label="Review">
             <ReviewLine b={b} />

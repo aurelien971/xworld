@@ -1,4 +1,5 @@
 import { coverSet } from "../align";
+import type { Value } from "../formats";
 import { appIcon, canvas, label, pill, scrim, sharp, type, type Layer } from "./draw";
 
 /**
@@ -19,11 +20,15 @@ export type SceneContext = {
   text: string;
   product: { name: string; cta: string; icon: Buffer | null };
   options: Record<string, unknown>;
+  /** The format's dials as they stand for this post. */
+  tune: Record<string, Value>;
 };
 
 type Scene = (c: SceneContext) => Promise<Buffer>;
 const margin = (c: SceneContext) => Math.round(c.width * 0.045);
 const small = (c: SceneContext) => Math.round(c.width * 0.03);
+/** The hook's size: a share of the width as the scene was drawn, scaled by the hook-size dial. */
+const hookSize = (c: SceneContext, share: number) => Math.round(c.width * share * (Number(c.tune.hookScale ?? 100) / 100));
 const pairOf = (c: SceneContext) => c.pairs[Math.min(c.pairs.length - 1, Number(c.options.pair ?? 0))];
 const rect = (w: number, h: number, fill: string, rx = 0, opacity = 1) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" rx="${rx}" fill="${fill}" fill-opacity="${opacity}"/></svg>`);
 /** A recipe may ask for the brief's own words by name. */
@@ -43,7 +48,7 @@ const splitCover: Scene = async (c) => {
     ...(await label("before", { x: m, y: c.height - m, size: small(c), anchor: "left" })),
     ...(await label("after", { x: c.width - m, y: c.height - m, size: small(c), anchor: "right" })),
   ];
-  if (c.options.hook !== false && c.hook) layers.push(...(await pill(c.hook, { cx: c.width / 2, cy: Math.round(c.height * 0.8), size: Math.round(c.width * 0.047), maxWidth: Math.round(c.width * 0.8) })));
+  if (c.options.hook !== false && c.hook) layers.push(...(await pill(c.hook, { cx: c.width / 2, cy: Math.round(c.height * 0.8), size: hookSize(c, 0.047), maxWidth: Math.round(c.width * 0.8) })));
   return canvas(c.width, c.height, layers);
 };
 
@@ -61,7 +66,7 @@ const stack: Scene = async (c) => {
     ...(await label("before", { x: m, y: half - m, size: small(c), anchor: "left" })),
     ...(await label("after", { x: m, y: c.height - m, size: small(c), anchor: "left" })),
   ];
-  if (c.hook) layers.push(...(await pill(c.hook, { cx: c.width / 2, cy: half + seam / 2, size: Math.round(c.width * 0.044), maxWidth: Math.round(c.width * 0.84) })));
+  if (c.hook) layers.push(...(await pill(c.hook, { cx: c.width / 2, cy: half + seam / 2, size: hookSize(c, 0.044), maxWidth: Math.round(c.width * 0.84) })));
   return canvas(c.width, c.height, layers);
 };
 
@@ -77,9 +82,9 @@ const full: Scene = async (c) => {
   const [before, after] = await coverSet([p.before, p.after], c.width, c.height);
   const layers: Layer[] = [{ input: c.options.side === "before" ? before : after, left: 0, top: 0 }];
   if (c.options.label === "before") layers.push(...(await label("before", { x: m, y: c.height - m, size: small(c), anchor: "left" })));
-  if (c.options.label === "filter" && p.filterLabel) layers.push(...(await pill(p.filterLabel, { cx: c.width / 2, cy: Math.round(c.height * 0.9), size: Math.round(c.width * 0.036), maxWidth: Math.round(c.width * 0.8), weight: "SemiBold" })));
+  if (c.options.label === "filter" && p.filterLabel && c.tune.filterName !== "hidden") layers.push(...(await pill(p.filterLabel, { cx: c.width / 2, cy: Math.round(c.height * 0.9), size: Math.round(c.width * 0.036), maxWidth: Math.round(c.width * 0.8), weight: "SemiBold" })));
   const line = words(c, c.options.text);
-  if (line) layers.push(...(await pill(line, { cx: c.width / 2, cy: Math.round(c.height * 0.2), size: Math.round(c.width * 0.047), maxWidth: Math.round(c.width * 0.8) })));
+  if (line) layers.push(...(await pill(line, { cx: c.width / 2, cy: Math.round(c.height * 0.2), size: hookSize(c, 0.047), maxWidth: Math.round(c.width * 0.8) })));
   if (typeof c.options.tag === "string") {
     const numeral = /^\d+$/.test(c.options.tag);
     const t = await type(c.options.tag, { size: Math.round(c.width * (numeral ? 0.2 : 0.085)), weight: "Bold", maxWidth: c.width * 0.8 });
@@ -94,7 +99,7 @@ const title: Scene = async (c) => {
   const p = c.pairs[0];
   const [after] = await coverSet([p.after], c.width, c.height);
   const line = words(c, c.options.from ?? "hook") || c.hook;
-  const t = await type(line, { size: Math.round(c.width * 0.085), weight: "Bold", maxWidth: Math.round(c.width * 0.82) });
+  const t = await type(line, { size: hookSize(c, 0.085), weight: "Bold", maxWidth: Math.round(c.width * 0.82) });
   return canvas(c.width, c.height, [{ input: after, left: 0, top: 0 }, scrim(c.width, c.height, 0.42), { input: t.input, left: Math.round((c.width - t.width) / 2), top: Math.round((c.height - t.height) / 2) }]);
 };
 
@@ -113,14 +118,14 @@ const grid: Scene = async (c) => {
     layers.push({ input: rect(d, d, "#FFFFFF", d / 2), left: left + margin(c), top: top + margin(c) }, { input: n.input, left: Math.round(left + margin(c) + (d - n.width) / 2), top: Math.round(top + margin(c) + (d - n.height) / 2) });
   }
   layers.push({ input: rect(c.width, seam, "#FFFFFF"), left: 0, top: h }, { input: rect(seam, c.height, "#FFFFFF"), left: w, top: 0 });
-  if (c.hook) layers.push(...(await pill(c.hook, { cx: c.width / 2, cy: c.height / 2, size: Math.round(c.width * 0.047), maxWidth: Math.round(c.width * 0.8) })));
+  if (c.hook) layers.push(...(await pill(c.hook, { cx: c.width / 2, cy: c.height / 2, size: hookSize(c, 0.047), maxWidth: Math.round(c.width * 0.8) })));
   return canvas(c.width, c.height, layers);
 };
 
 /** A message someone sent her, and her answer, over the photo they were asking about. */
 const dm: Scene = async (c) => {
   const [after] = await coverSet([c.pairs[0].after], c.width, c.height);
-  const size = Math.round(c.width * 0.045);
+  const size = hookSize(c, 0.045);
   const bubble = async (text: string, mine: boolean, top: number) => {
     const t = await type(text, { size, weight: "Medium", color: mine ? "#FFFFFF" : "#000000", maxWidth: Math.round(c.width * 0.58) });
     const padX = Math.round(size * 0.8), padY = Math.round(size * 0.55);
@@ -137,7 +142,7 @@ const dm: Scene = async (c) => {
 const card: Scene = async (c) => {
   const m = Math.round(c.width * 0.1);
   const kicker = await type("one fix", { size: Math.round(c.width * 0.03), weight: "SemiBold", color: "#8A877F", maxWidth: c.width - m * 2, spacing: c.width * 0.002, align: "left" });
-  const head = await type(c.hook, { size: Math.round(c.width * 0.085), weight: "Bold", color: "#141413", maxWidth: c.width - m * 2, align: "left" });
+  const head = await type(c.hook, { size: hookSize(c, 0.085), weight: "Bold", color: "#141413", maxWidth: c.width - m * 2, align: "left" });
   const body = await type(c.text, { size: Math.round(c.width * 0.044), weight: "Medium", color: "#3F3E3A", maxWidth: c.width - m * 2, align: "left" });
   const top = Math.round((c.height - (kicker.height + head.height + body.height + c.width * 0.07)) / 2);
   return canvas(c.width, c.height, [

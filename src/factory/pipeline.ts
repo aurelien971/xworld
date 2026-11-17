@@ -8,8 +8,9 @@ import { compose } from "./stages/compose";
 import { judge, judgeAvailable } from "./stages/judge";
 import { publishBlocker, send, standing } from "./stages/publish";
 import { generationKey, transform } from "./stages/transform";
-import { get } from "./storage";
+import { drop, get } from "./storage";
 import { dayOf, TZ } from "./time";
+import { valuesFor } from "./tuning";
 import type { Brief, PairRef } from "./types";
 
 /**
@@ -94,6 +95,12 @@ async function build(b: Brief, generate: boolean): Promise<Built> {
   return { pairs, alignment, cost, fresh, judgeable: { key: loaded[0].key, before: pairs[0].before, after: pairs[0].after, filterName: loaded[0].filter.name, benefit: loaded[0].filter.benefit } };
 }
 
+/** The files of a brief's earlier make that its new make no longer uses. */
+const stale = (b: Brief, slides: Brief["slides"], video: Brief["video"]) => {
+  const kept = new Set([...slides.flatMap((s) => [s.key, s.thumb]), video?.key]);
+  return [...b.slides.flatMap((s) => [s.key, s.thumb]), ...(b.video ? [b.video.key] : [])].filter((k) => !kept.has(k));
+};
+
 export async function runBrief(id: string) {
   if (!(await claim(id, ["planned", "failed"], "generating", "Started"))) return;
   let cost = 0;
@@ -106,8 +113,9 @@ export async function runBrief(id: string) {
     if (built.alignment.applied) await update(id, null, `After laid over the before: ${Math.round(Math.abs(built.alignment.scale - 1) * 100)}% zoom corrected`);
 
     const words = wordsOf(b);
-    const { slides, video } = await compose({ briefId: id, format: registry.format(b.format), product: registry.product(b.product), pairs: built.pairs, hook: words.hook, text: words.text });
+    const { slides, video } = await compose({ briefId: id, format: registry.format(b.format), product: registry.product(b.product), pairs: built.pairs, hook: words.hook, text: words.text, tune: await valuesFor(b.format, id) });
     await update(id, "reviewing", video ? `Video made, ${video.seconds}s` : `${slides.length} ${slides.length === 1 ? "picture" : "slides"} made`, { slides, video, align: built.alignment, caption: words.caption });
+    await drop(stale(b, slides, video));
 
     if (!judgeAvailable()) {
       await update(id, null, "Waiting for a person: no review model is set", { review: waiting("No review model is set.") });
@@ -136,15 +144,32 @@ export async function runBrief(id: string) {
 }
 
 /** Make a brief's slides or video again from the same pairs and words, at no cost: for when a scene or a format changes. Its state stays as it is. */
-export async function remake(id: string) {
+export async function remake(id: string, note = "Made again") {
   const b = await load(id);
   if (!b || !b.slides.length) return false;
   const built = await build(b, false);
   const words = wordsOf(b);
-  const { slides, video } = await compose({ briefId: id, format: registry.format(b.format), product: registry.product(b.product), pairs: built.pairs, hook: words.hook, text: words.text });
-  await update(id, null, "Made again", { slides, video, align: built.alignment });
+  const { slides, video } = await compose({ briefId: id, format: registry.format(b.format), product: registry.product(b.product), pairs: built.pairs, hook: words.hook, text: words.text, tune: await valuesFor(b.format, id) });
+  await update(id, null, note, { slides, video, align: built.alignment });
+  await drop(stale(b, slides, video));
   return true;
 }
+
+const q = globalThis as unknown as { __remakes?: { chain: Promise<void>; waiting: number } };
+const remakes = (q.__remakes ??= { chain: Promise.resolve(), waiting: 0 });
+/** Posts to make again, one after another behind whatever is already being remade. */
+export function remakeLater(ids: string[], note?: string) {
+  remakes.waiting += ids.length;
+  remakes.chain = remakes.chain.then(async () => {
+    for (const id of ids) {
+      await remake(id, note).catch(() => false);
+      remakes.waiting--;
+    }
+  });
+  return remakes.chain;
+}
+/** How many posts are still waiting to be made again. */
+export const remaking = () => remakes.waiting;
 
 /** Every brief that is not out yet, made again. */
 export async function remakeAll(product: string) {

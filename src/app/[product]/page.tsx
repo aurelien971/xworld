@@ -7,7 +7,7 @@ import { Floor } from "@/ui/Floor";
 import { Setup } from "@/ui/Setup";
 
 export const dynamic = "force-dynamic";
-const VIEWS = ["campaign", "day", "wall", "ideas", "filters", "library", "accounts"] as const;
+const VIEWS = ["campaign", "day", "wall", "ideas", "formats", "filters", "library", "accounts"] as const;
 
 export default async function Page({ params, searchParams }: PageProps<"/[product]">) {
   const { product } = await params;

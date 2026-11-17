@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { Scope } from "@/factory/tuning";
 import type { State } from "@/factory/types";
 import type { BriefDetail, BriefView, DayView, WallView } from "@/factory/view";
 import { Detail } from "./Detail";
@@ -10,6 +11,7 @@ import { Button, cx, IconButton, money, StateMark } from "./primitives";
 import { Accounts } from "./Accounts";
 import { Campaign } from "./Campaign";
 import { Filters } from "./Filters";
+import { Formats } from "./Formats";
 import { Ideas } from "./Ideas";
 import { Library } from "./Library";
 import { Wall } from "./Wall";
@@ -22,8 +24,8 @@ import { Wall } from "./Wall";
 
 const shift = (day: string, by: number) => new Date(Date.parse(`${day}T12:00:00Z`) + by * 86_400_000).toISOString().slice(0, 10);
 const longDate = (day: string) => new Intl.DateTimeFormat("en-GB", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }).format(new Date(`${day}T12:00:00Z`));
-type Mode = "campaign" | "day" | "wall" | "ideas" | "filters" | "library" | "accounts";
-const MODES: Mode[] = ["campaign", "day", "wall", "ideas", "filters", "library", "accounts"];
+type Mode = "campaign" | "day" | "wall" | "ideas" | "formats" | "filters" | "library" | "accounts";
+const MODES: Mode[] = ["campaign", "day", "wall", "ideas", "formats", "filters", "library", "accounts"];
 /** The views that show briefs, and so have a brief open beside them and its keys. */
 const BRIEFS: Mode[] = ["day", "wall"];
 const working = (b: BriefView) => b.state === "generating" || (b.state === "reviewing" && !b.needsPerson);
@@ -54,7 +56,9 @@ export function Floor({ initial, view: initialMode = "campaign" }: { initial: Da
   // What is on screen: the day's briefs, or every brief on the wall.
   const source = useMemo(() => (mode === "wall" ? (wall?.briefs ?? []) : view.briefs), [mode, wall, view]);
   const current = useMemo(() => source.find((b) => b.id === selected) ?? null, [source, selected]);
-  const active = source.some(working) || view.briefs.some(working) || busy === "run";
+  const [tuning, setTuning] = useState(false);
+  const [remaking, setRemaking] = useState(false);
+  const active = source.some(working) || view.briefs.some(working) || busy === "run" || remaking;
 
   const loadWall = useCallback(() => call<WallView>(`/api/wall?product=${product}`).then(setWall, (e) => setError((e as Error).message)), [product]);
 
@@ -174,6 +178,28 @@ export function Floor({ initial, view: initialMode = "campaign" }: { initial: Da
     [current?.seq, load, loadWall, mode, select, view.briefs, view.day],
   );
 
+  /** New values for the format's dials, set from one post. That post is made again before the answer; the others it reaches follow behind. */
+  const tune = useCallback(
+    async (id: string, changes: Record<string, number | string | null>, scope: Scope) => {
+      setTuning(true);
+      try {
+        const d = await call<BriefDetail & { remaking: number }>(`/api/briefs/${id}`, { action: "tune", changes, scope });
+        setDetail((prev) => (prev?.id === id ? d : prev));
+        setError(null);
+        if (d.remaking) {
+          setRemaking(true);
+          window.setTimeout(() => setRemaking(false), d.remaking * 7000 + 4000);
+        }
+      } catch (e) {
+        setError((e as Error).message);
+      }
+      setTuning(false);
+      load(view.day);
+      if (mode === "wall") loadWall();
+    },
+    [load, loadWall, mode, view.day],
+  );
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey || (e.target as HTMLElement).closest("input, textarea, select, [contenteditable]")) return;
@@ -289,6 +315,8 @@ export function Floor({ initial, view: initialMode = "campaign" }: { initial: Da
             <Campaign product={product} onOpen={(v) => show(v as Mode)} />
           ) : mode === "ideas" ? (
             <Ideas product={product} />
+          ) : mode === "formats" ? (
+            <Formats product={product} />
           ) : mode === "filters" ? (
             <Filters product={product} />
           ) : mode === "library" ? (
@@ -315,6 +343,8 @@ export function Floor({ initial, view: initialMode = "campaign" }: { initial: Da
             slide={Math.min(slide, Math.max(0, current.slides.length - 1))}
             onSlide={setSlide}
             onAct={(action) => act(current.id, action)}
+            onTune={(changes, scope) => tune(current.id, changes, scope)}
+            tuning={tuning}
             open={open}
             onClose={() => setOpen(false)}
           />

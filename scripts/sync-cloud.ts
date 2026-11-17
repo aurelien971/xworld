@@ -16,8 +16,8 @@ for (const line of fs.existsSync(".env.local") ? fs.readFileSync(".env.local", "
 const url = process.env.DATABASE_URL || process.env.POSTGRES_URL;
 const token = process.env.BLOB_READ_WRITE_TOKEN;
 
-const TABLES: [string, string][] = [["assets", "id"], ["generations", "key"], ["judgements", "key"], ["alignments", "key"], ["briefs", "id"], ["idea_state", "id"], ["filter_state", "id"], ["connections", "account"], ["events", "id"], ["costs", "id"]];
-const JSONB = new Set(["tags", "meta", "inputs", "slides", "video", "align", "review", "publish", "metrics", "result"]);
+const TABLES: [string, string][] = [["assets", "id"], ["generations", "key"], ["judgements", "key"], ["alignments", "key"], ["briefs", "id"], ["idea_state", "id"], ["filter_state", "id"], ["settings", "scope,key"], ["connections", "account"], ["events", "id"], ["costs", "id"]];
+const JSONB = new Set(["tags", "meta", "inputs", "slides", "video", "align", "review", "publish", "metrics", "result", "value"]);
 
 async function main() {
   if (!url || !token) throw new Error("Set DATABASE_URL and BLOB_READ_WRITE_TOKEN first (connect the database in Vercel, then `vercel env pull .env.local`).");

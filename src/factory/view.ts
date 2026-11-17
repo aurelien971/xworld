@@ -6,6 +6,7 @@ import { publishBlocker } from "./stages/publish";
 import { generationKey } from "./stages/transform";
 import { mediaUrl } from "./storage";
 import { dayOf } from "./time";
+import { tuningOf, type Tuning } from "./tuning";
 import type { Brief, BriefEvent } from "./types";
 
 /**
@@ -38,6 +39,8 @@ export type DayView = { product: { id: string; name: string }; day: string; toda
 
 export type BriefDetail = BriefView & {
   events: BriefEvent[];
+  /** The format's dials as they stand for this post. Null once it is out, or before it is made. */
+  tuning: Tuning | null;
   source: { before: string; after: string | null; tags: string[]; gender: string | null; prompt: string; quality: string; generation: { source: string; costUsd: number | null; createdAt: string } | null };
 };
 
@@ -102,6 +105,7 @@ export async function briefDetail(id: string): Promise<BriefDetail | null> {
   return {
     ...view(b, asset ? mediaUrl(asset.media_key) : null, await liveAccounts()),
     events: await eventsOf(id),
+    tuning: b.slides.length && !b.publish && b.state !== "published" ? await tuningOf(b.format, b.id) : null,
     source: {
       before: asset ? mediaUrl(asset.media_key) : "",
       after: gen ? mediaUrl(gen.media_key) : null,

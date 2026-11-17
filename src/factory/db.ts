@@ -38,6 +38,7 @@ create table if not exists connections (
   account text primary key, provider text not null, username text not null, name text, avatar text,
   sealed text not null, posting boolean not null default false, needs_reconnect boolean not null default false,
   at timestamptz not null default now());
+create table if not exists settings (scope text not null, key text not null, value jsonb not null, at timestamptz not null default now(), primary key (scope, key));
 create table if not exists events (
   id bigserial primary key, brief_id text not null, at timestamptz not null default now(),
   state text not null, note text);
