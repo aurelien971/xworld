@@ -33,7 +33,8 @@ async function main() {
   const { get, put } = await import("../src/factory/storage");
   const { transform } = await import("../src/factory/stages/transform");
   const { judge } = await import("../src/factory/stages/judge");
-  const { openaiKey } = await import("../src/factory/keys");
+  const { openaiKey, generationPaused } = await import("../src/factory/keys");
+  if (generationPaused()) throw new Error("Generation is paused (FACTORY_GENERATION=off). Nothing was spent.");
   const { REGISTRY } = await import("../src/factory/paths");
   const { sharp } = await import("../src/factory/scenes/draw");
   if (!openaiKey()) throw new Error("No image model key is set.");

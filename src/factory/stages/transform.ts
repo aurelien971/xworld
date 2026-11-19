@@ -1,4 +1,4 @@
-import { openaiKey } from "../keys";
+import { generationPaused, openaiKey } from "../keys";
 import crypto from "node:crypto";
 import { sql } from "../db";
 import { sharp } from "../scenes/draw";
@@ -58,6 +58,7 @@ export async function transform(o: { asset: string; assetKey: string; filter: st
   const hit = await cached(key);
   if (hit) return hit;
 
+  if (generationPaused()) throw new Error("Generation is paused, so this pair was not made. Nothing was spent.");
   const apiKey = openaiKey();
   if (!apiKey) throw new Error("This pair has not been generated yet and no image model key is set.");
   const prepared = await prepare(await get(o.assetKey));
